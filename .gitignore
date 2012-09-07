@@ -1,0 +1,9 @@
+*.log
+*.pot
+*.py[cod]
+*.db
+*.swp
+*.log
+venv
+build
+local_settings.py
