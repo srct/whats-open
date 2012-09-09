@@ -1,0 +1,18 @@
+.open{
+    color:green;
+    font-weight:bold;
+    font-size:200%;
+    text-align:center;
+}
+.closing{
+    color:yellow;
+    font-weight:bold;
+    font-size:200%;
+    text-align:center;
+}
+.closed{
+    color:black;
+    font-size:200%;
+    text-align:center;
+}
+

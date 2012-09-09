@@ -6,4 +6,5 @@ from django.conf import settings
 def alpha (request):
     restaurants = Restaurant.objects.all()
     #pass to django template
-    return render_to_response('alpha.html', {'restaurants':restaurants})
+    restRows = [restaurants[x:x+4] for x in xrange(0, len(restaurants), 4)]
+    return render_to_response('alpha.html', {'restaurants':restRows})

@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<ul>
-{% for restaurant in restaurants %}
-   <li>
-        {{ restaurant.name }}
-    </li>
+
+{% for list in restaurants %}
+   <div class = "row">
+        {% for restaurant in list %}
+        <div class = "span3 {% if restaurant.isOpen %}open{% else %}closed{% endif %}">      
+            {{restaurant.name}}
+        </div>
+        {% endfor %}
+    </div>
 {% empty %}
-I love to suck cock :-O c===3
-(There aren't any restaurants)
+There aren't any restaurants
+Solution: suck some cocks :-O c===3
 {% endfor %}
-</ul>
+
 {% endblock %}
