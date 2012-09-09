@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul>
+{% for restaurant in restaurants %}
+   <li>
+        {{ restaurant.name }}
+    </li>
+{% empty %}
+I love to suck cock :-O c===3
+(There aren't any restaurants)
+{% endfor %}
+</ul>
+{% endblock %}

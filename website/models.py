@@ -3,9 +3,10 @@ from django.db import models
 class Restaurant(models.Model):
     name = models.CharField(max_length = 100)
     mainSchedule = models.ForeignKey('Schedule', related_name = 'restaurant_main')
-    specialSchedules = models.ManyToManyField('Schedule', related_name = 'restaurant_special')
+    specialSchedules = models.ManyToManyField('Schedule', related_name = 'restaurant_special', null = True, blank = True)
 
 class Schedule(models.Model):
+    name = models.CharField(max_length = 100)
     dateValidStart = models.DateField(null = True, blank = True)
     dateValidEnd = models.DateField(null = True, blank = True)
     monOpen = models.TimeField(null = True, blank = True)
