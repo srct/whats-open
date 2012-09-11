@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<!-- {% now "jS F Y H:i" %} -->
 {% for list in restaurants %}
    <div class = "row">
         {% for restaurant in list %}
@@ -11,8 +11,7 @@
         {% endfor %}
     </div>
 {% empty %}
-There aren't any restaurants
-Solution: suck some cocks :-O c===3
+There aren't any restaurants.
 {% endfor %}
 
 {% endblock %}
