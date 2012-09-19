@@ -74,7 +74,7 @@ class Schedule(models.Model):
                 (self.sat_open, self.sat_close),
                 (self.sun_open, self.sun_close),
         ]
-        start, end = days[weekday]
+        start, end = days[weekday]  # Get opening/closing times for today
         if (start is not None and end is not None and
                 start <= today.time() <= end):
             return True

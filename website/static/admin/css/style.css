@@ -1,3 +1,11 @@
+div.container{
+    margin-top:30px;
+}
+#grid div[class*='span']{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
 .open{
     color:green;
     font-weight:bold;
