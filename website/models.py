@@ -46,40 +46,54 @@ class Schedule(models.Model):
     # inclusive:
     valid_start = models.DateField(null=True, blank=True)
     valid_end = models.DateField(null=True, blank=True)
-    mon_open = models.TimeField(null=True, blank=True)
-    mon_close = models.TimeField(null=True, blank=True)
-    tue_open = models.TimeField(null=True, blank=True)
-    tue_close = models.TimeField(null=True, blank=True)
-    wed_open = models.TimeField(null=True, blank=True)
-    wed_close = models.TimeField(null=True, blank=True)
-    thu_open = models.TimeField(null=True, blank=True)
-    thu_close = models.TimeField(null=True, blank=True)
-    fri_open = models.TimeField(null=True, blank=True)
-    fri_close = models.TimeField(null=True, blank=True)
-    sat_open = models.TimeField(null=True, blank=True)
-    sat_close = models.TimeField(null=True, blank=True)
-    sun_open = models.TimeField(null=True, blank=True)
-    sun_close = models.TimeField(null=True, blank=True)
 
     def isOpenNow(self):
         """Return true if this schedule is open right now."""
-        today = datetime.datetime.today()
-        weekday = today.weekday()
-        days = [
-                (self.mon_open, self.mon_close),
-                (self.tue_open, self.tue_close),
-                (self.wed_open, self.wed_close),
-                (self.thu_open, self.thu_close),
-                (self.fri_open, self.fri_close),
-                (self.sat_open, self.sat_close),
-                (self.sun_open, self.sun_close),
-        ]
-        start, end = days[weekday]  # Get opening/closing times for today
-        if (start is not None and end is not None and
-                start <= today.time() <= end):
-            return True
-        else:
-            return False
+        for time in OpenTime.objects.filter(schedule=self):
+            if time.isOpenNow():
+                return True
+        return False
 
     def __unicode__(self):
         return self.name
+
+
+class OpenTime(models.Model):
+    """Represents a period time when a Restaurant is open"""
+    schedule = models.ForeignKey('Schedule', related_name='open_times')
+    start_day = models.IntegerField()  # 0-6, Monday == 0
+    start_time = models.TimeField()
+    end_day = models.IntegerField()  # 0-6, Monday == 0
+    end_time = models.TimeField()
+
+    def isOpenNow(self):
+        """Return true if the current time is this OpenTime's range"""
+        today = datetime.datetime.today()
+        if self.start_day <= self.end_day:
+            if self.start_day == today.weekday():
+                if self.start_time > today.time():
+                    return False
+            elif self.start_day > today.weekday():
+                return False
+            if self.end_day == today.weekday():
+                if self.end_time < today.time():
+                    return False
+            elif self.end_day < today.weekday():
+                return False
+        else:
+            if self.start_day == today.weekday():
+                if self.start_time > today.time():
+                    return False
+            if self.end_day == today.weekday():
+                if self.end_time < today.time():
+                    return False
+            if self.end_day < today.weekday() < self.start_day:
+                return False
+        return True
+
+    def __unicode__(self):
+        weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
+                'Saturday', 'Sunday']
+        return '%s %s to %s %s' % (weekdays[self.start_day],
+                self.start_time.strftime("%H:%M:%S"), weekdays[self.end_day],
+                self.end_time.strftime("%H:%M:%S"))
