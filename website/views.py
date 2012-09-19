@@ -1,7 +1,5 @@
-from website.models import Restaurant, Schedule
-from django.template import RequestContext
-from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
-from django.conf import settings
+from website.models import Restaurant
+from django.shortcuts import render_to_response
 
 
 def restaurant_grid(request):

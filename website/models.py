@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.cache import cache
 import datetime
 
 
@@ -10,14 +9,6 @@ class Restaurant(models.Model):
             related_name='restaurant_main')
     specialSchedules = models.ManyToManyField('Schedule',
             related_name='restaurant_special', null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        cache.clear()  # Invalidate cache on restaurant change/creation
-        super(Restaurant, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        cache.clear()  # Invalidate cache on restuarant deletion
-        super(Restaurant, self).delete(*args, **kwargs)
 
     def isOpen(self):
         """
@@ -63,14 +54,6 @@ class Schedule(models.Model):
     satClose = models.TimeField(null=True, blank=True)
     sunOpen = models.TimeField(null=True, blank=True)
     sunClose = models.TimeField(null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        cache.clear()  # Invalidate cache on schedule change/creation
-        super(Schedule, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        cache.clear()  # Invalidate cache on schedule deletion
-        super(Schedule, self).delete(*args, **kwargs)
 
     def isOpenNow(self):
         """Return true if this schedule is open right now."""
