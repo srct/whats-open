@@ -7,3 +7,4 @@
 venv
 build
 local_settings.py
+.ropeproject
