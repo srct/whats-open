@@ -4,6 +4,7 @@
 *.db
 *.swp
 *.log
+*.env
 venv
 build
 .ropeproject
