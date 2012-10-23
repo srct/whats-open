@@ -26,7 +26,7 @@ To get started, you'll need the following installed:
 * [virtualenv](http://www.virtualenv.org/en/latest/index.html#installation) 
   (to install you will need either 
   [pip](http://www.pip-installer.org/en/latest/installing.html) or 
-  easy_install, which is bundled with 
+  easyinstall, which is bundled with 
   [setuptools](http://pypi.python.org/pypi/setuptools)
 
 Then type the following commands in your terminal (if you're on Windows, 
@@ -95,7 +95,19 @@ folder as `local_settings.py`, is identical to the `settings.py` except for a
 few things that allow you to run the site locally, like using an sqlite
 database instead of the PostgresSQL one used for production currently.
 
-However, it is possibly to run the site locally using the PostgresSQL database
+However, it is possible to run the site locally using the PostgresSQL database
 and normal `settings.py` file. The most sane way of doing this requires that the 
 heroku-toolbelt installed and that you have access to the heroku site as a 
 contributor, so see me if you desire this.
+
+###To Do###
+* Get all restaurants displaying correct open times on the page. AKA. make
+  extensive tests.
+* Add a Typeahead search box at the top to quickly filter out restaurants.
+* Sort by location view
+* Get a decent UI
+* Add times until opening/closing for restaurants that are close, and exact
+  times for those that aren't.
+* Add yellow close-to-closing condition.
+* Possible: Make page refresh, or more preferably have the data refresh. For
+  example, with AJAX calls.
