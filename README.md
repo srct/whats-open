@@ -111,3 +111,4 @@ contributor, so see me if you desire this.
 * Add yellow close-to-closing condition.
 * Possible: Make page refresh, or more preferably have the data refresh. For
   example, with AJAX calls.
+* Possible: Make an API?
