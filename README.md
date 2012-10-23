@@ -39,7 +39,7 @@ virtualenv venv --distribute
 source venv/bin/activate
 pip install -r requirements.txt
 python manage.py syncdb
-python manage.py schemamigration website --auto
+python manage.py migrate website
 ```
 
 The git.gmu.edu repository should be available to all SRCT members registered
