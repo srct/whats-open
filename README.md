@@ -29,13 +29,10 @@ To get started, you'll need the following installed:
   easyinstall, which is bundled with 
   [setuptools](http://pypi.python.org/pypi/setuptools)
 
-Then type the following commands in your terminal (if you're on Windows, 
-[Cygwin](http://www.cygwin.com/) is recommended).
-
 NOTE: While git.gmu.edu is not functioning correctly, What's Open will be using
 my repository at https://github.com/thallada/whats-open So, if you want to
 push code I'll have to add you as a collaborator to the repository manually. 
-Please let me know you're github username and I can add you. In the future, when
+Please let me know your github username and I can add you. In the future, when
 git.gmu.edu is working, you will be able to contribute to the project as long
 as you're in the SRCT group.
 
@@ -47,6 +44,9 @@ github](https://help.github.com/articles/generating-ssh-keys) at this time so
 you won't have to keep typing in your password when you push to a github
 repository.
 
+Then type the following commands in your terminal (if you're on Windows, 
+[Cygwin](http://www.cygwin.com/) is recommended).
+
 ```bash
 git clone https://github.com/thallada/whats-open.git
 cd whats-open/
@@ -57,7 +57,7 @@ python manage.py syncdb
 python manage.py migrate website
 ```
 
-###Testing the Site Locally###
+###Running the Site Locally###
 
 Now that everything is set-up you can run the server on your computer.
 
@@ -78,6 +78,12 @@ If you're new to Django and don't know where to start, I highly recommend
 giving the [tutorial](https://docs.djangoproject.com/en/dev/intro/tutorial01/)
 a try. However, it leaves out a lot of important things, so remember, Google is
 your friend. If you can't figure it out there, ask me.
+
+For the JavaScript, I will be using jQuery whenever possible because I prefer
+it to straight up JavaScript. jQuery has [great
+documentation](http://docs.jquery.com/) and I've found [Mozilla's documentation
+on JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript) to be
+useful as well. But if you're Google-fu is sharp, that should suffice.
 
 If you followed the steps in "Set Up" above, once you actually make changes it
 should be easy to push them to the git repository.
@@ -100,6 +106,8 @@ Some more helpful links on how to use Git:
 * [Git For Ages 4 And
   Up](http://blip.tv/open-source-developers-conference/git-for-ages-4-and-up-4460524)
 
+We currently don't have What's Open running on a dedicated server yet, but when
+we do I will have instructions on how to deploy the code here.
 
 ###Pedantic Technical Details###
 
