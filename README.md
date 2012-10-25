@@ -9,9 +9,9 @@ What's Open is still in it's very early stages and needs all the help it can
 get. Even if you don't feel like you can be helpful with the heavily technical
 aspects, we definitely need designers and technical writers.
 
-There are many things that can be done with this project, but sometimes it's the
-small things that count, so don't be afraid of contributing just for a spelling
-mistake.
+There are many things that can be done with this project (see the "To Do" 
+section), but sometimes it's the small things that count, so don't be afraid of 
+contributing just for a spelling mistake.
 
 If you need help at all please contact me (Tyler). I want people to
 contribute, so if you are struggling, or just want to learn, then I am willing
@@ -32,8 +32,23 @@ To get started, you'll need the following installed:
 Then type the following commands in your terminal (if you're on Windows, 
 [Cygwin](http://www.cygwin.com/) is recommended).
 
+NOTE: While git.gmu.edu is not functioning correctly, What's Open will be using
+my repository at https://github.com/thallada/whats-open So, if you want to
+push code I'll have to add you as a collaborator to the repository manually. 
+Please let me know you're github username and I can add you. In the future, when
+git.gmu.edu is working, you will be able to contribute to the project as long
+as you're in the SRCT group.
+
+You don't need a github account to preform a `git clone`, but you should get
+one if you plan on actually modifying code. [Github's Set-Up
+Page](https://help.github.com/articles/set-up-git) should help with that. It's
+also a good idea to set up your [ssh keys to be used by
+github](https://help.github.com/articles/generating-ssh-keys) at this time so
+you won't have to keep typing in your password when you push to a github
+repository.
+
 ```bash
-git clone git@git.gmu.edu:whats-open/whats-open.git
+git clone https://github.com/thallada/whats-open.git
 cd whats-open/
 virtualenv venv --distribute
 source venv/bin/activate
@@ -41,10 +56,6 @@ pip install -r requirements.txt
 python manage.py syncdb
 python manage.py migrate website
 ```
-
-The git.gmu.edu repository should be available to all SRCT members registered
-on the site. If you're not, but would like to contribute, contact me or another
-SRCT member.
 
 ###Testing the Site Locally###
 
@@ -77,6 +88,9 @@ There are many ways to use git, and this is one example:
 git commit -a
 git push origin master
 ```
+
+If you're having trouble pushing to my github repository please see the note 
+in "Set-Up" about how to set up github so you can do that.
 
 Some more helpful links on how to use Git:
 * [Git Reference](http://gitref.org/)
