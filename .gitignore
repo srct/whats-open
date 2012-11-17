@@ -7,4 +7,5 @@
 *.env
 venv
 build
+apache
 .ropeproject

@@ -29,26 +29,18 @@ To get started, you'll need the following installed:
   easyinstall, which is bundled with 
   [setuptools](http://pypi.python.org/pypi/setuptools)
 
-NOTE: While git.gmu.edu is not functioning correctly, What's Open will be using
-my repository at https://github.com/thallada/whats-open So, if you want to
-push code I'll have to add you as a collaborator to the repository manually. 
-Please let me know your github username and I can add you. In the future, when
-git.gmu.edu is working, you will be able to contribute to the project as long
-as you're in the SRCT group.
-
-You don't need a github account to preform a `git clone`, but you should get
-one if you plan on actually modifying code. [Github's Set-Up
-Page](https://help.github.com/articles/set-up-git) should help with that. It's
-also a good idea to set up your [ssh keys to be used by
-github](https://help.github.com/articles/generating-ssh-keys) at this time so
-you won't have to keep typing in your password when you push to a github
-repository.
+You don't need to do anything with [git.gmu.edu](https://git.gmu.edu/) to 
+preform a `git clone`, but you should log in if you plan on actually modifying 
+code. Logging into git.gmu.edu with your George Mason credentials will create 
+an account. Ask a SRCT member to add you to the SRCT group on the site and you 
+will be added to the list of people allowed to `git push` to the repository at 
+git.gmu.edu. 
 
 Then type the following commands in your terminal (if you're on Windows, 
 [Cygwin](http://www.cygwin.com/) is recommended).
 
 ```bash
-git clone https://github.com/thallada/whats-open.git
+git clone git://git.gmu.edu/whats-open/whats-open.git
 cd whats-open/
 virtualenv venv --distribute
 source venv/bin/activate
@@ -57,12 +49,15 @@ python manage.py syncdb
 python manage.py migrate website
 ```
 
+If git.gmu.edu is not loading correctly the alternative url is: 
+https://github.com/thallada/whats-open.git
+
 ###Running the Site Locally###
 
 Now that everything is set-up you can run the server on your computer.
 
 ```bash
-python manage.py runserver --settings=whats_open.local_settings
+python manage.py runserver
 ```
 
 Go to http://127.0.0.1/ in your browser and you should see the website. 
@@ -94,10 +89,6 @@ There are many ways to use git, and this is one example:
 git commit -a
 git push origin master
 ```
-
-If you're having trouble pushing to my github repository please see the note 
-in "Set-Up" about how to set up github so you can do that.
-
 Some more helpful links on how to use Git:
 * [Git Reference](http://gitref.org/)
 * [OpenHatch's Training Mission](https://openhatch.org/missions/git)
@@ -109,18 +100,12 @@ Some more helpful links on how to use Git:
 We currently don't have What's Open running on a dedicated server yet, but when
 we do I will have instructions on how to deploy the code here.
 
-###Pedantic Technical Details###
+###Running Site Locally with Production Database###
 
-Notice that `whats_open.local_settings` was specified as the settings file when
-running the site locally. This settings file, located under the `whats_open`
-folder as `local_settings.py`, is identical to the `settings.py` except for a
-few things that allow you to run the site locally, like using an sqlite
-database instead of the PostgresSQL one used for production currently.
-
-However, it is possible to run the site locally using the PostgresSQL database
-and normal `settings.py` file. The most sane way of doing this requires that the 
-heroku-toolbelt installed and that you have access to the heroku site as a 
-contributor, so see me if you desire this.
+It is possible to run the site locally using the PostgresSQL database that
+whatsopen.gmu.edu uses. The way settings.py is configured requires that you set
+an environmental variable to the database's url before you run the site. Talk 
+to me if you would like to know the url to accomplish this.
 
 ###To Do###
 * Get all restaurants displaying correct open times on the page. AKA. make
