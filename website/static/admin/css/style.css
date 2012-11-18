@@ -1,13 +1,44 @@
+a{
+    color: ForestGreen;
+}
+
+a:hover{
+    color: Green;
+}
+
+a:visited{
+    color: DarkGreen;
+}
+
 div.container{
+}
+
+.title{
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
     margin-top:30px;
 }
+
+.left-footer{
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+}
+
+.right-footer{
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
 #grid div[class*='span']{
     margin-top:10px;
     margin-bottom:10px;
 }
 
 .open{
-    color:green;
+    color:ForestGreen;
     font-weight:bold;
     font-size:200%;
     text-align:center;

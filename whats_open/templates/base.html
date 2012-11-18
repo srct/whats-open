@@ -17,11 +17,37 @@
         {% endblock %}
     </head>
     {% endblock %}
-        <body>
-            <div class = "container">
-            {% block content%}
+    <body>
+    <div class = "container">
 
-            {% endblock %}
+        <!-- Title, Logo -->
+        <div class = "row-fluid">
+            <div class = "span2">
+            <a href="http://www.gmu.edu/"><img src = "http://logo.gmu.edu/hireslogos/primarylogo/PC/GMURGB.bmp" alt = "GMU Logo" width = "114" height = "79"></a>
             </div>
-        </body>
+            <div class = "span8 title">
+            <a href="http://whatsopen.gmu.edu">What's Open</a>
+            </div>
+        </div>
+
+        {% block content%}
+
+        {% endblock %}
+    <div class = "navbar">
+
+
+    </div>
+    
+        <!-- Footers -->
+
+    </div>
+
+    <div class = "left-footer">
+        A project of <a href="http://srct.gmu.edu">GMU SRCT</a>. Some rights reserved.
+    </div>
+    <div class = "offset5 right-footer">
+        George Mason University <a href="http://dining.gmu.edu">Dining Services</a> 
+    </div>
+
+    </body>
 </html>
