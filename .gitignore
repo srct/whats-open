@@ -9,3 +9,4 @@ venv
 build
 apache
 .ropeproject
+website/static/admin/

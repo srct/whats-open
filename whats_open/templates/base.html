@@ -2,13 +2,13 @@
     {% block head %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/static/admin/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/admin/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="/static/admin/css/style.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-    <script src="/static/admin/js/bootstrap.min.js"></script>
-    <link href="/static/admin/img/glyphicons-halflings.png" rel="icons">
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <link href="{{ STATIC_URL}}img/glyphicons-halflings.png" rel="icons">
     <head>
         {% block title %}
         <title>
