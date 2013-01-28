@@ -1,6 +1,7 @@
 # Django settings for whats_open project.
 import os
 import dj_database_url
+import secret_key
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -83,7 +84,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'a3n#)-dein7gn69$d(+05yu%^0vjg@^f+p%(@@$v2z2vfs54j^'
+SECRET_KEY = secret_key.SECRET_KEY
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
