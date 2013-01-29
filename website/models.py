@@ -9,6 +9,7 @@ class Restaurant(models.Model):
             related_name='restaurant_main')
     special_schedules = models.ManyToManyField('Schedule',
             related_name='restaurant_special', null=True, blank=True)
+    last_modified = models.DateTimeField('Last Modified', auto_now=True)
 
     def isOpen(self):
         """
@@ -44,8 +45,11 @@ class Schedule(models.Model):
     """
     name = models.CharField(max_length=100)
     # inclusive:
-    valid_start = models.DateField(null=True, blank=True)
-    valid_end = models.DateField(null=True, blank=True)
+    valid_start = models.DateField('Start Date', null=True, blank=True,
+            help_text='Date that this schedule goes into effect')
+    valid_end = models.DateField('End Date', null=True, blank=True,
+            help_text='Last day that this schedule is in effect')
+    last_modified = models.DateTimeField('Last Modified', auto_now=True)
 
     def isOpenNow(self):
         """Return true if this schedule is open right now."""
@@ -65,6 +69,7 @@ class OpenTime(models.Model):
     start_time = models.TimeField()
     end_day = models.IntegerField()  # 0-6, Monday == 0
     end_time = models.TimeField()
+    last_modified = models.DateTimeField('Last Modified', auto_now=True)
 
     def isOpenNow(self):
         """Return true if the current time is this OpenTime's range"""
