@@ -1,7 +1,6 @@
 # Django settings for whats_open project.
 import os
 import dj_database_url
-import secret_key
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -83,8 +82,16 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = secret_key.SECRET_KEY
+if DEBUG:
+    try:
+        import secret_key
+        SECRET_KEY = secret_key.SECRET_KEY
+    except ImportError:
+        # This is a test/local run so security doesn't matter
+        SECRET_KEY = "testtesttest"
+else:
+    import secret_key
+    SECRET_KEY = secret_key.SECRET_KEY
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
