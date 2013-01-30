@@ -29,10 +29,15 @@
             <a href="http://whatsopen.gmu.edu">What's Open</a>
             </div>
         </div>
+        <div class = clock>
+            {% now "H:i" %}
+            <!--All nice and static... this will too will likely be changing soon. -->
+        </div>
 
         {% block content%}
 
         {% endblock %}
+
     <div class = "navbar">
 
 

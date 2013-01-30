@@ -58,3 +58,9 @@ div.container{
 .phone-footer{
     text-align: center;
 }
+
+.clock{
+    text-align: center;
+    font-size: 25px;
+    font-family:"Courier New", Courier, monospace;
+}
