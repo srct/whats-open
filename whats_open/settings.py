@@ -16,7 +16,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': PROJECT_PATH + 'database.db'
+            'NAME': PROJECT_PATH + '/database.db'
         }
 }
 
