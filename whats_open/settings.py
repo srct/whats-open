@@ -7,7 +7,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Tyler Hallada', 'thallada@gmu.edu'),
 )
 
 MANAGERS = ADMINS
@@ -17,7 +17,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'database.db'
+            'NAME': PROJECT_PATH + 'database.db'
         }
 }
 
