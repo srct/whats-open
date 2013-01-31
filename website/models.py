@@ -2,14 +2,17 @@ from django.db import models
 import datetime
 
 
-class Restaurant(models.Model):
+class BaseModel(models.Model):
+    last_modified = models.DateTimeField('Last Modified', auto_now=True)
+
+
+class Restaurant(BaseModel):
     """Represents a dining location on campus."""
     name = models.CharField(max_length=100)
     main_schedule = models.ForeignKey('Schedule',
             related_name='restaurant_main')
     special_schedules = models.ManyToManyField('Schedule',
             related_name='restaurant_special', null=True, blank=True)
-    last_modified = models.DateTimeField('Last Modified', auto_now=True)
 
     def isOpen(self):
         """
@@ -35,7 +38,7 @@ class Restaurant(models.Model):
         return self.name
 
 
-class Schedule(models.Model):
+class Schedule(BaseModel):
     """
     Contains opening and closing times for each day in a week.
 
@@ -49,7 +52,6 @@ class Schedule(models.Model):
             help_text='Date that this schedule goes into effect')
     valid_end = models.DateField('End Date', null=True, blank=True,
             help_text='Last day that this schedule is in effect')
-    last_modified = models.DateTimeField('Last Modified', auto_now=True)
 
     def isOpenNow(self):
         """Return true if this schedule is open right now."""
@@ -62,14 +64,13 @@ class Schedule(models.Model):
         return self.name
 
 
-class OpenTime(models.Model):
+class OpenTime(BaseModel):
     """Represents a period time when a Restaurant is open"""
     schedule = models.ForeignKey('Schedule', related_name='open_times')
     start_day = models.IntegerField()  # 0-6, Monday == 0
     start_time = models.TimeField()
     end_day = models.IntegerField()  # 0-6, Monday == 0
     end_time = models.TimeField()
-    last_modified = models.DateTimeField('Last Modified', auto_now=True)
 
     def isOpenNow(self):
         """Return true if the current time is this OpenTime's range"""
@@ -102,3 +103,42 @@ class OpenTime(models.Model):
         return '%s %s to %s %s' % (weekdays[self.start_day],
                 self.start_time.strftime("%H:%M:%S"), weekdays[self.end_day],
                 self.end_time.strftime("%H:%M:%S"))
+
+
+def export_data():
+    restaurants = list()
+    for restaurant in Restaurant.objects.all():
+        restaurant_data = {'name': restaurant.name}
+        open_times = list()
+        for time in restaurant.main_schedule.open_times.all():
+            open_times.append({
+                    'start_day': time.start_day,
+                    'start_time': time.start_time.isoformat(),
+                    'end_day': time.end_day,
+                    'end_time': time.end_time.isoformat()
+            })
+        restaurant_data['main_schedule'] = {
+                'name': restaurant.main_schedule.name,
+                'id': restaurant.id,
+                'open_times': open_times
+        }
+        special_schedules = list()
+        for schedule in restaurant.special_schedules.all():
+            open_times = list()
+            for time in schedule.open_times.all():
+                open_times.append({
+                        'start_day': time.start_day,
+                        'start_time': time.start_time.isoformat(),
+                        'end_day': time.end_day,
+                        'end_time': time.end_time.isoformat()
+                })
+            special_schedules.append({
+                    'name': schedule.name,
+                    'id': restaurant.id,
+                    'start': schedule.valid_start.isoformat(),
+                    'end': schedule.valid_end.isoformat(),
+                    'open_times': open_times
+            })
+        restaurant_data['special_schedules'] = special_schedules
+        restaurants.append(restaurant_data)
+    return restaurants
