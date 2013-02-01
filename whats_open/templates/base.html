@@ -31,10 +31,15 @@
             <a href="http://whatsopen.gmu.edu">What's Open</a>
             </div>
         </div>
+        <div class = clock>
+            {% now "H:i" %}
+            <!--All nice and static... this will too will likely be changing soon. -->
+        </div>
 
         {% block content%}
 
         {% endblock %}
+
     <div class = "navbar">
 
 
@@ -44,10 +49,17 @@
 
     </div>
 
-    <div class = "left-footer">
+    <div class = "left-footer hidden-phone">
         A project of <a href="http://srct.gmu.edu">GMU SRCT</a>. Some rights reserved.
     </div>
-    <div class = "offset5 right-footer">
+    <div class = "offset5 right-footer hidden-phone">
+        George Mason University <a href="http://dining.gmu.edu">Dining Services</a> 
+    </div>
+
+    <div class = "phone-footer visible-phone">
+        A project of <a href="http://srct.gmu.edu">GMU SRCT</a>. Some rights reserved.
+    </div>
+    <div class = "phone-footer visible-phone">
         George Mason University <a href="http://dining.gmu.edu">Dining Services</a> 
     </div>
 
