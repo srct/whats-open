@@ -1,5 +1,6 @@
 from django.template import RequestContext
-from website.models import Restaurant, OpenTime, BaseModel, export_data
+from website.models import Restaurant, OpenTime, BaseModel
+from website.json import export_data
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.views.decorators.http import condition
