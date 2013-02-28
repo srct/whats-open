@@ -4,7 +4,7 @@ from website.models import Restaurant
 def export_data():
     restaurants = list()
     for restaurant in Restaurant.objects.all():
-        restaurant_data = {'name': restaurant.name}
+        restaurant_data = {'name': restaurant.name, 'id': restaurant.id}
         open_times = list()
         for time in restaurant.main_schedule.open_times.all():
             open_times.append({
@@ -15,7 +15,6 @@ def export_data():
             })
         restaurant_data['main_schedule'] = {
                 'name': restaurant.main_schedule.name,
-                'id': restaurant.id,
                 'open_times': open_times
         }
         special_schedules = list()
@@ -30,7 +29,6 @@ def export_data():
                 })
             special_schedules.append({
                     'name': schedule.name,
-                    'id': restaurant.id,
                     'start': schedule.valid_start.isoformat(),
                     'end': schedule.valid_end.isoformat(),
                     'open_times': open_times

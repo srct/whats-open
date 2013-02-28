@@ -30,6 +30,8 @@ class Restaurant(BaseModel):
                 if schedule.valid_start <= today <= schedule.valid_end:
                     if schedule.isOpenNow():
                         return True
+                    else:
+                        return False
         if self.main_schedule.isOpenNow():
             return True
         return False
