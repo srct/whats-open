@@ -127,6 +127,4 @@ we do I will have instructions on how to deploy the code here.
 * Add times until opening/closing for restaurants that are close, and exact
   times for those that aren't.
 * Add yellow close-to-closing condition.
-* Possible: Make page refresh, or more preferably have the data refresh. For
-  example, with AJAX calls.
 * Possible: Make an API?
