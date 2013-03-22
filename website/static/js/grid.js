@@ -13,15 +13,17 @@ function open(id) {
 $.ajax({
     url: '/ajax/schedule/',
 }).done(function (data) {
-    $('#grid').append('<div class="row"></div>');
+    $('#grid').empty();
+    $('#grid').html('<div class="row"></div>');
     $.each(data.data, function (idx, restaurant) {
-        // Note: This assumes grid does not already exist. TODO do not assume.
+        // Append the data into the Bootstrap scaffolding
         if ($('#grid .row').last().children().length < 4) {
-            $('#grid .row').append(
+            $('#grid .row').last().append(
                 '<div class="span3 closed" id="' + restaurant.id + '">' + restaurant.name + '</div>'
             );
         } else {
-            $('#grid').append('<div class="row"></div>').append(
+            $('#grid').append('<div class="row"></div>');
+            $('#grid .row').last().append(
                 '<div class="span3 closed" id="' + restaurant.id + '">' + restaurant.name + '</div>'
             );
         }

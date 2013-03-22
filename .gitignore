@@ -2,7 +2,7 @@
 *.pot
 *.py[cod]
 *.db
-*.swp
+*.sw[po]
 *.log
 *.env
 venv
