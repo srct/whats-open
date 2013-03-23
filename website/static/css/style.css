@@ -65,3 +65,11 @@ div.container{
     font-size: 25px;
     font-family:"Courier New", Courier, monospace;
 }
+#searchBar{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+ul.ui-autocomplete {
+    list-style: none;
+    visibility: hidden;
+}

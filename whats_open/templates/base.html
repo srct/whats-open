@@ -5,11 +5,12 @@
     <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!-- Version Changed -->
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script> <!-- Version Changed -->
     <script type="text/javascript" src="http://www.datejs.com/build/date.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
     <script src="{{ STATIC_URL }}js/grid.js"></script>
+    <script src="{{ STATIC_URL }}js/typeAhead.js"></script>
     <link href="{{ STATIC_URL}}img/glyphicons-halflings.png" rel="icons">
     <head>
         {% block title %}
@@ -21,7 +22,7 @@
     {% endblock %}
     <body>
     <div class = "container">
-
+	    
         <!-- Title, Logo -->
         <div class = "row-fluid">
             <div class = "span2">
@@ -35,13 +36,17 @@
             {% now "H:i" %}
             <!--All nice and static... this will too will likely be changing soon. -->
         </div>
+        <div class="row">
+        	<div class="span6 offset5">
+		        <input name="field"id="searchBar"/>
+        	</div>
+	    </div>
 
         {% block content%}
 
         {% endblock %}
 
     <div class = "navbar">
-
 
     </div>
     
