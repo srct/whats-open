@@ -20,18 +20,6 @@ div.container{
     margin-top:30px;
 }
 
-.left-footer{
-    position: absolute;
-    left: 5px;
-    bottom: 5px;
-}
-
-.right-footer{
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-}
-
 #grid div[class*='span']{
     margin-top:10px;
     margin-bottom:10px;
@@ -56,10 +44,6 @@ div.container{
     text-align:center;
 }
 
-.phone-footer{
-    text-align: center;
-}
-
 .clock{
     text-align: center;
     font-size: 25px;
@@ -77,4 +61,11 @@ ul.ui-autocomplete {
 .campusDropdown{
     font-size: 20px;
     margin-top: 10px;
+}
+
+#footer{
+    width: 100&#37;;
+    background-color: LightGreen;
+    text-align: center;
+    font-size: 15px;
 }
