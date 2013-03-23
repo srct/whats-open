@@ -119,7 +119,6 @@ we do I will have instructions on how to deploy the code here.
 ###To Do###
 * Get all restaurants displaying correct open times on the page. AKA. make
   extensive tests.
-* Add a Typeahead search box at the top to quickly filter out restaurants.
 * Sort by location view
 * Get a decent UI
 * Get a usable admin interface UI, currently it is very confusing to add a 
