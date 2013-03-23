@@ -1,9 +1,15 @@
 from website.models import Restaurant
-
+import re
 
 def export_data():
     restaurants = list()
-    for restaurant in Restaurant.objects.all():
+    
+    # Sort the restaurants by alphabetical order ignoring "the" and "a"
+    alphalist = sorted(Restaurant.objects.all(),
+            key=lambda r: re.sub('^(the|a) ', '', r.name, count=1,
+            flags=re.IGNORECASE))
+    
+    for restaurant in alphalist:
         restaurant_data = {'name': restaurant.name, 'id': restaurant.id}
         open_times = list()
         for time in restaurant.main_schedule.open_times.all():
