@@ -73,3 +73,8 @@ ul.ui-autocomplete {
     list-style: none;
     visibility: hidden;
 }
+
+.campusDropdown{
+    font-size: 20px;
+    margin-top: 10px;
+}
