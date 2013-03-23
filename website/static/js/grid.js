@@ -30,6 +30,8 @@ function construct_grid(restaurants) {
 $.ajax({
     url: '/ajax/schedule/',
 }).done(function (data) {
+    // Hide footer while generating grid to prevent it flying across the screen
+    $('#footer').hide();
     $('#grid').empty();
     $('#grid').html('<div class="row"></div>');
     var restaurants = data.data;
@@ -99,4 +101,5 @@ $.ajax({
         });
     });
     construct_grid(restaurants);
+    $('#footer').show();
 });
