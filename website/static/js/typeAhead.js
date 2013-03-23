@@ -34,6 +34,8 @@ $.ajax({
 				$('.open:contains("'+ui.content[result].value+'")').css('background-color','#FDFFBF');
 				$('.closed:contains("'+ui.content[result].value+'")').css('background-color','#FDFFBF');
 			}
+            // To prevent the page width from extending
+            $('.ui-autocomplete').remove();
 		}
 	});
 });
