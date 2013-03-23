@@ -70,7 +70,7 @@ $.ajax({
                             return open(restaurant.id);
                         }
                     } else {
-                        return open(restauant.id);
+                        return open(restaurant.id);
                     }
                 }
             } else if (start_day < end_day) {
