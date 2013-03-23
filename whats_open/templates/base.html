@@ -30,10 +30,13 @@
             </div>
             <div class = "span8 title">
             <a href="http://whatsopen.gmu.edu">What's Open</a>
+            {% block campus %}
+
+            {% endblock %}
             </div>
         </div>
         <div class = clock>
-            {% now "H:i" %}
+            at {% now "H:i" %}
             <!--All nice and static... this will too will likely be changing soon. -->
         </div>
         <div class="row">
