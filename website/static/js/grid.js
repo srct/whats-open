@@ -1,15 +1,3 @@
-function close(id) {
-    $('#grid #' + id).removeClass('open');
-    $('#grid #' + id).addClass('closed');
-    return false;
-}
-
-function open(id) {
-    $('#grid #' + id).removeClass('closed');
-    $('#grid #' + id).addClass('open');
-    return false;
-}
-
 function sort_restaurants(restaurants) {
     var open = $.grep(restaurants, 
             function (r, idx) { return (r.open === true) });
@@ -23,7 +11,7 @@ function construct_grid(restaurants) {
     $.each(restaurants, function (idx, restaurant) {
         var open_class = 'closed';
         if (restaurant.open) {
-            open_class = 'open';
+            open_class = 'opened';
         }
         // Append the data into the Bootstrap scaffolding
         if ($('#grid .row').last().children().length < 4) {
