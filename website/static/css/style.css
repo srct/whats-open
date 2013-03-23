@@ -49,9 +49,8 @@ div.container{
     font-size: 25px;
     font-family:"Courier New", Courier, monospace;
 }
-#searchBar{
-	margin-top: 10px;
-	margin-bottom: 10px;
+.search-row{
+    text-align: center;
 }
 ul.ui-autocomplete {
     list-style: none;
