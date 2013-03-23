@@ -1,6 +1,5 @@
 # Django settings for whats_open project.
 import os
-import dj_database_url
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -19,9 +18,6 @@ DATABASES = {
             'NAME': PROJECT_PATH + '/database.db'
         }
 }
-
-if os.environ.get('DATABASE_URL', None):
-    DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
