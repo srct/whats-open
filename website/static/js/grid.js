@@ -1,13 +1,30 @@
-function close(id) {
-    $('#grid #' + id).removeClass('open');
-    $('#grid #' + id).addClass('closed');
-    return false;
+function sort_restaurants(restaurants) {
+    var open = $.grep(restaurants, 
+            function (r, idx) { return (r.open === true) });
+    var closed = $.grep(restaurants, 
+            function (r, idx) { return (r.open === false) });
+    return $.merge(open, closed);
 }
 
-function open(id) {
-    $('#grid #' + id).removeClass('closed');
-    $('#grid #' + id).addClass('open');
-    return false;
+function construct_grid(restaurants) {
+    restaurants = sort_restaurants(restaurants);
+    $.each(restaurants, function (idx, restaurant) {
+        var open_class = 'closed';
+        if (restaurant.open) {
+            open_class = 'opened';
+        }
+        // Append the data into the Bootstrap scaffolding
+        if ($('#grid .row').last().children().length < 4) {
+            $('#grid .row').last().append(
+                '<div class="span3 ' + open_class + '" id="' + restaurant.id + '">' + restaurant.name + '</div>'
+            );
+        } else {
+            $('#grid').append('<div class="row"></div>');
+            $('#grid .row').last().append(
+                '<div class="span3 ' + open_class + '" id="' + restaurant.id + '">' + restaurant.name + '</div>'
+            );
+        }
+    });
 }
 
 $.ajax({
@@ -15,18 +32,8 @@ $.ajax({
 }).done(function (data) {
     $('#grid').empty();
     $('#grid').html('<div class="row"></div>');
-    $.each(data.data, function (idx, restaurant) {
-        // Append the data into the Bootstrap scaffolding
-        if ($('#grid .row').last().children().length < 4) {
-            $('#grid .row').last().append(
-                '<div class="span3 closed" id="' + restaurant.id + '">' + restaurant.name + '</div>'
-            );
-        } else {
-            $('#grid').append('<div class="row"></div>');
-            $('#grid .row').last().append(
-                '<div class="span3 closed" id="' + restaurant.id + '">' + restaurant.name + '</div>'
-            );
-        }
+    var restaurants = data.data;
+    $.each(restaurants, function (idx, restaurant) {
         var now = new Date();
         var date = new Date().setHours(0,0,0,0);
         // JavaScript sets 0 to Sunday instead of Monday
@@ -56,10 +63,12 @@ $.ajax({
                 if (now >= Date.parse(time.start_time)) {
                     if (day === end_day) {
                         if (now <= Date.parse(time.end_time)) {
-                            return open(restaurant.id);
+                            restaurant.open = true;
+                            return false;
                         }
                     } else {
-                        return open(restaurant.id);
+                        restaurant.open = true;
+                        return false;
                     }
 
                 }
@@ -67,21 +76,27 @@ $.ajax({
                 if (now <= Date.parse(time.end_time)) {
                     if (day === start_day) {
                         if (now >= Date.parse(time.start_time)) {
-                            return open(restaurant.id);
+                            restaurant.open = true;
+                            return false;
                         }
                     } else {
-                        return open(restaurant.id);
+                        restaurant.open = true;
+                        return false;
                     }
                 }
             } else if (start_day < end_day) {
                 if (day > start_day && day < end_day) {
-                    return open(restaurant.id);
+                    restaurant.open = true;
+                    return false;
                 }
             } else if (start_day > end_day) {
                 if (day < start_day || day > end_day) {
-                    return open(restaurant.id);
+                    restaurant.open = true;
+                    return false;
                 }
             }
+            restaurant.open = false;
         });
     });
+    construct_grid(restaurants);
 });
