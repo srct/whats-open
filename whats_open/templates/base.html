@@ -34,6 +34,16 @@
 
             {% endblock %}
             </div>
+            <div class = "span2">
+                <div class="dropdown campusDropdown">
+                    <a class "dropdown-toggle" data-toggle="dropdown" href='#'>Select Campus</a>
+                        <ul class="dropdown-menu" role="menu" ara-labelledby="dLabel">
+                            <li><a tabindex="-1" href="#">Fairfax</a></li>
+                            <li><a tabindex="-1" href="#">Prince William</a></li>
+                            <li><a tabindex="-1" href="#">Arlington</a></li>
+                        </ul>
+                </div>
+            </div>
         </div>
         <div class = clock>
             at {% now "H:i" %}
