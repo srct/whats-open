@@ -1,5 +1,5 @@
 a{
-    color: ForestGreen;
+    color: #006400;
 }
 
 a:hover{
@@ -7,7 +7,7 @@ a:hover{
 }
 
 a:visited{
-    color: DarkGreen;
+    color: #003C00;
 }
 
 div.container{
