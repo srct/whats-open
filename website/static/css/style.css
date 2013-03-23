@@ -35,6 +35,7 @@ div.container{
 #grid div[class*='span']{
     margin-top:10px;
     margin-bottom:10px;
+    line-height:1;
 }
 
 .open{
