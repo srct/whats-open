@@ -12,7 +12,7 @@ $.ajax({
 		var value = $('#searchBar').val();
 		if (value == 0){
 			//resets all backgrounds to white if the search bar is empty 
-			$('.open').css('background-color','white');
+			$('.opened').css('background-color','white');
 			$('.closed').css('background-color','white');
 		}	  
 	});	   	
@@ -26,12 +26,12 @@ $.ajax({
         },
         response: function(event, ui) {
 			//resets all backgrounds to white if the search bar is edited 
-			$('.open').css('background-color','white');
+			$('.opened').css('background-color','white');
 			$('.closed').css('background-color','white');
 			//ui.content array contains all names that are returned from the search
 			for (var result in ui.content){
 				//Highlights all search results	
-				$('.open:contains("'+ui.content[result].value+'")').css('background-color','#FDFFBF');
+				$('.opened:contains("'+ui.content[result].value+'")').css('background-color','#FDFFBF');
 				$('.closed:contains("'+ui.content[result].value+'")').css('background-color','#FDFFBF');
 			}
             // To prevent the page width from extending
