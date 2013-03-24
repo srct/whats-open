@@ -2,38 +2,27 @@ $.ajax({
     url: '/ajax/schedule/',
 }).done(function (data) {
 	//collecting list of restaurant names from server data	
-	var restaurants = [];
+	var rest_names = [];
 	
 	for (var i = 0; i < data.data.length; i++) {
-		restaurants.push(data.data[i].name);
+		rest_names.push(data.data[i].name);
 	};
-	//Monitors for keyboard activity to detect when the input field is empty
-    $('#searchBar').keyup(function() {
-		var value = $('#searchBar').val();
-		if (value == 0){
-			//resets all backgrounds to white if the search bar is empty 
-			$('.open').css('background-color','white');
-			$('.closed').css('background-color','white');
-		}	  
-	});	   	
 	// For doumentation on jQuery's autocomplete: (api.jqueryui.com/autocomplete)     	 	
     $("#searchBar").autocomplete({  
-    	source: restaurants,
+    	source: rest_names,
     	//making it so the search result list doesn't physically appear 
     	messages: { 
         	noResults: '',
         	results: function(){} 
         },
+        minLength: 0,
         response: function(event, ui) {
-			//resets all backgrounds to white if the search bar is edited 
-			$('.open').css('background-color','white');
-			$('.closed').css('background-color','white');
 			//ui.content array contains all names that are returned from the search
-			for (var result in ui.content){
-				//Highlights all search results	
-				$('.open:contains("'+ui.content[result].value+'")').css('background-color','#FDFFBF');
-				$('.closed:contains("'+ui.content[result].value+'")').css('background-color','#FDFFBF');
-			}
+            results = $.map(ui.content, function(r) { return r.value; });
+            filtered = $.grep(restaurants, function (r, idx) {
+                    return ($.inArray(r.name, results) != -1);
+            });
+            construct_grid(filtered);
             // To prevent the page width from extending
             $('.ui-autocomplete').remove();
 		}

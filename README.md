@@ -120,10 +120,21 @@ we do I will have instructions on how to deploy the code here.
 * Get all restaurants displaying correct open times on the page. AKA. make
   extensive tests.
 * Sort by location view
-* Get a decent UI
-* Get a usable admin interface UI, currently it is very confusing to add a 
-  restaurant and schedule.
+* Get a decent UI (make sure everything is pretty and usable)
 * Add times until opening/closing for restaurants that are close, and exact
   times for those that aren't.
 * Add yellow close-to-closing condition.
-* Possible: Make an API?
+* Make page refresh, or more preferably have the data refresh. For
+  example, with AJAX calls.
+* Create more useful API calls. Document them.
+* Allow switching between campuses. In the database, mark which campus each
+  restauraunt is on, include this information in the JSON object returned at
+  `ajax/schedule` and store the campus choice in the user's cookies
+  so that when they come back the page will already be set to their campus.
+  Default would be Fairfax of course.
+  [jquery-cookie](https://github.com/carhartl/jquery-cookie) would be useful
+  fo[jquery-cookie](https://github.com/carhartl/jquery-cookie) would be useful
+  for this.
+* Create a more user-friendly way of creating restaurants and updating
+  schedules on the admin site. This could be done by modifying the admin site
+  or creating our own Django forms and doing it outside the admin site.

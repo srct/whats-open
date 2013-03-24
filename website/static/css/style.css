@@ -22,6 +22,7 @@ body {
     font-size: 50px;
     font-weight: 900;
     margin-top:30px;
+    line-height: 50px;
 }
 
 #grid div[class*='span']{
@@ -50,6 +51,7 @@ body {
 
 .search-row{
     text-align: center;
+    padding-top: 15px;
 }
 ul.ui-autocomplete {
     list-style: none;

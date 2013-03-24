@@ -1,14 +1,24 @@
-function sort_restaurants(restaurants) {
-    var open = $.grep(restaurants, 
+var restaurants = [];
+
+function sort_restaurants(filtered_restaurants) {
+    var open = $.grep(filtered_restaurants, 
             function (r, idx) { return (r.open === true) });
-    var closed = $.grep(restaurants, 
+    var closed = $.grep(filtered_restaurants, 
             function (r, idx) { return (r.open === false) });
     return $.merge(open, closed);
 }
 
-function construct_grid(restaurants) {
-    restaurants = sort_restaurants(restaurants);
-    $.each(restaurants, function (idx, restaurant) {
+function construct_grid(filtered_restaurants) {
+    // Hide footer while generating grid to prevent it flying across the screen
+    $('#footer').hide();
+    $('#grid').empty();
+    $('#grid').html('<div class="row"></div>');
+    if (filtered_restaurants.length == 0) {
+        $('#grid').append('<span class="span2 offset5">No results found.</span>');
+        return;
+    }
+    sorted_restaurants = sort_restaurants(filtered_restaurants);
+    $.each(sorted_restaurants, function (idx, restaurant) {
         var open_class = 'closed';
         if (restaurant.open) {
             open_class = 'opened';
@@ -25,16 +35,13 @@ function construct_grid(restaurants) {
             );
         }
     });
+    $('#footer').show();
 }
 
 $.ajax({
     url: '/ajax/schedule/',
 }).done(function (data) {
-    // Hide footer while generating grid to prevent it flying across the screen
-    $('#footer').hide();
-    $('#grid').empty();
-    $('#grid').html('<div class="row"></div>');
-    var restaurants = data.data;
+    restaurants = data.data;
     $.each(restaurants, function (idx, restaurant) {
         var now = new Date();
         var date = new Date().setHours(0,0,0,0);
@@ -101,5 +108,4 @@ $.ajax({
         });
     });
     construct_grid(restaurants);
-    $('#footer').show();
 });
