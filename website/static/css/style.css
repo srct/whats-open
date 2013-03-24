@@ -1,5 +1,5 @@
 a{
-    color: #006400;
+    color: #006633;
 }
 
 a:hover{
@@ -11,6 +11,10 @@ a:visited{
 }
 
 div.container{
+}
+
+body {
+    background: url(/static/img/chruch.png) repeat;
 }
 
 .title{
@@ -33,7 +37,7 @@ div.container{
     text-align:center;
 }
 .closing{
-    color:yellow;
+    color: #FFCC33;
     font-weight:bold;
     font-size:200%;
     text-align:center;
@@ -59,7 +63,20 @@ ul.ui-autocomplete {
 
 #footer{
     width: 100&#37;;
-    background-color: LightGreen;
+    background-color: #006633;
     text-align: center;
     font-size: 15px;
+    color: white;
+    font-weight: bold;
+}
+
+#footer a{
+    color: #FFCC33;
+}
+#footer a:hover{
+    color: #E6E600;
+}
+
+#footer a:visited{
+    color: #FFCC33;
 }
