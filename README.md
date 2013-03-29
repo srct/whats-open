@@ -119,6 +119,7 @@ we do I will have instructions on how to deploy the code here.
 <!--whatsopen.gmu.edu uses. The way settings.py is configured requires that you set-->
 <!--an environmental variable to the database's url before you run the site. Talk -->
 <!--to me if you would like to know the url to accomplish this.-->
+
 ###To Do###
 
 * Get all restaurants displaying correct open times on the page. AKA. make
