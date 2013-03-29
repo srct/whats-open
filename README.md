@@ -138,7 +138,6 @@ we do I will have instructions on how to deploy the code here.
   so that when they come back the page will already be set to their campus.
   Default would be Fairfax of course.
   [jquery-cookie](https://github.com/carhartl/jquery-cookie) would be useful
-  fo[jquery-cookie](https://github.com/carhartl/jquery-cookie) would be useful
   for this.
 * Create a more user-friendly way of creating restaurants and updating
   schedules on the admin site. This could be done by modifying the admin site
