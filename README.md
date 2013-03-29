@@ -20,6 +20,7 @@ to help.
 ###Set Up###
 
 To get started, you'll need the following installed:
+
 * [Python 2.7](http://www.python.org/download/)
 * [Django 1.4 or later](https://www.djangoproject.com/download/)
 * [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
@@ -99,7 +100,9 @@ There are many ways to use git, and this is one example:
 git commit -a
 git push origin master
 ```
+
 Some more helpful links on how to use Git:
+
 * [Git Reference](http://gitref.org/)
 * [OpenHatch's Training Mission](https://openhatch.org/missions/git)
 * [Visual Git
@@ -117,6 +120,7 @@ we do I will have instructions on how to deploy the code here.
 <!--an environmental variable to the database's url before you run the site. Talk -->
 <!--to me if you would like to know the url to accomplish this.-->
 ###To Do###
+
 * Get all restaurants displaying correct open times on the page. AKA. make
   extensive tests.
 * Sort by location view
