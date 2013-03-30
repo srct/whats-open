@@ -63,22 +63,8 @@ ul.ui-autocomplete {
     margin-top: 10px;
 }
 
-#footer{
-    width: 100&#37;;
-    background-color: #006633;
+.footer{
     text-align: center;
     font-size: 15px;
-    color: white;
-    font-weight: bold;
-}
-
-#footer a{
-    color: #FFCC33;
-}
-#footer a:hover{
-    color: #E6E600;
-}
-
-#footer a:visited{
-    color: #FFCC33;
+    padding-bottom: 2px;
 }
