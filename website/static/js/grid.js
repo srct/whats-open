@@ -14,7 +14,7 @@ function construct_grid(filtered_restaurants) {
     $('#grid').empty();
     $('#grid').html('<div class="row"></div>');
     if (filtered_restaurants.length == 0) {
-        $('#grid').append('<span class="span2 offset5">No results found.</span>');
+        $('#grid').append('<span class="col-md-2 offset5">No results found.</span>');
         return;
     }
     sorted_restaurants = sort_restaurants(filtered_restaurants);
@@ -26,12 +26,12 @@ function construct_grid(filtered_restaurants) {
         // Append the data into the Bootstrap scaffolding
         if ($('#grid .row').last().children().length < 4) {
             $('#grid .row').last().append(
-                '<div class="span3 ' + open_class + '" id="' + restaurant.id + '">' + restaurant.name + '</div>'
+                '<div class="col-sm-4 col-md-3 ' + open_class + '" id="' + restaurant.id + '">' + restaurant.name + '</div>'
             );
         } else {
             $('#grid').append('<div class="row"></div>');
             $('#grid .row').last().append(
-                '<div class="span3 ' + open_class + '" id="' + restaurant.id + '">' + restaurant.name + '</div>'
+                '<div class="col-sm-4 col-md-3 ' + open_class + '" id="' + restaurant.id + '">' + restaurant.name + '</div>'
             );
         }
     });
