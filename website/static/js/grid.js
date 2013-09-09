@@ -24,16 +24,9 @@ function construct_grid(filtered_restaurants) {
             open_class = 'opened';
         }
         // Append the data into the Bootstrap scaffolding
-        if ($('#grid .row').last().children().length < 4) {
-            $('#grid .row').last().append(
-                '<div class="col-sm-4 col-md-3 ' + open_class + '" id="' + restaurant.id + '">' + restaurant.name + '</div>'
-            );
-        } else {
-            $('#grid').append('<div class="row"></div>');
-            $('#grid .row').last().append(
-                '<div class="col-sm-4 col-md-3 ' + open_class + '" id="' + restaurant.id + '">' + restaurant.name + '</div>'
-            );
-        }
+        $('#grid .row').last().append(
+            '<div class="col-sm-4 col-md-3 ' + open_class + '" id="' + restaurant.id + '">' + restaurant.name + '</div>'
+        );
     });
     $('#footer').show();
 }
