@@ -24,58 +24,12 @@
     </head>
     {% endblock %}
     <body>
-    <div class = "container">
-	    
-        <!-- Title, Logo -->
-        <div class = "row-fluid">
-            <div class = "span2">
-                <a href="http://www.gmu.edu/"><img src = "{{ STATIC_URL }}img/GMURGB.png" alt = "GMU Logo" width = "114" height = "79"></a>
-            </div>
-            <div class = "span8 title">
-            <a href="http://whatsopen.gmu.edu">What's Open</a>
-            {% block campus %}
 
-            {% endblock %}
-            </div>
-            <div class = "span2">
-                <div class="dropdown campusDropdown">
-                    <a class "dropdown-toggle" data-toggle="dropdown" href='#'><button class="btn" type="button">Select Campus</button></a>
-                        <ul class="dropdown-menu" role="menu" ara-labelledby="dLabel">
-                            <li><a tabindex="-1" href="#">Fairfax</a></li>
-                            <li><a tabindex="-1" href="#">Prince William</a></li>
-                            <li><a tabindex="-1" href="#">Arlington</a></li>
-                        </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row-fluid search-row">
-            <div class="control-group">
-                <div class="controls">
-                    <div class="input-prepend">
-                        <span class="add-on"><i class="icon-search"></i></span>
-                        <input name="field" class="span2" type="text" id="searchBar"/>
-                    </div>
-                </div>
-            </div>
-	    </div>
-
-        {% block content%}
-
-        {% endblock %}
-
-    <div class = "navbar">
-
-    </div>
+        <div class="footer">
+            A project of <a href="http://srct.gmu.edu">GMU SRCT</a>. <a href="http://opensource.org/licenses/MIT/">Some rights reserved</a>. &nbsp; &nbsp; | &nbsp; &nbsp;
     
-        <!-- Footers -->
-
-    </div>
-
-    <div class="footer">
-        A project of <a href="http://srct.gmu.edu">GMU SRCT</a>. <a href="http://opensource.org/licenses/MIT/">Some rights reserved</a>. &nbsp; &nbsp; | &nbsp; &nbsp;
-
-        George Mason University <a href="http://dining.gmu.edu/">Dining Services</a>.
+            George Mason University <a href="http://dining.gmu.edu/">Dining Services</a>.
+            </div>
         </div>
-    </div>
     </body>
 </html>
