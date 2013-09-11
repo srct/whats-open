@@ -31,22 +31,24 @@ body {
     line-height:1;
 }
 
+.grid-box{
+    font-size:200%;
+    margin: 10px 0px;
+}
+.grid-box .restaurant{
+    text-align:center;
+    background-color: white;
+    padding: 10px 0px;
+}
 .opened{
-    color:ForestGreen;
-    font-weight:bold;
-    font-size:200%;
-    text-align:center;
+    color:#141414;
 }
-.closing{
+.restaurant.closing{
     color: #FFCC33;
-    font-weight:bold;
-    font-size:200%;
-    text-align:center;
 }
-.closed{
-    color:black;
-    font-size:200%;
-    text-align:center;
+.restaurant.closed{
+    color: rgba(80,80,80,0.9);
+    background-color: rgba(255,255,255,0.8);
 }
 
 .search-row{
