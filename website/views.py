@@ -28,6 +28,6 @@ def gen_last_modified(request):
 def ajax_schedule_data(request):
     # Wrapping up in an object to avoid possible CSRF attack on top-level
     # arrays in JSON objects
-    return HttpResponse(json.dumps({'data': export_data()}),
+    return HttpResponse(json.dumps({'data': export_data()}, indent=4),
             content_type="application/json")
 
