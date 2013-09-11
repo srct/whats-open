@@ -14,7 +14,8 @@ div.container{
 }
 
 body {
-    background: url(/static/img/chruch.png) repeat;
+    background: url(/static/img/southside.jpg) center top no-repeat;
+    background-size: cover;
 }
 
 .title{
