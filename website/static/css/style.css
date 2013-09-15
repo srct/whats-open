@@ -48,8 +48,8 @@ body {
     color: #FFCC33;
 }
 .restaurant.closed{
-    color: rgba(80,80,80,0.9);
-    background-color: rgba(255,255,255,0.8);
+    color: rgba(81,81,81,0.9);
+    background-color: rgba(255,255,255,0.65);
 }
 
 .search-row{
@@ -70,4 +70,8 @@ ul.ui-autocomplete {
     text-align: center;
     font-size: 15px;
     padding-bottom: 2px;
+}
+
+.navbar-default {
+	background-color: #FDFDFF;
 }
