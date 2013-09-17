@@ -25,7 +25,7 @@ function construct_grid(filtered_restaurants) {
         }
         // Append the data into the Bootstrap scaffolding
         $('#grid .row').last().append(
-            '<div class="col-sm-4 col-md-3 grid-box id="' + restaurant.id + '">\
+            '<div class="col-sm-6 col-md-4 col-lg-3 grid-box id="' + restaurant.id + '">\
                 <div class="restaurant ' + open_class + '">' + restaurant.name + '</div>\
             </div>'
         );

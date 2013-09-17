@@ -33,13 +33,14 @@ body {
 }
 
 .grid-box{
-    font-size:200%;
+    font-size:160%;
     margin: 10px 0px;
 }
 .grid-box .restaurant{
     text-align:center;
     background-color: white;
     padding: 10px 0px;
+    margin: 5px 0px;
 }
 .opened{
     color:#141414;
