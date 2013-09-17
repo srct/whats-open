@@ -1,6 +1,16 @@
+/*Bootstrap*/
 .navbar-default {
 	background-color: rgba(252,252,255,0.78);
 }
+.navbar-toggle {
+	background-color: white;
+}
+.navbar-brand {
+	padding: 13px 18px; 
+	font-size: 26px;
+}
+
+/*Styles*/
 a{
     color: #006633;
 }
@@ -88,9 +98,6 @@ ul.ui-autocomplete {
     text-align: center;
     font-size: 15px;
 }
-
-.navbar-default {
-	background-color: #FDFDFF;
 .footer-row {
 	margin: 0;
 }
