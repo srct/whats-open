@@ -23,12 +23,18 @@ a:visited{
     color: #003C00;
 }
 
-div.container{
-}
+.holder{
+	min-height: 100%;
+	position: relative;
+} 
 
 body {
     background: url(/static/img/southside.jpg) center top no-repeat;
     background-size: cover;
+}
+
+.main-container{
+	padding-bottom: 150px;
 }
 
 .title{
