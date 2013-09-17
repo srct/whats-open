@@ -66,13 +66,33 @@ ul.ui-autocomplete {
     font-size: 20px;
     margin-top: 10px;
 }
-
-.footer{
+.gmu-brand {
+	padding: 0px 5px 0px 12px;
+	margin: none;
+	float: left;
+}
+.gmu-logo {
+	width: 150px;
+	height: auto;
+}
+#footer{
+	background-color: rgba(252,252,255,0.78);
+	bottom: 0;
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 100px;
     text-align: center;
     font-size: 15px;
-    padding-bottom: 2px;
 }
 
 .navbar-default {
 	background-color: #FDFDFF;
+.footer-row {
+	margin: 0;
+}
+.footer-text{
+	width:100%;
+	text-align:center;
+	margin-top: 12px;
 }
