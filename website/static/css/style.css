@@ -103,6 +103,7 @@ ul.ui-autocomplete {
 	height: 100px;
     text-align: center;
     font-size: 15px;
+    display: none;
 }
 .footer-row {
 	margin: 0;
