@@ -1,6 +1,6 @@
 /*Bootstrap*/
 .navbar-default {
-	background-color: rgba(252,252,255,0.78);
+	background-color: rgba(252,252,255,0.96);
 }
 .navbar-toggle {
 	background-color: white;
@@ -96,8 +96,7 @@ ul.ui-autocomplete {
 	padding-bottom: 200px;
 }
 #footer{
-	background-color: rgba(252,252,255,0.78);
-	bottom: 0;
+	background-color: rgba(252,252,255,0.96);
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -141,12 +140,16 @@ ul.ui-autocomplete {
 	}
 	#footer {
 		height: 100px;
+		background-color: rgba(252,252,255,0.82)
+	}
 	.navbar {
 		position: relative;
 	}
 	body{
 		padding-top: 0px;
 	}
+	.navbar-default {
+		background-color: rgba(252,252,255,0.82);
 	}
 }
 /* lg */
