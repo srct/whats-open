@@ -31,6 +31,7 @@ a:visited{
 body {
     background: url(/static/img/southside.jpg) center top no-repeat;
     background-size: cover;
+    padding-top: 70px;
 }
 
 .title{
@@ -98,6 +99,7 @@ ul.ui-autocomplete {
 	background-color: rgba(252,252,255,0.78);
 	bottom: 0;
 	position: absolute;
+	bottom: 0;
 	left: 0;
 	right: 0;
 	height: 165px;
@@ -139,6 +141,12 @@ ul.ui-autocomplete {
 	}
 	#footer {
 		height: 100px;
+	.navbar {
+		position: relative;
+	}
+	body{
+		padding-top: 0px;
+	}
 	}
 }
 /* lg */
