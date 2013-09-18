@@ -88,7 +88,8 @@ ul.ui-autocomplete {
 .gmu-brand {
 	padding: 0px 5px 0px 12px;
 	margin: none;
-	float: right;
+	display: block;
+	text-align: center;
 }
 .gmu-logo {
 	width: 150px;
@@ -113,6 +114,9 @@ ul.ui-autocomplete {
 	text-align:center;
 	margin-top: 12px;
 }
+#footer-line {
+	display: none;
+}
 /* Custom Responsive Classes */
 /* xs */
 @media (min-width: 480px) {
@@ -124,7 +128,13 @@ ul.ui-autocomplete {
 }
 /* md */
 @media (min-width: 992px) {
-
+	#footer-line {
+		display: inline;
+	}
+	.gmu-brand {
+		position: absolute;
+		right: 15px;
+	}
 }
 /* lg */
 @media (min-width: 1200px) {
