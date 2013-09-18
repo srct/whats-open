@@ -14,7 +14,7 @@ function construct_grid(filtered_restaurants) {
     $('#grid').empty();
     $('#grid').html('<div class="row"></div>');
     if (filtered_restaurants.length == 0) {
-        $('#grid').append('<span class="col-md-2 offset5">No results found.</span>');
+        $('#grid').append('<span class="col-md-2 offset5" id="no-results">No results found.</span>');
         return;
     }
     sorted_restaurants = sort_restaurants(filtered_restaurants);
