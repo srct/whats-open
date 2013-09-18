@@ -113,3 +113,20 @@ ul.ui-autocomplete {
 	text-align:center;
 	margin-top: 12px;
 }
+/* Custom Responsive Classes */
+/* xs */
+@media (min-width: 480px) {
+
+}
+/* sm */
+@media (min-width: 768px) {
+
+}
+/* md */
+@media (min-width: 992px) {
+
+}
+/* lg */
+@media (min-width: 1200px) {
+	
+}
