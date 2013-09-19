@@ -26,7 +26,8 @@ To get started, you'll need the following installed:
 * [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
 * [virtualenv](http://www.virtualenv.org/en/latest/index.html#installation) 
   (to install you will need either 
-  [pip](http://www.pip-installer.org/en/latest/installing.html)
+  [pip](http://www.pip-installer.org/en/latest/installing.html) or
+  [easy_install](http://pythonhosted.org/distribute/easy_install.html))
 
 <!--This section is redundant as git.gmu.edu is no longer operational -->
 <!--You don't need to do anything with [git.gmu.edu](https://git.gmu.edu/) to -->
@@ -53,8 +54,8 @@ python manage.py migrate website
 <!--If git.gmu.edu is not loading correctly the alternative url is: -->
 <!--https://github.com/thallada/whats-open.git-->
 Note, I will have to add you as a collaborator to the github repo for you to be 
-able to push code. Please email me, Facebook message, or Humbug message me so I 
-can add you.
+able to push code. Please email me, Facebook message, or send me a Zulip message
+me so I can add you.
 
 ###Running the Site Locally###
 
@@ -83,7 +84,7 @@ For the JavaScript, I will be using jQuery whenever possible because I prefer
 it to straight up JavaScript. jQuery has [great
 documentation](http://docs.jquery.com/) and I've found [Mozilla's documentation
 on JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript) to be
-useful as well. But if you're Google-fu is sharp, that should suffice.
+useful as well. But if your Google-fu is sharp, that should suffice.
 
 <!--This section is incorrect as git.gmu.edu is no longer operational -->
 <!--If you followed the steps in "Set Up" above, once you actually make changes it-->
@@ -125,7 +126,8 @@ we do I will have instructions on how to deploy the code here.
 * Get all restaurants displaying correct open times on the page. AKA. make
   extensive tests.
 * Sort by location view
-* Get a decent UI (make sure everything is pretty and usable)
+* ~~Get a decent UI (make sure everything is pretty and usable)~~ (thanks
+  Renfred)
 * Add times until opening/closing for restaurants that are close, and exact
   times for those that aren't.
 * Add yellow close-to-closing condition.
