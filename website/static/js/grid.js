@@ -106,4 +106,22 @@ $.ajax({
     restaurants = data.data;
     update_grid(restaurants);
     construct_grid(restaurants);
+    // Update the grid on the hour and 30 minutes after the hour to reflect current hours without refreshing
+    var now = new Date();
+    // Find out the time to wait till the next half hour period
+    if (now.getMinutes() <= 30) {
+    	var timeout = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), 30, 1, 0) - now;
+    }
+    else {
+    	var timeout = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours()+1, 0, 1, 0) - now;
+    }
+    // Update the grid on the next half hour, then keep updating every 30 minutes (1800000 milliseconds)
+    setTimeout(function(){
+    	update_grid(restaurants);
+    	construct_grid(restaurants);
+    }, timeout);
+    setInterval(function(){
+    	update_grid(restaurants);
+    	construct_grid(restaurants);
+    }, 1800000);
 });
