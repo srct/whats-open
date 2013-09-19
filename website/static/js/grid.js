@@ -9,8 +9,6 @@ function sort_restaurants(filtered_restaurants) {
 }
 
 function construct_grid(filtered_restaurants) {
-    // Hide footer while generating grid to prevent it flying across the screen
-    $('#footer').hide();
     $('#grid').empty();
     $('#grid').html('<div class="row"></div>');
     if (filtered_restaurants.length == 0) {
