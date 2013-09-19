@@ -34,11 +34,8 @@ function construct_grid(filtered_restaurants) {
     $('#footer').show();
 }
 
-$.ajax({
-    url: '/ajax/schedule/',
-}).done(function (data) {
-    restaurants = data.data;
-    $.each(restaurants, function (idx, restaurant) {
+function update_grid(restaurants) {
+	$.each(restaurants, function (idx, restaurant) {
         var now = new Date();
         var date = new Date().setHours(0,0,0,0);
         // JavaScript sets 0 to Sunday instead of Monday
@@ -103,5 +100,12 @@ $.ajax({
             restaurant.open = false;
         });
     });
+}
+
+$.ajax({
+    url: '/ajax/schedule/',
+}).done(function (data) {
+    restaurants = data.data;
+    update_grid(restaurants);
     construct_grid(restaurants);
 });
