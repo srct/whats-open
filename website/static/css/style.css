@@ -1,6 +1,7 @@
 /*Bootstrap*/
 .navbar-default {
 	background-color: rgba(252,252,255,0.96);
+	margin-bottom: 0;
 }
 .navbar-toggle {
 	background-color: white;
@@ -31,7 +32,7 @@ a:visited{
 body {
     background: url(/static/img/southside.jpg) center top no-repeat;
     background-size: cover;
-    padding-top: 70px;
+    padding-top: 50px;
 }
 
 .title{
@@ -51,6 +52,7 @@ body {
 .grid-box{
     font-size:160%;
     margin: 10px 0px;
+    cursor: pointer;
 }
 .grid-box .restaurant{
     text-align:center;
@@ -94,6 +96,7 @@ ul.ui-autocomplete {
 }
 .main-container{
 	padding-bottom: 200px;
+	margin-top: 20px
 }
 #footer{
 	background-color: rgba(252,252,255,0.96);
@@ -116,6 +119,22 @@ ul.ui-autocomplete {
 }
 #footer-line {
 	display: none;
+}
+#info-body {
+	width: 100%;
+	background-color: #FFF;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor: pointer;
+	display: none;
+}
+#info-name {
+	font-size: 22px;
+	margin-bottom: 5px;
+}
+#info-close {
+    position: absolute;
+    right: 15px;
 }
 /* Custom Responsive Classes */
 /* xs */
