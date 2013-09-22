@@ -140,6 +140,7 @@ ul.ui-autocomplete {
     right: 0;
     padding: 6px 19px 19px 19px;
     cursor: pointer;
+    z-index: 10;
 }
 /* Custom Responsive Classes */
 /* xs */
