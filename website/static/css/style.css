@@ -125,7 +125,10 @@ ul.ui-autocomplete {
 	background-color: #FFF;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	cursor: pointer;
+	position: fixed;
+	top: 51px;
+	bottom: 0;
+	z-index: 3;
 	display: none;
 }
 #info-name {
@@ -134,7 +137,9 @@ ul.ui-autocomplete {
 }
 #info-close {
     position: absolute;
-    right: 15px;
+    right: 0;
+    padding: 6px 19px 19px 19px;
+    cursor: pointer;
 }
 /* Custom Responsive Classes */
 /* xs */
@@ -143,7 +148,9 @@ ul.ui-autocomplete {
 }
 /* sm */
 @media (min-width: 768px) {
-
+    #info-close {
+        padding: 6px 31px 31px 31px;
+    }
 }
 /* md */
 @media (min-width: 992px) {
@@ -170,6 +177,13 @@ ul.ui-autocomplete {
 	.navbar-default {
 		background-color: rgba(252,252,255,0.82);
 	}
+	#info-body {
+	   position: static;
+	   cursor: pointer;
+    }
+    #info-close {
+        display: none;
+    }
 }
 /* lg */
 @media (min-width: 1200px) {

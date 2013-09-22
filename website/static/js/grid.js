@@ -129,7 +129,13 @@ $.ajax({
 $(document).ready(function() {
     var lastClicked = null;
     $('#info-body').click(function() {
-       $(this).slideUp(350); 
+        // Only allow closing the info pane via click on larger screens
+        if ($(window).width() >= 992) {
+            $(this).slideUp(350);
+        } 
+    });
+    $('#info-body').click(function() {
+        $(this).slideUp(350);
     });
     $(document).on('click', '.grid-box', function() {
         // If the user clicks on the same box twice it will close the info menu
