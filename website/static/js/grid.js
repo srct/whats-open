@@ -116,8 +116,10 @@ $.ajax({
     var last_updated = new Date();
     setInterval(function(){
     	now = new Date();
-    	// If the hour has changed, it the half hour has changed or it has been over a half hour since the last update.
-    	if (last_updated.getHours() != now.getHours() || (last_updated.getMinutes() < 30 && now.getMinutes() >= 30) || now - last_updated > 1800000){
+    	// If the hour has changed, it the half hour has changed 
+    	// or it has been over a half hour (180000 milliseconds) since the last update.
+    	if (last_updated.getHours() != now.getHours() ||
+    	   (last_updated.getMinutes() < 30 && now.getMinutes() >= 30) || now - last_updated > 1800000){
 	    	update_grid(restaurants);
 	    	construct_grid(restaurants);
 	    	last_updated = new Date(); 
