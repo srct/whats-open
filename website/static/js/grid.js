@@ -64,10 +64,12 @@ function update_grid(restaurants) {
                     if (day === end_day) {
                         if (now <= Date.parse(time.end_time)) {
                             restaurant.open = true;
+                            restaurant.current = time;
                             return false;
                         }
                     } else {
                         restaurant.open = true;
+                        restaurant.current = time;
                         return false;
                     }
 
@@ -77,21 +79,25 @@ function update_grid(restaurants) {
                     if (day === start_day) {
                         if (now >= Date.parse(time.start_time)) {
                             restaurant.open = true;
+                            restaurant.current = time;
                             return false;
                         }
                     } else {
                         restaurant.open = true;
+                        restaurant.current = time;
                         return false;
                     }
                 }
             } else if (start_day < end_day) {
                 if (day > start_day && day < end_day) {
                     restaurant.open = true;
+                    restaurant.current = time;
                     return false;
                 }
             } else if (start_day > end_day) {
                 if (day < start_day || day > end_day) {
                     restaurant.open = true;
+                    restaurant.current = time;
                     return false;
                 }
             }
