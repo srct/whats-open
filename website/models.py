@@ -9,6 +9,7 @@ class BaseModel(models.Model):
 class Restaurant(BaseModel):
     """Represents a dining location on campus."""
     name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, null=True, blank=True)
     main_schedule = models.ForeignKey('Schedule',
             related_name='restaurant_main')
     special_schedules = models.ManyToManyField('Schedule',
