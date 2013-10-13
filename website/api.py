@@ -10,7 +10,11 @@ def export_data():
             flags=re.IGNORECASE))
     
     for restaurant in alphalist:
-        restaurant_data = {'name': restaurant.name, 'id': restaurant.id}
+        restaurant_data = {
+            'name': restaurant.name,
+            'location': restaurant.location, 
+            'id': restaurant.id
+        }
         open_times = list()
         for time in restaurant.main_schedule.open_times.all():
             open_times.append({
