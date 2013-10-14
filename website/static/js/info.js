@@ -61,11 +61,11 @@ $(document).ready(function() {
             $('#info-status').html('<b>Status:</b>  Open');
             var closing = Date.parse(restaurant.current.end_time);
             // Print the time the restaurant closes in local format with the seconds removed via regex
-            $('#info-next').html('<b>Open Till:</b> ' + closing.toLocaleTimeString().replace(/(\d+:\d{2})(:\d+ )/, "$1 "));
+            $('#info-next').html('<b>Open Till:</b> ' + closing.toLocaleTimeString().replace(/(\d+:\d{2})(:\d+ )/, "$1 ")).show();
         }
         else {
             $('#info-status').html('<b>Status:</b>  Closed');
-            $('#info-next').html("");
+            $('#info-next').empty().hide()
         }
         // Display all open times for the main schedule 
         var open_times = restaurant.main_schedule.open_times;
