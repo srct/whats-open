@@ -57,6 +57,12 @@ $(document).ready(function() {
         });
         // Display restaurant info in the info-body
         $('#info-name').text(restaurant.name);
+        if (restaurant.location !== null){
+            $('#info-location').html('<b>Location:</b>  ' + restaurant.location).show();
+        }
+        else {
+            $('#info-location').hide();
+        }
         if (restaurant.open){
             $('#info-status').html('<b>Status:</b>  Open');
             var closing = Date.parse(restaurant.current.end_time);
