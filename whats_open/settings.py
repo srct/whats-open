@@ -4,9 +4,8 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    ('Tyler Hallada', 'thallada@gmu.edu'),
-)
+# Insert a ('Name', 'Email') inside ADMINS tuple
+ADMINS = ('Your Name', 'youremail@example.com')
 
 MANAGERS = ADMINS
 
@@ -18,6 +17,10 @@ DATABASES = {
             'NAME': PROJECT_PATH + '/database.db'
         }
 }
+
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -78,16 +81,14 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = ''
+
 if DEBUG:
-    try:
-        import secret_key
-        SECRET_KEY = secret_key.SECRET_KEY
-    except ImportError:
-        # This is a test/local run so security doesn't matter
-        SECRET_KEY = "testtesttest"
-else:
-    import secret_key
-    SECRET_KEY = secret_key.SECRET_KEY
+    # This is a test/local run so security doesn't matter
+    SECRET_KEY = "testtesttest"
+elif SECRET_KEY == '':
+        raise AssertionError("Must enter unique value for SECRET_KEY setting")
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -113,6 +114,9 @@ WSGI_APPLICATION = 'whats_open.wsgi.application'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, 'templates'),
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
 )
 
 INSTALLED_APPS = (
@@ -129,6 +133,8 @@ INSTALLED_APPS = (
     'south',
     'website',
 )
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
