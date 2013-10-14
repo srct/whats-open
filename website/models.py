@@ -14,6 +14,10 @@ class Restaurant(BaseModel):
             related_name='restaurant_main')
     special_schedules = models.ManyToManyField('Schedule',
             related_name='restaurant_special', null=True, blank=True)
+     
+    class Meta:
+        # Sort by name in admin view
+        ordering = ['name']
 
     def isOpen(self):
         """
@@ -55,7 +59,10 @@ class Schedule(BaseModel):
             help_text='Date that this schedule goes into effect')
     valid_end = models.DateField('End Date', null=True, blank=True,
             help_text='Last day that this schedule is in effect')
-
+    
+    class Meta:
+        ordering = ['name']
+        
     def isOpenNow(self):
         """Return true if this schedule is open right now."""
         for time in OpenTime.objects.filter(schedule=self):
