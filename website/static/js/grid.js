@@ -23,9 +23,11 @@ function construct_grid(filtered_restaurants) {
             open_class = 'opened';
         }
         // Append the data into the Bootstrap scaffolding
+        // Note that identical restaurants can be numbered. If there is a number in square brackets 
+        // Next to a restuarant name, the number will be formatted as a subscript. 
         $('#grid .row').append(
             '<div class="col-sm-6 col-md-4 col-lg-3 grid-box" id="' + restaurant.id + '">\
-                <div class="restaurant ' + open_class + '">' + restaurant.name + '</div>\
+                <div class="restaurant ' + open_class + '">' + restaurant.name.replace(/ ?\[(\d+)\]/, "<sub>$1</sub>") + '</div>\
             </div>'
         );
     });
