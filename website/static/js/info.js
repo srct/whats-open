@@ -35,18 +35,7 @@ $(document).ready(function() {
     });
     // Displays more info about a restaurant on-click
     $(document).on('click', '.grid-box', function() {
-        // If the user clicks on the same box twice it will close the info menu
         grid_id = $(this).attr('id');
-        if (lastClicked == grid_id){
-            $('#info-body').slideToggle(300)
-        }
-        else {
-            // Empty the schedule before sliding down in case the new
-            // schedule is shorter
-            $('#info-schedule').empty();
-            $('#info-body').slideDown(300);
-            lastClicked = grid_id;
-        }
         // Search though the restaurnts object to find the selected restaurant's info
         var restaurant;
         $.each(restaurants, function(idx, restaurant_i) { 
@@ -96,6 +85,14 @@ $(document).ready(function() {
                 $("#info-schedule").append(element);
                 element = '';
             }
+        }
+        // If the user clicks on the same box twice it will close the info menu
+        if (lastClicked == grid_id){
+            $('#info-body').slideToggle(300)
+        }
+        else {            
+            $('#info-body').slideDown(300);
+            lastClicked = grid_id;
         }
     });
 });
