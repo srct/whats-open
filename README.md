@@ -13,8 +13,8 @@ There are many things that can be done with this project (see the "To Do"
 section), but sometimes it's the small things that count, so don't be afraid of 
 contributing just for a spelling mistake.
 
-If you need help at all please contact me (Tyler). I want people to
-contribute, so if you are struggling, or just want to learn, then I am willing
+If you need help at all please contact any SRCT member. We want people to
+contribute, so if you are struggling, or just want to learn, then we are willing
 to help.
 
 ###Set Up###
