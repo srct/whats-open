@@ -29,19 +29,19 @@ To get started, you'll need the following installed:
   [pip](http://www.pip-installer.org/en/latest/installing.html) or
   [easy_install](http://pythonhosted.org/distribute/easy_install.html))
 
-<!--This section is redundant as git.gmu.edu is no longer operational -->
 <!--You don't need to do anything with [git.gmu.edu](https://git.gmu.edu/) to -->
 <!--preform a `git clone`, but you should log in if you plan on actually modifying -->
 <!--code. Logging into git.gmu.edu with your George Mason credentials will create -->
 <!--an account. Ask a SRCT member to add you to the SRCT group on the site and you -->
 <!--will be added to the list of people allowed to `git push` to the repository at -->
-<!--git.gmu.edu. -->
+<!--git.gmu.edu. Alternatively, you can fork the project, clone your own repo, make -->
+<!--changes there, and submit pull requests.-->
 
 Then type the following commands in your terminal (if you're on Windows, 
 [Cygwin](http://www.cygwin.com/) is recommended).
 
 ```bash
-git clone https://github.com/thallada/whats-open.git
+git clone http://git.gmu.edu/srct/whats-open.git
 cd whats-open/
 virtualenv venv --distribute
 source venv/bin/activate
@@ -49,13 +49,6 @@ pip install -r requirements.txt
 python manage.py syncdb
 python manage.py migrate website
 ```
-
-<!--This section is redundant as git.gmu.edu is no longer operational -->
-<!--If git.gmu.edu is not loading correctly the alternative url is: -->
-<!--https://github.com/thallada/whats-open.git-->
-Note, I will have to add you as a collaborator to the github repo for you to be 
-able to push code. Please email me, Facebook message, or send me a Zulip message
-me so I can add you.
 
 ###Running the Site Locally###
 
@@ -86,14 +79,12 @@ documentation](http://docs.jquery.com/) and I've found [Mozilla's documentation
 on JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript) to be
 useful as well. But if your Google-fu is sharp, that should suffice.
 
-<!--This section is incorrect as git.gmu.edu is no longer operational -->
 <!--If you followed the steps in "Set Up" above, once you actually make changes it-->
 <!--should be easy to push them to the git repository.-->
 
 Once you actually make your changes and have fully tested them you can push the 
-code to the git repository. Note, I will have to add you to my github repo in 
-order for you to be allowed to push code to the repo. Please email, Facebook 
-message, Humbug message me so I can add you.
+code to the git repository. The best way to do this is to fork the project, make
+the changes in your local repository, push to gitlab, and submit a pull request.
 
 There are many ways to use git, and this is one example:
 
