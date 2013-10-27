@@ -60,14 +60,16 @@ body {
 
 .grid-box{
     font-size:160%;
-    margin: 10px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
 }
 .grid-box .restaurant{
     text-align:center;
     background-color: white;
     padding: 10px 0px;
-    margin: 5px 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .opened{
     color:#141414;
@@ -110,7 +112,7 @@ ul.ui-autocomplete {
 }
 .main-container{
 	padding-bottom: 200px;
-	margin-top: 20px
+	margin-top: 20px;
 }
 #footer{
 	background-color: rgba(252,252,255,0.96);
