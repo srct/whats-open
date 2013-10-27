@@ -10,12 +10,17 @@ $(document).ready(function(){
         $(this).parent().toggleClass('active');
         // Replace "About" link with the close icon
         $('#about-link-text, #about-close-nav').toggle();
-        // Hide grid to disable scrolling when info body is active 
-        // The delay prevents buggy scrolling on some mobile browsers                                      
-        window.setTimeout(function() { $('.main-container').toggle() }, 350);
-        $('html, body').animate({
-            scrollTop: 0
-        }, 500);
+        if ($(window).width() >= 992){
+            // Animation for large displays
+            $('.main-container').slideToggle(356)
+        } else {
+            // Hide grid to disable scrolling when info body is active 
+            // The delay prevents buggy scrolling on some mobile browsers                                      
+            window.setTimeout(function() { $('.main-container').toggle() }, 350);
+            $('html, body').animate({
+                scrollTop: 0
+            }, 500);
+        }
     });
     $('#about-close').click(function(){
         $('#about-link').parent().removeClass('active');
