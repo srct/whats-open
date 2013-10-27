@@ -11,11 +11,11 @@ $(document).ready(function(){
         $(this).parent().toggleClass('active');
         // Replace "About" link with the close icon
         $('#about-link-text, #about-close-nav').toggle();
-        // Prevent body from scolling when about section is active
-        $('.main-container').slideToggle(500);
-        // Scroll back to top
+        // Hide grid to disable scrolling when info body is active 
+        // The delay prevents buggy scrolling on some mobile browsers                                      
+        window.setTimeout(function() { $('.main-container').toggle() }, 350);
         $('html, body').animate({
-                scrollTop: 0
+            scrollTop: 0
         }, 500);
     });
     $('#about-close').click(function(){

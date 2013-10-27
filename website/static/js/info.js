@@ -95,12 +95,9 @@ $(document).ready(function() {
             lastClicked = grid_id;
         }
         if ($(window).width() < 992) {
-            // On mobile displays, hide grid to disable scrolling when info body is active
-            $('.main-container').slideToggle(500);
-            // Scroll to top of page to prevent body from going out of view
-            $('html, body').animate({
-                    scrollTop: 0
-            }, 430);
+            // On mobile displays, hide grid to disable scrolling when info body is active 
+            // The delay prevents buggy scrolling on some mobile browsers                                      
+            window.setTimeout(function() { $('.main-container').toggle() }, 350);
         }
     });
     $('#info-close').click(function() {
