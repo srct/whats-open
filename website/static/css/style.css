@@ -10,7 +10,13 @@
 	padding: 13px 18px; 
 	font-size: 26px;
 }
-
+.navbar-default .navbar-nav > .active > a {
+    background: rgba(255,255,255,0.50);
+}
+.navbar-default .navbar-nav > .active > a:hover {
+    background: rgba(255,255,255,0.50);
+    color: #000;
+}
 /*Styles*/
 a{
     color: #006633;
