@@ -1,19 +1,19 @@
 <html>
     {% block head %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://www.datejs.com/build/date.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-    <script src="{{ STATIC_URL }}js/grid.js"></script>
-    <script src="{{ STATIC_URL }}js/typeAhead.js"></script>
-    <script src="{{ STATIC_URL }}js/info.js"></script>
-    <link rel="icon" href="{{ STATIC_URL }}/img/gmu-logo.ico">
-
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://www.datejs.com/build/date.js"></script>
+        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        <script src="{{ STATIC_URL }}js/grid.js"></script>
+        <script src="{{ STATIC_URL }}js/typeAhead.js"></script>
+        <script src="{{ STATIC_URL }}js/info.js"></script>
+        <script src="{{ STATIC_URL }}js/about.js"></script>
+        <link rel="icon" href="{{ STATIC_URL }}/img/gmu-logo.ico">
         {% block title %}
         <title>
         What's Open
@@ -23,6 +23,7 @@
     {% endblock %}
     <body>
         <div class="holder">
+            {% block nav %}
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -34,8 +35,18 @@
                     <a class="navbar-brand" href="/">what's open</a>
                 </div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav navbar-right" style="display:none;">
-                        <li class="dropdown">
+                    <div class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input id="searchBar" type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a id="about-link">
+                                <span id="about-link-text">About</span><img id="about-close-nav" src="{{ STATIC_URL }}img/close.png">
+                            </a>
+                        </li>
+                        <li class="dropdown" style="display:none;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Select Campus <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Fairfax</a></li>
@@ -44,13 +55,15 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <input id="searchBar" type="text" class="form-control" placeholder="Search">
-                        </div>
-                    </div>
+
                 </div>
             </nav>
+            {% endblock %}
+            <div id="about-body" style="display:none;">
+                <div class="container" id="about-container">
+                    {% include 'about.html' %}
+                </div>
+            </div>
             <div id="info-body">
 	            <div class="container" id="info-container">
 		            <div class="row" id="info-row">
@@ -71,7 +84,8 @@
                     {% endblock %}
                     </div>
                 </div>  
-            </div>  
+            </div>
+            {% block footer %}
             <div id="footer">
                 <div class="footer-row">
 	                <a class="gmu-brand" href="http://www.gmu.edu"><img src="{{ STATIC_URL }}img/gmurgb.png" class="gmu-logo"></a>
@@ -80,6 +94,7 @@
                 	</div>
                 </div>
             </div>
+            {% endblock %}
         </div>
     </body>
 </html>

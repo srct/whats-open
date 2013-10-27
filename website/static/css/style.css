@@ -10,7 +10,13 @@
 	padding: 13px 18px; 
 	font-size: 26px;
 }
-
+.navbar-default .navbar-nav > .active > a {
+    background: rgba(255,255,255,0.50);
+}
+.navbar-default .navbar-nav > .active > a:hover {
+    background: rgba(255,255,255,0.50);
+    color: #000;
+}
 /*Styles*/
 a{
     color: #006633;
@@ -35,6 +41,9 @@ body {
     padding-top: 50px;
 }
 
+.clip{
+    overflow: hidden;
+}
 .title{
     text-align: center;
     font-size: 50px;
@@ -51,14 +60,16 @@ body {
 
 .grid-box{
     font-size:160%;
-    margin: 10px 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
 }
 .grid-box .restaurant{
     text-align:center;
     background-color: white;
     padding: 10px 0px;
-    margin: 5px 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .opened{
     color:#141414;
@@ -101,7 +112,7 @@ ul.ui-autocomplete {
 }
 .main-container{
 	padding-bottom: 200px;
-	margin-top: 20px
+	margin-top: 20px;
 }
 #footer{
 	background-color: rgba(252,252,255,0.96);
@@ -133,19 +144,70 @@ ul.ui-autocomplete {
 	position: fixed;
 	top: 51px;
 	bottom: 0;
-	z-index: 3;
+	z-index: 10;
 	display: none;
+	overflow-y: scroll;
 }
 #info-name {
 	font-size: 22px;
 	margin-bottom: 5px;
 }
-#info-close {
+#info-close, #about-close {
     position: absolute;
     right: 0;
     padding: 6px 19px 19px 19px;
     cursor: pointer;
     z-index: 10;
+    opacity: 0.4;
+}
+#about-close-nav {
+    opacity: 0.5;
+    padding: 2px 15px 0px 15px;
+    display: none;
+}
+#info-close:hover, #about-close:hover, #about-close-nav:hover {
+    opacity: 1;
+}
+#about-body{
+    position: fixed;
+    z-index: 1040;
+    top: 51px;
+    width: 100%;
+    bottom: 0;
+    overflow: scroll;
+}
+#about-container {  
+    width: 100%;
+    overflow-y: auto;
+}
+.about-content {
+    background-color: #FFF;
+    padding-bottom: 20px;
+}
+#about-example{
+    background-color: rgba(255,255,255,0.4);
+}
+.about-top-p{
+    margin-top: 20px;
+}
+#about-link{
+    cursor: pointer;
+}
+.grid-blur{
+    opacity: 0.54;
+    -webkit-filter: blur(3px); 
+    -moz-filter: blur(3px); 
+    -o-filter: blur(3px); 
+    -ms-filter: blur(3px); 
+    filter: blur(3px);
+}
+.main-container{
+    /* Transitions for .grid-blur */
+    -webkit-transition: opacity 356ms ease-in-out, -webkit-filter 356ms ease-in-out;
+    -moz-transition: opacity 356ms ease-in-out, -moz-filter 356ms ease-in-out;;
+    -o-transition: opacity 356ms ease-in-out, -o-filter 356ms ease-in-out;;
+    -ms-transition: opacity 356ms ease-in-out, -ms-filter 356ms ease-in-out;
+    transition: opacity 356ms ease-in-out, "filter" 356ms ease-in-out;
 }
 /* Custom Responsive Classes */
 /* xs */
@@ -189,6 +251,16 @@ ul.ui-autocomplete {
     }
     #info-close {
         display: none;
+    }
+    #about-close {
+        display: none;
+    }
+    #about-body {
+        bottom: 100px;
+    }
+    .navbar-nav li{
+        margin-left: 10px;
+        margin-right: 10px;
     }
 }
 /* lg */
