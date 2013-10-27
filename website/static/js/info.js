@@ -44,8 +44,8 @@ $(document).ready(function() {
                 return false;
             }
         });
-        // Display restaurant info in the info-body
-        $('#info-name').text(restaurant.name);
+        // Display restaurant info in the info-body without bracketed locations
+        $('#info-name').text(restaurant.name.replace(/ ?\[(.+)\]/, ''));
         if (restaurant.location !== null){
             $('#info-location').html('<b>Location:</b>  ' + restaurant.location).show();
         }
