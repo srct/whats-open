@@ -140,7 +140,7 @@ ul.ui-autocomplete {
 	position: fixed;
 	top: 51px;
 	bottom: 0;
-	z-index: 10;
+	z-index: 1030;
 	display: none;
 	overflow-y: scroll;
 }
