@@ -33,6 +33,9 @@ $(document).ready(function() {
     // Displays more info about a restaurant on-click
     $(document).on('click', '.grid-box', function() {
         grid_id = $(this).attr('id');
+        // Keep track of the users vertical position so it can be scolled back
+        //to when the window is closed
+        position = $(window).scrollTop();
         // Search though the restaurnts object to find the selected restaurant's info
         var restaurant;
         $.each(restaurants, function(idx, restaurant_i) { 
@@ -91,13 +94,21 @@ $(document).ready(function() {
             $('#info-body').slideDown(300);
             lastClicked = grid_id;
         }
-        if ($(window).width() <= 992) {
-            // On mobile displays, disable scrolling when info body is active
-            $('body').addClass('clip');
+        if ($(window).width() < 992) {
+            // On mobile displays, hide grid to disable scrolling when info body is active
+            $('.main-container').slideToggle(500);
+            // Scroll to top of page to prevent body from going out of view
+            $('html, body').animate({
+                    scrollTop: 0
+            }, 430);
         }
     });
     $('#info-close').click(function() {
         $('#info-body').slideUp(350);
         $('body').removeClass('clip');
+        $('.main-container').show();
+        $('html, body').animate({
+            scrollTop: position
+        }, 350);
     });
 });

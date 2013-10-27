@@ -40,10 +40,6 @@ body {
     background-size: cover;
     padding-top: 50px;
 }
-
-.clip{
-    overflow: hidden;
-}
 .title{
     text-align: center;
     font-size: 50px;
@@ -208,6 +204,9 @@ ul.ui-autocomplete {
     -o-transition: opacity 356ms ease-in-out, -o-filter 356ms ease-in-out;;
     -ms-transition: opacity 356ms ease-in-out, -ms-filter 356ms ease-in-out;
     transition: opacity 356ms ease-in-out, "filter" 356ms ease-in-out;
+}
+.clip-height{
+    max-height: 60%;
 }
 /* Custom Responsive Classes */
 /* xs */
