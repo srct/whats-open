@@ -218,6 +218,9 @@ ul.ui-autocomplete {
     #info-close {
         padding: 6px 31px 31px 31px;
     }
+    #about-close {
+        display: none;
+    }
 }
 /* md */
 @media (min-width: 992px) {
@@ -249,9 +252,6 @@ ul.ui-autocomplete {
 	   cursor: pointer;
     }
     #info-close {
-        display: none;
-    }
-    #about-close {
         display: none;
     }
     #about-body {
