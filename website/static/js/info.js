@@ -28,10 +28,7 @@ $(document).ready(function() {
         // Only allow closing the info pane via click on larger screens
         if ($(window).width() >= 992) {
             $(this).slideUp(350);
-        } 
-    });
-    $('#info-close').click(function() {
-        $('#info-body').slideUp(350);
+        }
     });
     // Displays more info about a restaurant on-click
     $(document).on('click', '.grid-box', function() {
@@ -94,5 +91,13 @@ $(document).ready(function() {
             $('#info-body').slideDown(300);
             lastClicked = grid_id;
         }
+        if ($(window).width() <= 992) {
+            // On mobile displays, disable scrolling when info body is active
+            $('body').addClass('clip');
+        }
+    });
+    $('#info-close').click(function() {
+        $('#info-body').slideUp(350);
+        $('body').removeClass('clip');
     });
 });
