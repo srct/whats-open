@@ -5,7 +5,6 @@ $(document).ready(function(){
         // Keep track of the users vertical position so it can be scolled back
         //to when the window is closed
         position = $(window).scrollTop();
-        console.log(position);
         $('#about-body').slideToggle(356);
         $('.main-container').toggleClass('grid-blur');
         $(this).parent().toggleClass('active');
