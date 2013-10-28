@@ -18,6 +18,9 @@
     color: #000;
 }
 /*Styles*/
+body, html {
+    height: 100%;
+}
 a{
     color: #006633;
 }
