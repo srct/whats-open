@@ -50,7 +50,9 @@ body {
     margin-top:30px;
     line-height: 50px;
 }
-
+#grid{
+    display: none;
+}
 #grid div[class*='span']{
     margin-top:10px;
     margin-bottom:10px;
@@ -58,7 +60,6 @@ body {
 }
 
 .grid-box{
-    font-size:160%;
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
@@ -66,9 +67,12 @@ body {
 .grid-box .restaurant{
     text-align:center;
     background-color: white;
-    padding: 10px 0px;
+    padding: 10px 2px;
     margin-top: 5px;
     margin-bottom: 5px;
+    height: 50px;
+    font-size: 21px;
+    overflow-y: scroll;
 }
 .opened{
     color:#141414;
