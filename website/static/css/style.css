@@ -72,7 +72,7 @@ body {
     margin-bottom: 5px;
     height: 50px;
     font-size: 21px;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 .opened{
     color:#141414;
