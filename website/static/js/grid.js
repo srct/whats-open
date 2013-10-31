@@ -39,12 +39,14 @@ function construct_grid(filtered_restaurants) {
         if (restaurant.open) {
             open_class = 'opened';
         }
-        // Append the data into the Bootstrap scaffolding
-        // Note that identical restaurants can be numbered. If there is a number in square brackets 
-        // Next to a restuarant name, the number will be formatted as a subscript. 
+        // Append the data into the grid scaffolding.
+        // Note that identical restaurants can be labeled via location. If there text in square brackets 
+        // next to a restuarant name, the text will be formatted as next to it. 
         $('#grid .row').append(
             '<div class="col-sm-6 col-md-4 col-lg-3 grid-box" id="' + restaurant.id + '">\
-                <div class="restaurant ' + open_class + '">' + restaurant.name.replace(/ ?\[(.+)\]/, '<span class="building"> ($1)</span>') + '</div>\
+                <div class="restaurant ' + open_class + '">' + 
+                    restaurant.name.replace(/ ?\[(.+)\]/, '<span class="building"> ($1)</span>') + 
+                '</div>\
             </div>'
         );
     });
