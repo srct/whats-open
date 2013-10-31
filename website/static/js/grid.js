@@ -2,7 +2,7 @@ var restaurants = [];
 
 function correct_grid_overflow(){
     // This function ensures that all text inside the grid-boxes display nicely on one line. 
-    $('.restaurant').css('font-size', '');
+    $('.restaurant').css('font-size', '').css('overflow-y', 'scroll');
     $('.restaurant').each(function() {
         // Overflow is detected if the height of the box is less than
         // the clipped scroll height of the box.
@@ -15,6 +15,7 @@ function correct_grid_overflow(){
             $(this).css('padding-top', 31 - newSize + 'px');
         }    
     });
+    $('.restaurant').css('overflow-y', '');
 }
 
 function sort_restaurants(filtered_restaurants) {
@@ -51,7 +52,7 @@ function construct_grid(filtered_restaurants) {
         );
     });
     $('#grid').show();
-    correct_overflow();
+    correct_grid_overflow();
 }
 
 function update_grid(restaurants) {
