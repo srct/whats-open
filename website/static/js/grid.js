@@ -1,5 +1,22 @@
 var restaurants = [];
 
+function correct_grid_overflow(){
+    // This function ensures that all text inside the grid-boxes display nicely on one line. 
+    $('.restaurant').css('font-size', '');
+    $('.restaurant').each(function() {
+        // Overflow is detected if the height of the box is less than
+        // the clipped scroll height of the box.
+        while ($(this).height() > 0 && $(this).outerHeight() < $(this)[0].scrollHeight) {
+            // Shrink the elements that overflow until their contents fit on one line.
+            var newSize = parseInt($(this).css('font-size')) - 1;
+            $(this).css('font-size', newSize + 'px');
+            $(this).children('.building').css('font-size', newSize - 6 + 'px');
+            // Calulated padding is added to ensure the text remains vertically centered.
+            $(this).css('padding-top', 31 - newSize + 'px');
+        }    
+    });
+}
+
 function sort_restaurants(filtered_restaurants) {
     var open = $.grep(filtered_restaurants, 
             function (r, idx) { return (r.open === true) });
@@ -31,6 +48,8 @@ function construct_grid(filtered_restaurants) {
             </div>'
         );
     });
+    $('#grid').show();
+    correct_overflow();
 }
 
 function update_grid(restaurants) {
@@ -126,4 +145,7 @@ $.ajax({
 	    	last_updated = new Date(); 
     	}
     }, 1000);
+    $(window).on('resize', function(){
+        correct_grid_overflow();
+    });
 });
