@@ -31,7 +31,6 @@ function construct_grid(filtered_restaurants) {
             </div>'
         );
     });
-    $('#footer').show();
 }
 
 function update_grid(restaurants) {
