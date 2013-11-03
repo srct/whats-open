@@ -129,6 +129,7 @@ ul.ui-autocomplete {
 }
 .footer-row {
 	margin: 0;
+	background-color: rgba(252,252,255,0.96);;
 }
 .footer-text{
 	width:100%;
