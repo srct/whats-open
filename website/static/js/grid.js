@@ -118,7 +118,7 @@ function update_grid(restaurants) {
                     return false;
                 }
             } else if (start_day > end_day) {
-                if (day < start_day || day > end_day) {
+                if (day > start_day || day < end_day) {
                     restaurant.open = true;
                     restaurant.current = time;
                     return false;
