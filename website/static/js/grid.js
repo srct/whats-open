@@ -67,8 +67,10 @@ function update_grid(restaurants) {
         var schedule = undefined;
         // If there exists a valid special schedule choose it.
         $.each(restaurant.special_schedules, function (idx, special)  {
-            if (day >= Date.parse(special.start)
-                    && day <= Date.parse(special.end)) {
+            console.log(Date.parse(special.start))
+            console.log(date)
+            if (date >= Date.parse(special.start)
+                    && date <= Date.parse(special.end)) {
                 schedule = special;
             }
         });
