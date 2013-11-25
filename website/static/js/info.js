@@ -12,6 +12,51 @@ function compareTimes(time1, time2){
     return true;
 }
 
+function dispalyInfo(restaurant) {
+    // Display restaurant info in the info-body without bracketed locations
+    $('#info-name').text(restaurant.name.replace(/ ?\[(.+)\]/, ''));
+    if (restaurant.location !== null){
+        $('#info-location').html('<b>Location:</b>  ' + restaurant.location).show();
+    }
+    else {
+        $('#info-location').hide();
+    }
+    if (restaurant.open){
+        $('#info-status').html('<b>Status:</b>  Open');
+        var closing = Date.parse(restaurant.current_time.end_time);
+        // Print the time the restaurant closes in local format with the seconds removed via regex
+        $('#info-next').html('<b>Open Till:</b> ' + closing.toLocaleTimeString().replace(/(\d+:\d{2})(:\d+ )/, "$1 ")).show();
+    }
+    else {
+        $('#info-status').html('<b>Status:</b>  Closed');
+        $('#info-next').empty().hide()
+    }
+    // Display all open times for the main schedule 
+    var open_times = restaurant.current_schedule.open_times;
+    var element = '';
+    $('#info-schedule').empty();
+    for(var i = 0; i < open_times.length; i++){
+        if (!compareTimes(open_times[i], open_times[i-1])){
+            element += '<div class="col-md-3"><b>';
+        }
+        if (!compareTimes(open_times[i], open_times[i-1]) &&
+            // Add: "StartDay - " 
+            compareTimes(open_times[i], open_times[i+1])){
+            element += days[open_times[i].start_day] + ' - ';
+        }
+        if (!compareTimes(open_times[i], open_times[i+1])){
+            // Add "EndDay: OpenTime - CloseTime"
+            opening = Date.parse(open_times[i].start_time);
+            closing = Date.parse(open_times[i].end_time);
+            element += days[open_times[i].start_day] + '</b>: ' + 
+            opening.toLocaleTimeString().replace(/(\d+:\d{2})(:\d+ )/, "$1 ") + ' - ' + 
+            closing.toLocaleTimeString().replace(/(\d+:\d{2})(:\d+ )/, "$1 ") + '</div>';
+            $("#info-schedule").append(element);
+            element = '';
+        }
+    }
+}
+
 days = {
     0:"Mon",
     1:"Tues",
@@ -44,48 +89,7 @@ $(document).ready(function() {
                 return false;
             }
         });
-        // Display restaurant info in the info-body without bracketed locations
-        $('#info-name').text(restaurant.name.replace(/ ?\[(.+)\]/, ''));
-        if (restaurant.location !== null){
-            $('#info-location').html('<b>Location:</b>  ' + restaurant.location).show();
-        }
-        else {
-            $('#info-location').hide();
-        }
-        if (restaurant.open){
-            $('#info-status').html('<b>Status:</b>  Open');
-            var closing = Date.parse(restaurant.current.end_time);
-            // Print the time the restaurant closes in local format with the seconds removed via regex
-            $('#info-next').html('<b>Open Till:</b> ' + closing.toLocaleTimeString().replace(/(\d+:\d{2})(:\d+ )/, "$1 ")).show();
-        }
-        else {
-            $('#info-status').html('<b>Status:</b>  Closed');
-            $('#info-next').empty().hide()
-        }
-        // Display all open times for the main schedule 
-        var open_times = restaurant.main_schedule.open_times;
-        var element = '';
-        $('#info-schedule').empty();
-        for(var i = 0; i < open_times.length; i++){
-            if (!compareTimes(open_times[i], open_times[i-1])){
-                element += '<div class="col-md-3"><b>';
-            }
-            if (!compareTimes(open_times[i], open_times[i-1]) &&
-                // Add: "StartDay - " 
-                compareTimes(open_times[i], open_times[i+1])){
-                element += days[open_times[i].start_day] + ' - ';
-            }
-            if (!compareTimes(open_times[i], open_times[i+1])){
-                // Add "EndDay: OpenTime - CloseTime"
-                opening = Date.parse(open_times[i].start_time);
-                closing = Date.parse(open_times[i].end_time);
-                element += days[open_times[i].start_day] + '</b>: ' + 
-                opening.toLocaleTimeString().replace(/(\d+:\d{2})(:\d+ )/, "$1 ") + ' - ' + 
-                closing.toLocaleTimeString().replace(/(\d+:\d{2})(:\d+ )/, "$1 ") + '</div>';
-                $("#info-schedule").append(element);
-                element = '';
-            }
-        }
+        dispalyInfo(restaurant);
         // If the user clicks on the same box twice it will close the info menu
         if (lastClicked == grid_id){
             $('#info-body').slideToggle(300)
