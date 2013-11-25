@@ -1,5 +1,5 @@
-function compareTimes(time1, time2){
-    // Determine if two time objects are equal 
+function compareTimes(time1, time2) {
+    // Determine if two objects' start and end times are equal.
     if (time1 == undefined || time2 == undefined){
         return false;
     }
