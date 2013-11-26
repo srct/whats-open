@@ -67,7 +67,9 @@ function update_grid(restaurants) {
         var schedule = undefined;
         // If there exists a valid special schedule choose it.
         $.each(restaurant.special_schedules, function (idx, special)  {
-            if (date >= Date.parse(special.start)
+            // Special schedules take effect after 5am on their start day
+            // to prevent collisions with the previous night's schedule
+            if (date >= Date.parse(special.start).setHours(5,0,0,0)
                     && date <= Date.parse(special.end)) {
                 schedule = special;
             }
