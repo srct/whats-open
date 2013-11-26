@@ -15,11 +15,11 @@ function compareTimes(time1, time2) {
 function dispalyInfo(restaurant) {
     // Display restaurant info in the info-body without bracketed locations
     $('#info-name').text(restaurant.name.replace(/ ?\[(.+)\]/, ''));
-    if (restaurant.location !== null){
-        $('#info-location').html('<b>Location:</b>  ' + restaurant.location).show();
+    if (restaurant.location == '') {
+       $('#info-location').hide(); 
     }
     else {
-        $('#info-location').hide();
+       $('#info-location').html('<b>Location:</b>  ' + restaurant.location).show();
     }
     if (restaurant.open){
         $('#info-status').html('<b>Status:</b>  Open');
