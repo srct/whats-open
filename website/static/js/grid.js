@@ -76,8 +76,11 @@ function update_grid(restaurants) {
         if (schedule === undefined) {
             schedule = restaurant.main_schedule;
         }
-        restaurant.current_schedule = schedule;
         // Open the restaurants that are open, leave the rest closed.
+        if (schedule.open_times.length === 0) {
+            restaurant.open = false;
+        }
+        restaurant.current_schedule = schedule;
         $.each(schedule.open_times, function (idx, time) {
             var start_day = time.start_day;
             var end_day = time.end_day;
