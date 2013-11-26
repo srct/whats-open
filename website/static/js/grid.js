@@ -58,7 +58,7 @@ function construct_grid(filtered_restaurants) {
 function update_grid(restaurants) {
 	$.each(restaurants, function (idx, restaurant) {
         var now = new Date();
-        var date = new Date().setHours(0,0,0,0);
+        var date = new Date()
         // JavaScript sets 0 to Sunday instead of Monday
         var day = now.getDay() - 1;
         if (day === -1) {
@@ -69,7 +69,7 @@ function update_grid(restaurants) {
         $.each(restaurant.special_schedules, function (idx, special)  {
             // Special schedules take effect after 5am on their start day
             // to prevent collisions with the previous night's schedule
-            if (date >= Date.parse(special.start).setHours(5,0,0,0)
+            if (date >= Date.parse(special.start + ' 05:00:00')
                     && date <= Date.parse(special.end)) {
                 schedule = special;
             }
