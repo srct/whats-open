@@ -58,7 +58,7 @@ function construct_grid(filtered_restaurants) {
 function update_grid(restaurants) {
 	$.each(restaurants, function (idx, restaurant) {
         var now = new Date();
-        var date = new Date().setHours(0,0,0,0);
+        var endDate = new Date().setHours(5,0,0,0);
         // JavaScript sets 0 to Sunday instead of Monday
         var day = now.getDay() - 1;
         if (day === -1) {
@@ -67,10 +67,13 @@ function update_grid(restaurants) {
         var schedule = undefined;
         // If there exists a valid special schedule choose it.
         $.each(restaurant.special_schedules, function (idx, special)  {
-            console.log(Date.parse(special.start))
-            console.log(date)
-            if (date >= Date.parse(special.start)
-                    && date <= Date.parse(special.end)) {
+            // Special schedules take effect after 5am on their start day
+            // to prevent collisions with the previous night's schedule, 
+            // and they end at 5am the day after their end date.
+            special_start = Date.parse(special.start + ' 05:00:00');
+            special_end = Date.parse(special.end  + ' 05:00:00');
+            special_end.setDate(special_end.getDate()+1);
+            if (now >= special_start && now <= special_end) {
                 schedule = special;
             }
         });
@@ -78,8 +81,11 @@ function update_grid(restaurants) {
         if (schedule === undefined) {
             schedule = restaurant.main_schedule;
         }
-        restaurant.current_schedule = schedule;
         // Open the restaurants that are open, leave the rest closed.
+        if (schedule.open_times.length === 0) {
+            restaurant.open = false;
+        }
+        restaurant.current_schedule = schedule;
         $.each(schedule.open_times, function (idx, time) {
             var start_day = time.start_day;
             var end_day = time.end_day;
