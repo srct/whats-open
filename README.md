@@ -5,7 +5,7 @@ George Mason University's campus.
 
 ##Contributing##
 
-What's Open is still in it's very early stages and needs all the help it can
+What's Open is still in its very early stages and needs all the help it can
 get. Even if you don't feel like you can be helpful with the heavily technical
 aspects, we definitely need designers and technical writers.
 
