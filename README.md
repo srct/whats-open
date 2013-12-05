@@ -32,14 +32,6 @@ To get started, you'll need the following installed:
   [pip](http://www.pip-installer.org/en/latest/installing.html) or
   [easy_install](http://pythonhosted.org/distribute/easy_install.html))
 
-<!--You don't need to do anything with [git.gmu.edu](https://git.gmu.edu/) to -->
-<!--preform a `git clone`, but you should log in if you plan on actually modifying -->
-<!--code. Logging into git.gmu.edu with your George Mason credentials will create -->
-<!--an account. Ask a SRCT member to add you to the SRCT group on the site and you -->
-<!--will be added to the list of people allowed to `git push` to the repository at -->
-<!--git.gmu.edu. Alternatively, you can fork the project, clone your own repo, make -->
-<!--changes there, and submit pull requests.-->
-
 Then type the following commands in your terminal (if you're on Windows, 
 [Cygwin](http://www.cygwin.com/) is recommended).
 
