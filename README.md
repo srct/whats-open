@@ -28,7 +28,7 @@ Set Up
 To get started, you'll need the following installed:
 
 * [Python 2.7](http://www.python.org/download/)
-* [Django 1.4 or later](https://www.djangoproject.com/download/)
+* [Django 1.5 or later](https://www.djangoproject.com/download/)
 * [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
 * [virtualenv](http://www.virtualenv.org/en/latest/index.html#installation) 
   (to install you will need either 
