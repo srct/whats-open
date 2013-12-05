@@ -4,6 +4,9 @@ What's Open
 Simple Django site displaying which dining locations are currently open on 
 George Mason University's campus.
 
+For more up-to-date information, view the [What's Open 
+wiki page](http://wiki.srct.gmu.edu/wiki/index.php/Whatsopen).
+
 Contributing
 ---
 
@@ -45,6 +48,8 @@ python manage.py syncdb
 python manage.py migrate website
 ```
 
+More detailed info on installation can be found on the [SRCT 
+wiki](http://wiki.srct.gmu.edu/wiki/index.php/Whatsopen#Installation)
 Running the Site Locally
 ---
 
