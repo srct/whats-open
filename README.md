@@ -1,9 +1,11 @@
-#What's Open#
+What's Open
+===
 
 Simple Django site displaying which dining locations are currently open on 
 George Mason University's campus.
 
-##Contributing##
+Contributing
+---
 
 What's Open is still in its very early stages and needs all the help it can
 get. Even if you don't feel like you can be helpful with the heavily technical
@@ -17,7 +19,8 @@ If you need help at all please contact any SRCT member. We want people to
 contribute, so if you are struggling, or just want to learn, then we are willing
 to help.
 
-###Set Up###
+Set Up
+---
 
 To get started, you'll need the following installed:
 
@@ -50,7 +53,8 @@ python manage.py syncdb
 python manage.py migrate website
 ```
 
-###Running the Site Locally###
+Running the Site Locally
+---
 
 Now that everything is set-up you can run the server on your computer.
 
@@ -64,7 +68,8 @@ the database. Go to http://127.0.0.1:8000/admin/ to add new Restaurant and Sched
 objects to your database (the login would be the same username and password you 
 entered when creating a superuser during the `python manage.py syncdb` command).
 
-###Modifying and Deploying Code###
+Modifying and Deploying Code
+---
 
 With the means of testing the website, you can really start contributing.
 
@@ -112,7 +117,8 @@ we do I will have instructions on how to deploy the code here.
 <!--an environmental variable to the database's url before you run the site. Talk -->
 <!--to me if you would like to know the url to accomplish this.-->
 
-###To Do###
+To Do
+---
 
 * Get all restaurants displaying correct open times on the page. AKA. make
   extensive tests.
