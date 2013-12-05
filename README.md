@@ -10,10 +10,10 @@ wiki page](http://wiki.srct.gmu.edu/wiki/index.php/Whatsopen).
 Contributing
 ---
 
-What's Open is still in its very early stages and needs all the help it can
-get. Even if you don't feel like you can be helpful with the heavily technical
-aspects, we definitely need designers and technical writers.
-
+What's Open needs all the help it can get. Even if you don't feel 
+like you can be helpful with the heavily technical aspects, 
+we definitely need designers and technical writers.
+ 
 There are many things that can be done with this project (see the "To Do" 
 section), but sometimes it's the small things that count, so don't be afraid of 
 contributing just for a spelling mistake.
@@ -81,9 +81,6 @@ documentation](http://docs.jquery.com/) and I've found [Mozilla's documentation
 on JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript) to be
 useful as well. But if your Google-fu is sharp, that should suffice.
 
-<!--If you followed the steps in "Set Up" above, once you actually make changes it-->
-<!--should be easy to push them to the git repository.-->
-
 Once you actually make your changes and have fully tested them you can push the 
 code to the git repository. The best way to do this is to fork the project, make
 the changes in your local repository, push to gitlab, and submit a pull request.
@@ -104,15 +101,6 @@ Some more helpful links on how to use Git:
 * [Git For Ages 4 And
   Up](http://blip.tv/open-source-developers-conference/git-for-ages-4-and-up-4460524)
 
-We currently don't have What's Open running on a dedicated server yet, but when
-we do I will have instructions on how to deploy the code here.
-
-<!--No longer relevant as there is no postgres database set up at the moment-->
-<!--###Running Site Locally with Production Database###-->
-<!--It is possible to run the site locally using the PostgresSQL database that-->
-<!--whatsopen.gmu.edu uses. The way settings.py is configured requires that you set-->
-<!--an environmental variable to the database's url before you run the site. Talk -->
-<!--to me if you would like to know the url to accomplish this.-->
 
 To Do
 ---
