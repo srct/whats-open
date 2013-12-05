@@ -10,10 +10,10 @@ wiki page](http://wiki.srct.gmu.edu/wiki/index.php/Whatsopen).
 Contributing
 ---
 
-What's Open is still in its very early stages and needs all the help it can
-get. Even if you don't feel like you can be helpful with the heavily technical
-aspects, we definitely need designers and technical writers.
-
+What's Open needs all the help it can get. Even if you don't feel 
+like you can be helpful with the heavily technical aspects, 
+we definitely need designers and technical writers.
+ 
 There are many things that can be done with this project (see the "To Do" 
 section), but sometimes it's the small things that count, so don't be afraid of 
 contributing just for a spelling mistake.
