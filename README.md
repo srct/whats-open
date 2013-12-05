@@ -123,11 +123,8 @@ To Do
 * Get all restaurants displaying correct open times on the page. AKA. make
   extensive tests.
 * Sort by location view
-* ~~Get a decent UI (make sure everything is pretty and usable)~~ (thanks
-  Renfred)
 * Add times until opening/closing for restaurants that are close, and exact
   times for those that aren't.
-* Add yellow close-to-closing condition.
 * Make page refresh, or more preferably have the data refresh. For
   example, with AJAX calls.
 * Create more useful API calls. Document them.
@@ -138,6 +135,3 @@ To Do
   Default would be Fairfax of course.
   [jquery-cookie](https://github.com/carhartl/jquery-cookie) would be useful
   for this.
-* Create a more user-friendly way of creating restaurants and updating
-  schedules on the admin site. This could be done by modifying the admin site
-  or creating our own Django forms and doing it outside the admin site.
