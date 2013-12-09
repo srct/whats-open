@@ -1,6 +1,6 @@
 function compareTimes(time1, time2) {
     // Determine if two objects' start and end times are equal.
-    if (time1 == undefined || time2 == undefined){
+    if (time1 === undefined || time2 === undefined){
         return false;
     }
     else if (time1.start_time != time2.start_time){
