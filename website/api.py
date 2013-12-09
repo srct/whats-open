@@ -16,7 +16,10 @@ def export_data():
             'id': restaurant.id
         }
         open_times = list()
-        for time in restaurant.main_schedule.open_times.all():
+        # Sort open times by their start day and time
+        sorted_times = sorted(restaurant.main_schedule.open_times.all(),
+                key=lambda t: (t.start_day, t.start_time, t.end_time))
+        for time in sorted_times:
             open_times.append({
                     'start_day': time.start_day,
                     'start_time': time.start_time.isoformat(),
@@ -30,7 +33,9 @@ def export_data():
         special_schedules = list()
         for schedule in restaurant.special_schedules.all():
             open_times = list()
-            for time in schedule.open_times.all():
+            sorted_times = sorted(schedule.open_times.all(),
+                key=lambda t: (t.start_day, t.start_time, t.end_time))
+            for time in sorted_times:
                 open_times.append({
                         'start_day': time.start_day,
                         'start_time': time.start_time.isoformat(),
