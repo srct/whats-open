@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+<!-- Grid with restaurants sorted by location -->
+<!-- New revisions pending major revisions (whoo JavaScript!) by Tyler -->
+
+{% block content %}
+{% now "jS F Y H:i" %}
+<div id="grid">
+{% for list in restRows %}
+    <div class = "row">
+        {% for restaurant in list %}
+        <div class = "span3 {% if restaurant.isOpen %}open{% else %}closed{% endif %}">      
+            {{ restaurant.name }}
+        </div>
+        {% endfor %}
+    </div>
+{% empty %}
+There aren't any restaurants.
+{% endfor %}
+</div>
+
+{% endblock %}
