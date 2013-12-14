@@ -1,4 +1,4 @@
-What's Open
+Wat's Open
 ===
 
 Simple Django site displaying which dining locations are currently open on 
@@ -120,3 +120,5 @@ To Do
   Default would be Fairfax of course.
   [jquery-cookie](https://github.com/carhartl/jquery-cookie) would be useful
   for this.
+* What's open for everything on campus, not just campuses-- for the card office, library, gyms, tutoring centers, places off campus that accept Mason Money
+* I'm seeing an "IndexError: list index out of range" that doesn't apparently affect anything being tossed in the managepy output
