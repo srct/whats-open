@@ -5,10 +5,13 @@ import datetime
 class BaseModel(models.Model):
     last_modified = models.DateTimeField('Last Modified', auto_now=True)
 
+class Category(BaseModel):
+  name = models.CharField(max_length=100)    
 
 class Facility(BaseModel):
     """Represents a dining location on campus."""
     name = models.CharField(max_length=100)
+    category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     main_schedule = models.ForeignKey('Schedule',
             related_name='facility_main')
