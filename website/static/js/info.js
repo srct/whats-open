@@ -58,19 +58,19 @@ $.fn.displaySchedule = function(open_times){
     }
 }
 
-function dispalyInfo(restaurant) {
-    // Display restaurant info in the info-body without bracketed locations
-    $('#info-name').text(restaurant.name.replace(/ ?\[(.+)\]/, ''));
-    if (restaurant.location == '') {
+function dispalyInfo(facility) {
+    // Display facility info in the info-body without bracketed locations
+    $('#info-name').text(facility.name.replace(/ ?\[(.+)\]/, ''));
+    if (facility.location == '') {
        $('#info-location').hide(); 
     }
     else {
-       $('#info-location').html('<b>Location:</b>  ' + restaurant.location).show();
+       $('#info-location').html('<b>Location:</b>  ' + facility.location).show();
     }
-    if (restaurant.open){
+    if (facility.open){
         $('#info-status').html('<b>Status:</b>  Open');
-        var closing = Date.parse(restaurant.current_time.end_time);
-        // Print the time the restaurant closes in local format with the seconds removed via regex
+        var closing = Date.parse(facility.current_time.end_time);
+        // Print the time the facility closes in local format with the seconds removed via regex
         $('#info-next').html('<b>Open Till:</b> ' + closing.toLocaleTimeString().replace(/(\d+:\d{2})(:\d+ )/, "$1 ")).show();
     }
     else {
@@ -79,7 +79,7 @@ function dispalyInfo(restaurant) {
     }
     $('#info-schedule').empty();
     // Display all open times for the main schedule 
-    var open_times = restaurant.current_schedule.open_times;
+    var open_times = facility.current_schedule.open_times;
     $('#info-schedule').displaySchedule(open_times);
 }
 
@@ -101,21 +101,21 @@ $(document).ready(function() {
             $(this).slideUp(350);
         }
     });
-    // Displays more info about a restaurant on-click
+    // Displays more info about a facility on-click
     $(document).on('click', '.grid-box', function() {
         grid_id = $(this).attr('id');
         // Keep track of the users vertical position so it can be scolled back
         //to when the window is closed
         position = $(window).scrollTop();
-        // Search though the restaurnts object to find the selected restaurant's info
-        var restaurant;
-        $.each(restaurants, function(idx, restaurant_i) { 
-            if (restaurant_i.id == grid_id) {
-                restaurant = restaurant_i;
+        // Search though the restaurnts object to find the selected facility's info
+        var facility;
+        $.each(facilities, function(idx, facility_i) { 
+            if (facility_i.id == grid_id) {
+                facility = facility_i;
                 return false;
             }
         });
-        dispalyInfo(restaurant);
+        dispalyInfo(facility);
         // If the user clicks on the same box twice it will close the info menu
         if (lastClicked == grid_id){
             $('#info-body').slideToggle(300)

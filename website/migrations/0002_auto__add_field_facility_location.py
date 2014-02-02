@@ -8,15 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Restaurant.location'
-        db.add_column(u'website_restaurant', 'location',
+        # Adding field 'Facility.location'
+        db.add_column(u'website_facility', 'location',
                       self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True),
                       keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting field 'Restaurant.location'
-        db.delete_column(u'website_restaurant', 'location')
+        # Deleting field 'Facility.location'
+        db.delete_column(u'website_facility', 'location')
 
 
     models = {
@@ -34,13 +34,13 @@ class Migration(SchemaMigration):
             'start_day': ('django.db.models.fields.IntegerField', [], {}),
             'start_time': ('django.db.models.fields.TimeField', [], {})
         },
-        u'website.restaurant': {
-            'Meta': {'object_name': 'Restaurant', '_ormbases': [u'website.BaseModel']},
+        u'website.facility': {
+            'Meta': {'object_name': 'Facility', '_ormbases': [u'website.BaseModel']},
             u'basemodel_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['website.BaseModel']", 'unique': 'True', 'primary_key': 'True'}),
             'location': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'main_schedule': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'restaurant_main'", 'to': u"orm['website.Schedule']"}),
+            'main_schedule': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'facility_main'", 'to': u"orm['website.Schedule']"}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'special_schedules': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'restaurant_special'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['website.Schedule']"})
+            'special_schedules': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'facility_special'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['website.Schedule']"})
         },
         u'website.schedule': {
             'Meta': {'object_name': 'Schedule', '_ormbases': [u'website.BaseModel']},

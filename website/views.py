@@ -1,5 +1,5 @@
 from django.template import RequestContext
-from website.models import Restaurant, OpenTime, BaseModel
+from website.models import Facility, OpenTime, BaseModel
 from website.api import export_data
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
@@ -8,13 +8,13 @@ import hashlib
 import json
 
 
-def restaurant_grid(request):
-    """Display the restaurants in a grid. Main page."""
+def facility_grid(request):
+    """Display the facilities in a grid. Main page."""
     if 'sort' in request.GET:
         if request.GET['sort'] == 'location':
             # Display the grid by location (instead of listing alphabetically)
             pass  # Not implemented yet
-    return render_to_response('restaurant_grid.html', 
+    return render_to_response('facility_grid.html', 
             context_instance=RequestContext(request))
 
 def gen_etag(request):

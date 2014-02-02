@@ -1,5 +1,5 @@
 from django.contrib import admin
-from website.models import Restaurant, Schedule, OpenTime
+from website.models import Facility, Schedule, OpenTime
 
 
 class OpenTimeInline(admin.TabularInline):
@@ -11,5 +11,5 @@ class ScheduleAdmin(admin.ModelAdmin):
     inlines = [OpenTimeInline, ]
 
 
-admin.site.register(Restaurant)
+admin.site.register(Facility)
 admin.site.register(Schedule, ScheduleAdmin)

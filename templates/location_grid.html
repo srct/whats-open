@@ -1,6 +1,6 @@
 {% extends 'layout/base.html' %}
 
-<!-- Grid with restaurants sorted by location -->
+<!-- Grid with facilitys sorted by location -->
 <!-- New revisions pending major revisions (whoo JavaScript!) by Tyler -->
 
 {% block content %}
@@ -8,14 +8,14 @@
 <div id="grid">
 {% for list in restRows %}
     <div class = "row">
-        {% for restaurant in list %}
-        <div class = "span3 {% if restaurant.isOpen %}open{% else %}closed{% endif %}">      
-            {{ restaurant.name }}
+        {% for facility in list %}
+        <div class = "span3 {% if facility.isOpen %}open{% else %}closed{% endif %}">      
+            {{ facility.name }}
         </div>
         {% endfor %}
     </div>
 {% empty %}
-There aren't any restaurants.
+There aren't any facilities.
 {% endfor %}
 </div>
 

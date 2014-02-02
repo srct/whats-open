@@ -1,7 +1,7 @@
 $.ajax({
     url: '/ajax/schedule/',
 }).done(function (data) {
-	//collecting list of restaurant names from server data	
+	//collecting list of facility names from server data	
 	var rest_names = [];
 	
 	for (var i = 0; i < data.data.length; i++) {
@@ -19,7 +19,7 @@ $.ajax({
         response: function(event, ui) {
 			//ui.content array contains all names that are returned from the search
             results = $.map(ui.content, function(r) { return r.value; });
-            filtered = $.grep(restaurants, function (r, idx) {
+            filtered = $.grep(facilities, function (r, idx) {
                     return ($.inArray(r.name, results) != -1);
             });
             construct_grid(filtered);

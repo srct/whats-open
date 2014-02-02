@@ -1,9 +1,9 @@
-var restaurants = [];
+var facilities = [];
 
 function correct_grid_overflow(){
     // This function ensures that all text inside the grid-boxes display nicely on one line. 
-    $('.restaurant').css('font-size', '').css('overflow-y', 'scroll');
-    $('.restaurant').each(function() {
+    $('.facility').css('font-size', '').css('overflow-y', 'scroll');
+    $('.facility').each(function() {
         // Overflow is detected if the height of the box is less than
         // the clipped scroll height of the box.
         while ($(this).height() > 0 && $(this).outerHeight() < $(this)[0].scrollHeight) {
@@ -15,38 +15,38 @@ function correct_grid_overflow(){
             $(this).css('padding-top', 31 - newSize + 'px');
         }    
     });
-    $('.restaurant').css('overflow-y', '');
+    $('.facility').css('overflow-y', '');
 }
 
-function sort_restaurants(filtered_restaurants) {
-    var open = $.grep(filtered_restaurants, 
+function sort_facilities(filtered_facilities) {
+    var open = $.grep(filtered_facilities, 
             function (r, idx) { return (r.open === true) });
-    var closed = $.grep(filtered_restaurants, 
+    var closed = $.grep(filtered_facilities, 
             function (r, idx) { return (r.open === false) });
     return $.merge(open, closed);
 }
 
-function construct_grid(filtered_restaurants) {
+function construct_grid(filtered_facilities) {
     $('#grid').empty();
     $('#grid').html('<div class="row"></div>');
-    if (filtered_restaurants.length == 0) {
+    if (filtered_facilities.length == 0) {
         $('#grid').append('<span class="col-md-8 offset2 grid-box" id="no-results">No results found.</span>');
         $('#grid').show();
         return;
     }
-    sorted_restaurants = sort_restaurants(filtered_restaurants);
-    $.each(sorted_restaurants, function (idx, restaurant) {
+    sorted_facilities = sort_facilities(filtered_facilities);
+    $.each(sorted_facilities, function (idx, facility) {
         var open_class = 'closed';
-        if (restaurant.open) {
+        if (facility.open) {
             open_class = 'opened';
         }
         // Append the data into the grid scaffolding.
-        // Note that identical restaurants can be labeled via location. If there text in square brackets 
+        // Note that identical facilities can be labeled via location. If there text in square brackets 
         // next to a restuarant name, the text will be formatted as next to it. 
         $('#grid .row').append(
-            '<div class="col-sm-6 col-md-4 col-lg-3 grid-box" id="' + restaurant.id + '">\
-                <div class="restaurant ' + open_class + '">' + 
-                    restaurant.name.replace(/ ?\[(.+)\]/, '<span class="building"> ($1)</span>') + 
+            '<div class="col-sm-6 col-md-4 col-lg-3 grid-box" id="' + facility.id + '">\
+                <div class="facility ' + open_class + '">' + 
+                    facility.name.replace(/ ?\[(.+)\]/, '<span class="building"> ($1)</span>') + 
                 '</div>\
             </div>'
         );
@@ -55,8 +55,8 @@ function construct_grid(filtered_restaurants) {
     correct_grid_overflow();
 }
 
-function update_grid(restaurants) {
-	$.each(restaurants, function (idx, restaurant) {
+function update_grid(facilities) {
+	$.each(facilities, function (idx, facility) {
         var now = new Date();
         var endDate = new Date().setHours(5,0,0,0);
         // JavaScript sets 0 to Sunday instead of Monday
@@ -66,7 +66,7 @@ function update_grid(restaurants) {
         }
         var schedule = undefined;
         // If there exists a valid special schedule choose it.
-        $.each(restaurant.special_schedules, function (idx, special)  {
+        $.each(facility.special_schedules, function (idx, special)  {
             // Special schedules take effect after 5am on their start day
             // to prevent collisions with the previous night's schedule, 
             // and they end at 5am the day after their end date.
@@ -79,13 +79,13 @@ function update_grid(restaurants) {
         });
         // If there was no special schedule, then use main_schedule.
         if (schedule === undefined) {
-            schedule = restaurant.main_schedule;
+            schedule = facility.main_schedule;
         }
-        // Open the restaurants that are open, leave the rest closed.
+        // Open the facilities that are open, leave the rest closed.
         if (schedule.open_times.length === 0) {
-            restaurant.open = false;
+            facility.open = false;
         }
-        restaurant.current_schedule = schedule;
+        facility.current_schedule = schedule;
         $.each(schedule.open_times, function (idx, time) {
             var start_day = time.start_day;
             var end_day = time.end_day;
@@ -95,13 +95,13 @@ function update_grid(restaurants) {
                 if (now >= Date.parse(time.start_time)) {
                     if (day === end_day) {
                         if (now <= Date.parse(time.end_time)) {
-                            restaurant.open = true;
-                            restaurant.current_time = time;
+                            facility.open = true;
+                            facility.current_time = time;
                             return false;
                         }
                     } else {
-                        restaurant.open = true;
-                        restaurant.current_time = time;
+                        facility.open = true;
+                        facility.current_time = time;
                         return false;
                     }
 
@@ -110,30 +110,30 @@ function update_grid(restaurants) {
                 if (now <= Date.parse(time.end_time)) {
                     if (day === start_day) {
                         if (now >= Date.parse(time.start_time)) {
-                            restaurant.open = true;
-                            restaurant.current_time = time;
+                            facility.open = true;
+                            facility.current_time = time;
                             return false;
                         }
                     } else {
-                        restaurant.open = true;
-                        restaurant.current_time = time;
+                        facility.open = true;
+                        facility.current_time = time;
                         return false;
                     }
                 }
             } else if (start_day < end_day) {
                 if (day > start_day && day < end_day) {
-                    restaurant.open = true;
-                    restaurant.current_time = time;
+                    facility.open = true;
+                    facility.current_time = time;
                     return false;
                 }
             } else if (start_day > end_day) {
                 if (day > start_day || day < end_day) {
-                    restaurant.open = true;
-                    restaurant.current_time = time;
+                    facility.open = true;
+                    facility.current_time = time;
                     return false;
                 }
             }
-            restaurant.open = false;
+            facility.open = false;
         });
     });
 }
@@ -141,9 +141,9 @@ function update_grid(restaurants) {
 $.ajax({
     url: '/ajax/schedule/',
 }).done(function (data) {
-    restaurants = data.data;
-    update_grid(restaurants);
-    construct_grid(restaurants);
+    facilities = data.data;
+    update_grid(facilities);
+    construct_grid(facilities);
     // Every second, check and see if it is necessary to update the grid. 
     var last_updated = new Date();
     setInterval(function(){
@@ -152,8 +152,8 @@ $.ajax({
     	// or it has been over a half hour (180000 milliseconds) since the last update.
     	if (last_updated.getHours() != now.getHours() ||
     	   (last_updated.getMinutes() < 30 && now.getMinutes() >= 30) || now - last_updated > 1800000){
-	    	update_grid(restaurants);
-	    	construct_grid(restaurants);
+	    	update_grid(facilities);
+	    	construct_grid(facilities);
 	    	last_updated = new Date(); 
     	}
     }, 1000);

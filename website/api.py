@@ -1,23 +1,23 @@
-from website.models import Restaurant
+from website.models import Facility
 import re
 
 def export_data():
-    restaurants = list()
+    facilities = list()
     
-    # Sort the restaurants by alphabetical order ignoring "the" and "a"
-    alphalist = sorted(Restaurant.objects.all(),
+    # Sort the facilities by alphabetical order ignoring "the" and "a"
+    alphalist = sorted(Facility.objects.all(),
             key=lambda r: re.sub('^(the|a) ', '', r.name, count=1,
             flags=re.IGNORECASE))
     
-    for restaurant in alphalist:
-        restaurant_data = {
-            'name': restaurant.name,
-            'location': restaurant.location, 
-            'id': restaurant.id
+    for facility in alphalist:
+        facility_data = {
+            'name': facility.name,
+            'location': facility.location, 
+            'id': facility.id
         }
         open_times = list()
         # Sort open times by their start day and time
-        sorted_times = sorted(restaurant.main_schedule.open_times.all(),
+        sorted_times = sorted(facility.main_schedule.open_times.all(),
                 key=lambda t: (t.start_day, t.start_time, t.end_time))
         for time in sorted_times:
             open_times.append({
@@ -26,12 +26,12 @@ def export_data():
                     'end_day': time.end_day,
                     'end_time': time.end_time.isoformat()
             })
-        restaurant_data['main_schedule'] = {
-                'name': restaurant.main_schedule.name,
+        facility_data['main_schedule'] = {
+                'name': facility.main_schedule.name,
                 'open_times': open_times
         }
         special_schedules = list()
-        for schedule in restaurant.special_schedules.all():
+        for schedule in facility.special_schedules.all():
             open_times = list()
             sorted_times = sorted(schedule.open_times.all(),
                 key=lambda t: (t.start_day, t.start_time, t.end_time))
@@ -48,6 +48,6 @@ def export_data():
                     'end': schedule.valid_end.isoformat(),
                     'open_times': open_times
             })
-        restaurant_data['special_schedules'] = special_schedules
-        restaurants.append(restaurant_data)
-    return restaurants
+        facility_data['special_schedules'] = special_schedules
+        facilities.append(facility_data)
+    return facilities

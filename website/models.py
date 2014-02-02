@@ -6,22 +6,24 @@ class BaseModel(models.Model):
     last_modified = models.DateTimeField('Last Modified', auto_now=True)
 
 
-class Restaurant(BaseModel):
+class Facility(BaseModel):
     """Represents a dining location on campus."""
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100, null=True, blank=True)
     main_schedule = models.ForeignKey('Schedule',
-            related_name='restaurant_main')
+            related_name='facility_main')
     special_schedules = models.ManyToManyField('Schedule',
-            related_name='restaurant_special', null=True, blank=True)
+            related_name='facility_special', null=True, blank=True)
      
     class Meta:
+        verbose_name = "facility"
+        verbose_name_plural = "facilities"
         # Sort by name in admin view
         ordering = ['name']
 
     def isOpen(self):
         """
-        Return true if this restaurant is currently open.
+        Return true if this facility is currently open.
 
         First checks any valid special schedules and then checks the
         main default schedule.
@@ -75,7 +77,7 @@ class Schedule(BaseModel):
 
 
 class OpenTime(BaseModel):
-    """Represents a period time when a Restaurant is open"""
+    """Represents a period time when a Facility is open"""
     schedule = models.ForeignKey('Schedule', related_name='open_times')
     start_day = models.IntegerField()  # 0-6, Monday == 0
     start_time = models.TimeField()
