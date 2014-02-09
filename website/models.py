@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 from model_utils.models import TimeStampedModel
+from autoslug import AutoSlugField
 import datetime
 
 class Category(TimeStampedModel):
@@ -8,7 +10,10 @@ class Category(TimeStampedModel):
 class Facility(TimeStampedModel):
     """Represents a dining location on campus."""
     name = models.CharField(max_length=100)
+    owner = models.ForeignKey(User)
+    slug = AutoSlugField(populate_from='name',unique=True)
     category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
+    location_type = models.CharField(max_length=100,null=True,blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     main_schedule = models.ForeignKey('Schedule',
             related_name='facility_main')
