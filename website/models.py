@@ -4,16 +4,12 @@ from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
 import datetime
 
-class Category(TimeStampedModel):
-  name = models.CharField(max_length=100)    
-
 class Facility(TimeStampedModel):
     """Represents a dining location on campus."""
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     owner = models.ForeignKey(User)
     slug = AutoSlugField(populate_from='name',unique=True)
-    category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
-    location_type = models.CharField(max_length=100,null=True,blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     main_schedule = models.ForeignKey('Schedule',
             related_name='facility_main')
@@ -52,6 +48,37 @@ class Facility(TimeStampedModel):
         return self.name
 
 
+class OnCampus(Facility):
+    class Meta:
+        pass
+
+class OffCampus(Facility):
+    class Meta:
+        pass
+
+class OnCampusRestaurant(OnCampus):
+    class Meta:
+        pass
+
+class OnCampusGym(OnCampus):
+    class Meta:
+        pass
+
+class OnCampusGeneral(Oncampus):
+    class Meta:
+        pass
+
+class OffCampusRestaurant(OffCampus):
+    class Meta:
+        pass
+class OffCampusShopping(OffCampus):
+    class Meta:
+        pass
+class OffCampusTransportation(OffCampus):
+    class Meta:
+        pass
+
+
 class Schedule(TimeStampedModel):
     """
     Contains opening and closing times for each day in a week.
@@ -60,6 +87,7 @@ class Schedule(TimeStampedModel):
     when this schedule will be valid can also be set.
 
     """
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     # inclusive:
     valid_start = models.DateField('Start Date', null=True, blank=True,
@@ -83,6 +111,7 @@ class Schedule(TimeStampedModel):
 
 class OpenTime(TimeStampedModel):
     """Represents a period time when a Facility is open"""
+    id = models.AutoField(primary_key=True)
     schedule = models.ForeignKey('Schedule', related_name='open_times')
     start_day = models.IntegerField()  # 0-6, Monday == 0
     start_time = models.TimeField()

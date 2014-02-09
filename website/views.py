@@ -8,6 +8,11 @@ import hashlib
 import json
 
 
+def ListOnCampus(ListView):
+    model = OnCampus
+def ListOffCampus(ListView):
+    model = OnCampus
+
 def facility_grid(request):
     """Display the facilities in a grid. Main page."""
     if 'sort' in request.GET:
