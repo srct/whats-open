@@ -1,14 +1,11 @@
 from django.db import models
+from model_utils.models import TimeStampedModel
 import datetime
 
-
-class BaseModel(models.Model):
-    last_modified = models.DateTimeField('Last Modified', auto_now=True)
-
-class Category(BaseModel):
+class Category(TimeStampedModel):
   name = models.CharField(max_length=100)    
 
-class Facility(BaseModel):
+class Facility(TimeStampedModel):
     """Represents a dining location on campus."""
     name = models.CharField(max_length=100)
     category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
@@ -50,7 +47,7 @@ class Facility(BaseModel):
         return self.name
 
 
-class Schedule(BaseModel):
+class Schedule(TimeStampedModel):
     """
     Contains opening and closing times for each day in a week.
 
@@ -79,7 +76,7 @@ class Schedule(BaseModel):
         return self.name
 
 
-class OpenTime(BaseModel):
+class OpenTime(TimeStampedModel):
     """Represents a period time when a Facility is open"""
     schedule = models.ForeignKey('Schedule', related_name='open_times')
     start_day = models.IntegerField()  # 0-6, Monday == 0
