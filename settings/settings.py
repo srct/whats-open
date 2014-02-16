@@ -133,7 +133,14 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'south',
     'rest_framework',
+    'guardian',
     'website',
+)
+
+ANONYMOUS_USER_ID = -1
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
