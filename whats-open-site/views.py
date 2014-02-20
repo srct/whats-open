@@ -8,10 +8,8 @@ import hashlib
 import json
 
 
-def ListOnCampus(ListView):
-    model = OnCampus
-def ListOffCampus(ListView):
-    model = OnCampus
+def ListFacilites(ListView):
+    model = Facility 
 
 def facility_grid(request):
     """Display the facilities in a grid. Main page."""

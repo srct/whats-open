@@ -4,11 +4,14 @@ from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
 import datetime
 
+class Category(TimeStampedModel):
+    name = models.CharField(max_length=100)
+
 class Facility(TimeStampedModel):
     """Represents a dining location on campus."""
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    owner = models.ForeignKey(User)
+    owners = models.ManyToManyField(User)
     slug = AutoSlugField(populate_from='name',unique=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     main_schedule = models.ForeignKey('Schedule',
@@ -46,38 +49,6 @@ class Facility(TimeStampedModel):
 
     def __unicode__(self):
         return self.name
-
-
-class OnCampus(Facility):
-    class Meta:
-        pass
-
-class OffCampus(Facility):
-    class Meta:
-        pass
-
-class OnCampusRestaurant(OnCampus):
-    class Meta:
-        pass
-
-class OnCampusGym(OnCampus):
-    class Meta:
-        pass
-
-class OnCampusGeneral(Oncampus):
-    class Meta:
-        pass
-
-class OffCampusRestaurant(OffCampus):
-    class Meta:
-        pass
-class OffCampusShopping(OffCampus):
-    class Meta:
-        pass
-class OffCampusTransportation(OffCampus):
-    class Meta:
-        pass
-
 
 class Schedule(TimeStampedModel):
     """

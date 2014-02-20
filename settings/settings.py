@@ -133,7 +133,18 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'south',
     'rest_framework',
+<<<<<<< HEAD
     'whats-open-site',
+=======
+    'guardian',
+    'website',
+>>>>>>> eb3014873211749b338992b8cac80d87309c23e8
+)
+
+ANONYMOUS_USER_ID = -1
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
