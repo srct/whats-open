@@ -9,7 +9,6 @@ class Category(TimeStampedModel):
 
 class Facility(TimeStampedModel):
     """Represents a facility location on campus."""
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     owners = models.ManyToManyField(User)
     category = models.ForeignKey('Category')
@@ -60,7 +59,6 @@ class Schedule(TimeStampedModel):
     when this schedule will be valid can also be set.
 
     """
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     # inclusive:
     valid_start = models.DateField('Start Date', null=True, blank=True,
@@ -84,7 +82,6 @@ class Schedule(TimeStampedModel):
 
 class OpenTime(TimeStampedModel):
     """Represents a period time when a Facility is open"""
-    id = models.AutoField(primary_key=True)
     schedule = models.ForeignKey('Schedule', related_name='open_times')
     monday_start = models.TimeField()
     monday_end = models.TimeField()

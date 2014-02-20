@@ -18,9 +18,9 @@ urlpatterns = patterns('whats_open_site.views',
     url(r'^facilities/(?P<on_campus>)/$', FacilityStatusListView.as_view(), name='facilities-list-by-status'),
 
     #schedules urls
-    url(r'^schedule/(?P<id>)/$', ScheduleDetailView.as_view(), name='schedule-detail'),
+    url(r'^schedule/(?P<pk>)/$', ScheduleDetailView.as_view(), name='schedule-detail'),
 
     #opentime urls
-    url(r'^open-time/(?P<id>)/$', OpenTimeDetailView.as_view(), name='open-time-detail'),
+    url(r'^open-time/(?P<pk>)/$', OpenTimeDetailView.as_view(), name='open-time-detail'),
 )
 
