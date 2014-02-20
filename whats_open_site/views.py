@@ -2,6 +2,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.views.decorators.http import condition
+from django.views.generic import ListView, DetailView
 
 from .models import Facility, OpenTime, BaseModel
 from .api import export_data
@@ -15,10 +16,24 @@ import hashlib
 import json
 
 
-class ListFacilites(ListView):
-    
+class FacilitiesListView(ListView):
+    model = Facility
     def get_queryset(self):
-        category = self.kwargs['category']
+        return Facility.objects.filter(category=self.kwargs['category'])
+
+class FacilitiesDetailView(DetailView):
+    model = Facility
+
+class ScheduleDetailView(DetailView):
+    model = Schedule
+
+class OpenTimeDetailView(DetailView):
+    model = OpenTime
+"""
+class CategoryListView(ListView):
+    model = Categories
+"""
+
 
 def facility_grid(request):
     """Display the facilities in a grid. Main page."""
