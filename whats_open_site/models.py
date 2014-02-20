@@ -13,6 +13,7 @@ class Facility(TimeStampedModel):
     name = models.CharField(max_length=100)
     owners = models.ManyToManyField(User)
     slug = AutoSlugField(populate_from='name',unique=True)
+    on_campus = models.BooleanField(default=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     main_schedule = models.ForeignKey('Schedule',
             related_name='facility_main')

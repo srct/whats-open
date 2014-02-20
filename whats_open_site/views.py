@@ -1,15 +1,24 @@
 from django.template import RequestContext
-from website.models import Facility, OpenTime, BaseModel
-from website.api import export_data
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.views.decorators.http import condition
+
+from .models import Facility, OpenTime, BaseModel
+from .api import export_data
+from .serializers import  CategorySerializer, FacilitySerializer, ScheduleSerializer, OpenTimeSerializer
+
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 import hashlib
 import json
 
 
-def ListFacilites(ListView):
-    model = Facility 
+class ListFacilites(ListView):
+    
+    def get_queryset(self):
+        category = self.kwargs['category']
 
 def facility_grid(request):
     """Display the facilities in a grid. Main page."""
