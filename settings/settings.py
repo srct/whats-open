@@ -5,7 +5,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # Insert a ('Name', 'Email') inside ADMINS tuple
-ADMINS = ('Your Name', 'youremail@example.com')
+ADMINS = ('SRCT Admin', 'exec@srct.gmu.edu')
 
 MANAGERS = ADMINS
 
@@ -133,7 +133,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'south',
     'rest_framework',
-    'website',
+    'whats-open-site',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
