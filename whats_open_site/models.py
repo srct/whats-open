@@ -8,10 +8,11 @@ class Category(TimeStampedModel):
     name = models.CharField(max_length=100)
 
 class Facility(TimeStampedModel):
-    """Represents a dining location on campus."""
+    """Represents a facility location on campus."""
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     owners = models.ManyToManyField(User)
+    category = models.ForeignKey('Category')
     slug = AutoSlugField(populate_from='name',unique=True)
     on_campus = models.BooleanField(default=True)
     location = models.CharField(max_length=100, null=True, blank=True)
@@ -85,10 +86,20 @@ class OpenTime(TimeStampedModel):
     """Represents a period time when a Facility is open"""
     id = models.AutoField(primary_key=True)
     schedule = models.ForeignKey('Schedule', related_name='open_times')
-    start_day = models.IntegerField()  # 0-6, Monday == 0
-    start_time = models.TimeField()
-    end_day = models.IntegerField()  # 0-6, Monday == 0
-    end_time = models.TimeField()
+    monday_start = models.TimeField()
+    monday_end = models.TimeField()
+    tuesday_start = models.TimeField()
+    tuesday_end = models.TimeField()
+    wednesday_start = models.TimeField()
+    wednesday_end = models.TimeField()
+    thursday_start = models.TimeField()
+    thursday_end = models.TimeField()
+    friday_start = models.TimeField()
+    friday_end = models.TimeField()
+    saturday_start = models.TimeField()
+    saturday_end = models.TimeField()
+    sunday_start = models.TimeField()
+    sunday_end = models.TimeField()
 
     def isOpenNow(self):
         """Return true if the current time is this OpenTime's range"""

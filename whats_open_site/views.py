@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.views.decorators.http import condition
 from django.views.generic import ListView, DetailView
 
-from .models import Facility, OpenTime, BaseModel
+from .models import Facility, OpenTime, Category, Schedule 
 from .api import export_data
 from .serializers import  CategorySerializer, FacilitySerializer, ScheduleSerializer, OpenTimeSerializer
 
@@ -16,12 +16,21 @@ import hashlib
 import json
 
 
-class FacilitiesListView(ListView):
+class FacilityListView(ListView):
+    model = Facility
+    queryset = Facility.objects.all()
+
+class FacilityCategoryListView(ListView):
     model = Facility
     def get_queryset(self):
         return Facility.objects.filter(category=self.kwargs['category'])
 
-class FacilitiesDetailView(DetailView):
+class FacilityStatusListView(ListView):
+    model = Facility
+    def get_queryset(self):
+        return Facility.objects.filter(on_campus=self.kwargs['on_campus'])
+    
+class FacilityDetailView(DetailView):
     model = Facility
 
 class ScheduleDetailView(DetailView):
