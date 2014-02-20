@@ -1,4 +1,4 @@
-Tyler Halada
-Daniel Bond
-Renfred Harper
-Ben Waters
+- Tyler Halada
+- Daniel Bond
+- Renfred Harper
+- Ben Waters
