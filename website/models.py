@@ -7,6 +7,13 @@ import datetime
 class Category(TimeStampedModel):
     name = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name = "Categories"
+        ordering = ['name']
+
+    def __unicode__(self):
+        return '%s' % self.name
+
 class Facility(TimeStampedModel):
     """Represents a facility location on campus."""
     name = models.CharField(max_length=100)
