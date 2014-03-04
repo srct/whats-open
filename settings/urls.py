@@ -10,10 +10,14 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^api/v1/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'', include('whats_open_site.urls')),
+    url(r'', include(website.urls)),
+    url(r'^login/$', 'django.contrib.auth.views.login', {
+        'template_name': 'login.html'})
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {
+        'next_page': '/'})
 
 )

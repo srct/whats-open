@@ -15,6 +15,22 @@ import hashlib
 import json
 
 
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class FacilityViewSet(viewsets.ModelViewSet):
+    queryset = Facility.objects.all()
+    serializer_class = FacilitySerializer
+
+class ScheduleViewSet(viewsets.ModelViewSet):
+    queryset = Schedule.objects.all()
+    serializer_class = ScheduleSerializer
+
+class OpenTimeViewSet(viewsets.ModelViewSet):
+    queryset = Schedule.objects.all()
+    serializer_class = OpenTimeSerializer
+
 class FacilityListView(ListView):
     model = Facility
     queryset = Facility.objects.all()

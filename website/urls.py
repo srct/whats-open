@@ -1,16 +1,19 @@
 from django.conf.urls import patterns, url
 
-from .views import FacilityListView, FacilityCategoryListView, FacilityStatusListView, FacilityDetailView, ScheduleDetailView, OpenTimeDetailView
-
+from .views import *
 from rest_framework.routers import DefaultRouter
 
-#router = DefaultRouter()
-
+router = DefaultRouter()
+router.register(r'categories', CategoryViewSet)
+router.register(r'facilities', FacilityViewSet)
+router.regsiter(r'schedules', ScheduleViewSet)
+router.register(r'opentimes', OpenTimeViewSet)
 
 urlpatterns = patterns('whats_open_site.views',
-    url(r'^(?:ajax|api)/schedule/', 'ajax_schedule_data', name='schedule_data'),
-    url(r'^$', 'facility_grid', name='facility_grid'),
+    #url(r'^(?:ajax|api)/schedule/', 'ajax_schedule_data', name='schedule_data'),
 
+    url(r'^$', 'facility_grid', name='facility_grid'),
+    url(r'^api/', include(router.urls)),
     #facilities open urls
     url(r'^facilities/$', FacilityListView.as_view(), name='faciliites-list'),
     url(r'^facilities/(?P<category>)/$', FacilityCategoryListView.as_view(), name='facilities-list-by-cat'),
