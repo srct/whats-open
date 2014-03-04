@@ -90,20 +90,11 @@ class Schedule(TimeStampedModel):
 class OpenTime(TimeStampedModel):
     """Represents a period time when a Facility is open"""
     schedule = models.ForeignKey('Schedule', related_name='open_times')
-    monday_start = models.TimeField()
-    monday_end = models.TimeField()
-    tuesday_start = models.TimeField()
-    tuesday_end = models.TimeField()
-    wednesday_start = models.TimeField()
-    wednesday_end = models.TimeField()
-    thursday_start = models.TimeField()
-    thursday_end = models.TimeField()
-    friday_start = models.TimeField()
-    friday_end = models.TimeField()
-    saturday_start = models.TimeField(blank=True,null=True)
-    saturday_end = models.TimeField(blank=True,null=True)
-    sunday_start = models.TimeField(blank=True,null=True)
-    sunday_end = models.TimeField(blank=True,null=True)
+    schedule = models.ForeignKey('Schedule', related_name='open_times')
+    start_day = models.IntegerField()  # 0-6, Monday == 0
+    start_time = models.TimeField()
+    end_day = models.IntegerField()  # 0-6, Monday == 0
+    end_time = models.TimeField()
 
     def isOpenNow(self):
         """Return true if the current time is this OpenTime's range"""
