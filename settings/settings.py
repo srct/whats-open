@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'south',
     'rest_framework',
     'website',
+    'management',
     #'guardian',
 )
 
@@ -139,7 +140,6 @@ ANONYMOUS_USER_ID = -1
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # this is default
     #'guardian.backends.ObjectPermissionBackend',
-    'management',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
