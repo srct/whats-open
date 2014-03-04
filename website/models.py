@@ -100,10 +100,10 @@ class OpenTime(TimeStampedModel):
     thursday_end = models.TimeField()
     friday_start = models.TimeField()
     friday_end = models.TimeField()
-    saturday_start = models.TimeField()
-    saturday_end = models.TimeField()
-    sunday_start = models.TimeField()
-    sunday_end = models.TimeField()
+    saturday_start = models.TimeField(blank=True,null=True)
+    saturday_end = models.TimeField(blank=True,null=True)
+    sunday_start = models.TimeField(blank=True,null=True)
+    sunday_end = models.TimeField(blank=True,null=True)
 
     def isOpenNow(self):
         """Return true if the current time is this OpenTime's range"""
