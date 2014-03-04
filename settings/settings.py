@@ -133,7 +133,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'south',
     'rest_framework',
-    'whats_open_site',
+    'website',
     #'guardian',
 )
 
