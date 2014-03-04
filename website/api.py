@@ -1,4 +1,4 @@
-from website.models import Facility
+from models import Facility
 import re
 
 def export_data():

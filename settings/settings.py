@@ -5,7 +5,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # Insert a ('Name', 'Email') inside ADMINS tuple
-ADMINS = ('Your Name', 'youremail@example.com')
+ADMINS = ('SRCT Admin', 'exec@srct.gmu.edu')
 
 MANAGERS = ADMINS
 
@@ -133,14 +133,14 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'south',
     'rest_framework',
-    'guardian',
-    'website',
+    'whats_open_site',
+    #'guardian',
 )
 
 ANONYMOUS_USER_ID = -1
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # this is default
-    'guardian.backends.ObjectPermissionBackend',
+    #'guardian.backends.ObjectPermissionBackend',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

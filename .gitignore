@@ -10,5 +10,5 @@ build
 apache
 .ropeproject
 whats_open/secret_key.py
-website/static/admin/
+static/admin/
 data

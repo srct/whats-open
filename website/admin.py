@@ -1,17 +1,13 @@
 from django.contrib import admin
-from website.models import Facility, Schedule, OpenTime
+from .models import Facility, Schedule, OpenTime
 
-class OpenTimeInline(admin.TabularInline):
-    model = OpenTime
-    fk_name = 'schedule'
-
-
-class FacilityAdmin(GuardedModelAdmin):
-
+class OpenTimeAdmin(admin.ModelAdmin):
+    pass
+class FacilityAdmin(admin.ModelAdmin):
+    pass
 class ScheduleAdmin(admin.ModelAdmin):
-    inlines = [OpenTimeInline, ]
-
+    pass
 
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Schedule, ScheduleAdmin)
-
+admin.site.register(OpenTime, OpenTimeAdmin)
