@@ -3,6 +3,7 @@ from django.contrib.sites.models import Site
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
 urlpatterns = patterns('',
     # Examples:
     # Uncomment the admin/doc line below to enable admin documentation:
