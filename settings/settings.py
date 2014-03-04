@@ -136,14 +136,17 @@ INSTALLED_APPS = (
     #'guardian',
 )
 
+CAS_GATEWAY=True
 ANONYMOUS_USER_ID = -1
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # this is default
+    'cas.middleware.CASMiddleware',
     #'guardian.backends.ObjectPermissionBackend',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
-
+LOGIN_URL='/management/login/'
+LOGIN_REDIRECT='/management'
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -177,3 +180,5 @@ LOGGING = {
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 259200
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+
