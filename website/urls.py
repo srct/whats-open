@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet)
 router.register(r'facilities', FacilityViewSet)
-router.regsiter(r'schedules', ScheduleViewSet)
+router.register(r'schedules', ScheduleViewSet)
 router.register(r'opentimes', OpenTimeViewSet)
 
 urlpatterns = patterns('whats_open_site.views',
