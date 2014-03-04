@@ -8,7 +8,7 @@ router.register(r'facilities', FacilityViewSet)
 router.register(r'schedules', ScheduleViewSet)
 router.register(r'opentimes', OpenTimeViewSet)
 
-urlpatterns = patterns('whats_open_site.views',
+urlpatterns = patterns('website.views',
     #url(r'^(?:ajax|api)/schedule/', 'ajax_schedule_data', name='schedule_data'),
 
     url(r'^$', 'facility_grid', name='facility_grid'),
