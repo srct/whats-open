@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     # Examples:
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^', include('website.urls')),
+    url(r'management/', include('management.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
