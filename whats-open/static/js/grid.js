@@ -70,8 +70,8 @@ function update_grid(facilities) {
             // Special schedules take effect after 5am on their start day
             // to prevent collisions with the previous night's schedule, 
             // and they end at 5am the day after their end date.
-            special_start = Date.parse(special.start + ' 05:00:00');
-            special_end = Date.parse(special.end  + ' 05:00:00');
+            special_start = Date.parse(special.vaild_start + ' 05:00:00');
+            special_end = Date.parse(special.valid_end  + ' 05:00:00');
             special_end.setDate(special_end.getDate()+1);
             if (now >= special_start && now <= special_end) {
                 schedule = special;
@@ -139,9 +139,9 @@ function update_grid(facilities) {
 }
 
 $.ajax({
-    url: '/ajax/schedule/',
+    url: '/api/facilities/.json',
 }).done(function (data) {
-    facilities = data.data;
+    facilities = data;
     update_grid(facilities);
     construct_grid(facilities);
     // Every second, check and see if it is necessary to update the grid. 

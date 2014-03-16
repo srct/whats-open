@@ -1,11 +1,11 @@
 $.ajax({
-    url: '/ajax/schedule/',
+    url: '/api/facilities/.json',
 }).done(function (data) {
 	//collecting list of facility names from server data	
 	var rest_names = [];
 	
-	for (var i = 0; i < data.data.length; i++) {
-		rest_names.push(data.data[i].name);
+	for (var i = 0; i < data.length; i++) {
+		rest_names.push(data[i].name);
 	};
 	// For doumentation on jQuery's autocomplete: (api.jqueryui.com/autocomplete)     	 	
     $("#searchBar").autocomplete({  
