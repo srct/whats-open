@@ -6,7 +6,16 @@ class BaseModel(models.Model):
     last_modified = models.DateTimeField('Last Modified', auto_now=True)
 
 class Category(BaseModel):
-  name = models.CharField(max_length=100)    
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "category"
+        verbose_name_plural = "categories"
+        # Sort by name in admin view
+        ordering = ['name']
+
+    def __unicode__(self):
+        return self.name
 
 class Facility(BaseModel):
     """Represents a dining location on campus."""

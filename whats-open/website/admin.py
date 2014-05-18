@@ -1,5 +1,5 @@
 from django.contrib import admin
-from website.models import Facility, Schedule, OpenTime
+from website.models import Facility, Category, Schedule, OpenTime
 
 
 class OpenTimeInline(admin.TabularInline):
@@ -12,4 +12,5 @@ class ScheduleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Facility)
+admin.site.register(Category)
 admin.site.register(Schedule, ScheduleAdmin)
