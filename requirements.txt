@@ -3,3 +3,4 @@ South
 argparse
 distribute
 wsgiref
+djangorestframework==2.3.13
