@@ -1,0 +1,6 @@
+Django>=1.6,<1.7
+South==1.0
+argparse
+distribute
+wsgiref
+djangorestframework>=2.3
