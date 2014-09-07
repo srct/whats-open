@@ -11,6 +11,7 @@ class OpenTimeSerializer(serializers.ModelSerializer):
         model = OpenTime
 
 class ScheduleSerializer(serializers.ModelSerializer):
+    open_times = OpenTimeSerializer(many=True)
     class Meta:
         model = Schedule
 
