@@ -10,8 +10,9 @@ from website.models import Facility, OpenTime, Category, Schedule
 from website.api import export_data
 from website.serializers import  CategorySerializer, FacilitySerializer, ScheduleSerializer, OpenTimeSerializer
 
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
 
 import hashlib
 import json
@@ -21,9 +22,23 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-class FacilityViewSet(viewsets.ModelViewSet):
+class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Facility.objects.all()
     serializer_class = FacilitySerializer
+
+    def get_queryset(self):
+        queryset = Facility.objects.all()
+        open_now = self.request.QUERY_PARAMS.get('open', None)
+        if open_now is not None:
+            results = []
+            for fac in queryset:
+                print fac
+                if fac.isOpen():
+                    print True
+                    results.append(fac)
+            return results
+        else:
+            return queryset
 
 class ScheduleViewSet(viewsets.ModelViewSet):
     queryset = Schedule.objects.all()
@@ -32,27 +47,6 @@ class ScheduleViewSet(viewsets.ModelViewSet):
 class OpenTimeViewSet(viewsets.ModelViewSet):
     queryset = OpenTime.objects.all()
     serializer_class = OpenTimeSerializer
-
-class FacilityListView(ListView):
-    queryset = Facility.objects.all()
-    serializer_class = FacilitySerializer
-
-class FacilityCategoryListView(ListView):
-    model = Facility
-    def get_queryset(self):
-        return Facility.objects.filter(category=self.kwargs['category'])
-
-class FacilityStatusListView(ListView):
-    model = Facility
-    def get_queryset(self):
-        return Facility.objects.all()
-
-class FacilityDetailView(DetailView):
-    model = Facility
-
-class OpenTimeDetailView(DetailView):
-    model = OpenTime
-
 
 def facility_grid(request):
     """Display the facilities in a grid. Main page."""
@@ -76,4 +70,3 @@ def ajax_schedule_data(request):
     # arrays in JSON objects
     return HttpResponse(json.dumps({'data': export_data()}, indent=4),
             content_type="application/json")
-
