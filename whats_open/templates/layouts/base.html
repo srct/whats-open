@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
     {% block head %}
@@ -16,7 +17,7 @@
             <div id="info-body">
 	            <div class="container" id="info-container">
 		            <div class="row" id="info-row">
-    		            <a id="info-close"><img src="{{ STATIC_URL }}img/close.png"></a>
+    		            <a id="info-close"><img src="{% static "img/close.png" %}"></a>
 			            <div class="col-md-12" id="info-name"></div>
 			            <div class="col-md-3" id="info-status"></div>
 			            <div class="col-md-3" id="info-next"></div>
