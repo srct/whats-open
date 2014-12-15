@@ -6,18 +6,19 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
 
 class OpenTimeSerializer(serializers.ModelSerializer):
+    schedule = serializers.RelatedField(many=False)
     class Meta:
         model = OpenTime
 
 class ScheduleSerializer(serializers.ModelSerializer):
     open_times = OpenTimeSerializer(many=True)
-
     class Meta:
         model = Schedule
 
 class FacilitySerializer(serializers.ModelSerializer):
-    main_schedule = ScheduleSerializer()
-    special_schedules = ScheduleSerializer(many=True)
+    category = serializers.RelatedField(many=False)
+    main_schedule = serializers.RelatedField(many=False)
+    special_schedules = serializers.RelatedField(many=True)
 
     class Meta:
         model = Facility
