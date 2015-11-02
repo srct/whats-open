@@ -1,4 +1,4 @@
-var facilities = JSON.parse(localStorage['facilities']) || [];
+var facilities = JSON.parse(localStorage['facilities'] || "[]" );
 
 function correct_grid_overflow(){
     // This function ensures that all text inside the grid-boxes display nicely on one line. 
@@ -144,7 +144,7 @@ $(function() {
       construct_grid(facilities);
 
   $.ajax({
-      url: '/api/facilities/.json',
+      url: '/api/facilities/?format=json',
   }).done(function (data) {
       facilities = data;
       localStorage['facilities'] = JSON.stringify(facilities);

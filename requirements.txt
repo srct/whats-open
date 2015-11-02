@@ -1,3 +1,4 @@
-# This file is here because many Platforms as a Service look for
-# requirements.txt in the root directory of a project.
--r requirements/production.txt
+Django==1.8.5
+djangorestframework==3.3.0
+gunicorn==19.3.0
+wheel==0.24.0
