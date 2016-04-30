@@ -18,7 +18,7 @@
 # (You'll need to reverse proxy port 8000 via nginx)
 
 # Set the base image to Ubuntu
-FROM ubuntu:14:04
+FROM ubuntu:16.04
 
 # File Author / Maintainer
 MAINTAINER Student-Run Computing and Technology - GMU
