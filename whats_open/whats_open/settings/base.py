@@ -32,7 +32,7 @@ TEMPLATE_DEBUG = DEBUG
 ########## MANAGER CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
-    ('Your Name', 'your_email@example.com'),
+    ('GMU SRCT', 'srct@gmu.edu'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -45,7 +45,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': normpath(join(DJANGO_ROOT, 'database.db')),
+        'NAME': normpath(join(DJANGO_ROOT, 'database/database.db')),
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
