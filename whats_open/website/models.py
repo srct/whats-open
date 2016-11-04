@@ -1,26 +1,27 @@
 from django.db import models
+from django.contrib.auth.models import User
+from model_utils.models import TimeStampedModel
+from autoslug import AutoSlugField
 import datetime
 
-
-class BaseModel(models.Model):
-    last_modified = models.DateTimeField('Last Modified', auto_now=True)
-
-class Category(BaseModel):
+class Category(TimeStampedModel):
     name = models.CharField(max_length=100)
 
-    class Meta:
         verbose_name = "category"
         verbose_name_plural = "categories"
         # Sort by name in admin view
         ordering = ['name']
 
     def __unicode__(self):
-        return self.name
+        return '%s' % self.name
 
-class Facility(BaseModel):
-    """Represents a dining location on campus."""
+class Facility(TimeStampedModel):
+    """Represents a facility location on campus."""
     name = models.CharField(max_length=100)
-    category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
+    owners = models.ManyToManyField(User)
+    category = models.ForeignKey('Category')
+    slug = AutoSlugField(populate_from='name',unique=True)
+    on_campus = models.BooleanField(default=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     main_schedule = models.ForeignKey('Schedule',
             related_name='facility_main')
@@ -58,8 +59,7 @@ class Facility(BaseModel):
     def __unicode__(self):
         return self.name
 
-
-class Schedule(BaseModel):
+class Schedule(TimeStampedModel):
     """
     Contains opening and closing times for each day in a week.
 
@@ -88,8 +88,9 @@ class Schedule(BaseModel):
         return self.name
 
 
-class OpenTime(BaseModel):
+class OpenTime(TimeStampedModel):
     """Represents a period time when a Facility is open"""
+    schedule = models.ForeignKey('Schedule', related_name='open_times')
     schedule = models.ForeignKey('Schedule', related_name='open_times')
     start_day = models.IntegerField()  # 0-6, Monday == 0
     start_time = models.TimeField()
