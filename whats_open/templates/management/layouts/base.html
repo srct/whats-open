@@ -4,9 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 {% block stylesheets %}
   <link rel="icon" href="/favicon.ico">
-  <link href="{% static "management/css/bootstrap.min.css" %}" rel="stylesheet">
-  <link href="{% static "management/css/bootswatch.min.css" %}" rel="stylesheet">
-  <link href="{% static "management/css/extensions.css" %}" rel="stylesheet">
+  <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "css/bootswatch.min.css" %}" rel="stylesheet">
+  <link href="{% static "css/extensions.css" %}" rel="stylesheet">
 {% endblock stylesheets %}
 <title>
   {% block title %}What's Open - Management{% endblock %}
@@ -26,4 +26,4 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js"></script>
-<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script src="{% static "js/bootstrap.min.js" %}"></script>

@@ -7,6 +7,7 @@ import datetime
 class Category(TimeStampedModel):
     name = models.CharField(max_length=100)
 
+    class Meta:
         verbose_name = "category"
         verbose_name_plural = "categories"
         # Sort by name in admin view

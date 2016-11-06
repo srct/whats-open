@@ -1,10 +1,11 @@
 from django.template import RequestContext
-from website.models import Facility, OpenTime, BaseModel
+from website.models import Facility, OpenTime
 from website.api import export_data
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.views.decorators.http import condition
 from django.views.generic import ListView, DetailView
+from model_utils.models import TimeStampedModel
 
 from website.models import Facility, OpenTime, Category, Schedule
 from website.api import export_data
@@ -61,7 +62,7 @@ def gen_etag(request):
     return hashlib.sha1(str(OpenTime.objects.all())).hexdigest()
 
 def gen_last_modified(request):
-    return BaseModel.objects.all().order_by('-last_modified')[0].last_modified
+    return TimeStampedModel.objects.all().order_by('-last_modified')[0].last_modified
 
 
 @condition(etag_func=gen_etag, last_modified_func=gen_last_modified)

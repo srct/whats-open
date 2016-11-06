@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.views.generic import FormView
 
-from django_gmucas.views import login as caslogin
+from cas.views import login as caslogin
 from management.forms import LoginForm
 
 @login_required(login_url='/management/login')

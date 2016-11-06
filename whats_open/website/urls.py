@@ -23,6 +23,5 @@ urlpatterns = patterns('website.views',
     #url(r'^schedule/(?P<pk>)/$', ScheduleDetailView.as_view(), name='schedule-detail'),
 
     #opentime urls
-    url(r'^open-time/(?P<pk>)/$', OpenTimeDetailView.as_view(), name='open-time-detail'),
+    #url(r'^open-time/(?P<pk>)/$', OpenTimeDetailView.as_view(), name='open-time-detail'),
 )
-
