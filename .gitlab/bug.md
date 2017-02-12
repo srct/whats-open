@@ -12,9 +12,3 @@ Describe briefly what actually occurs in the app given the input described above
 A numbered list of steps starting from the earliest possible moment up until the 
 bug occurs. Something that could be used by other developers to reproduce the bug
 that is being reported.
-
-## Helpful links 
-
-Here you should include a bullet point list of links to documentation, stack overflow,
-whatever, that could help guide someone on what it is they are trying to do.
-Essentially, a list of links to point them in the right direction.
