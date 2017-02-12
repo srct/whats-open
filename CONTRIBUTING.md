@@ -292,6 +292,9 @@ This "Closes" statement should only be incuded in commits that resolve an issue.
 What's nice about the statement itself is that when the commit is merged, the issue
 will auto close.
 
+If neither of these situations are the case (breaking changes or issue closing)
+then feel free to omit the footer.
+
 [coc]: https://studentconduct.gmu.edu/wp-content/uploads/2011/09/2016-17-Code-of-Student-Conduct.pdf
 [gitlab]: https://git.gmu.edu/srct/whats-open
 [style-guide]: https://www.python.org/dev/peps/pep-0008/
