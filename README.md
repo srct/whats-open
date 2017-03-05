@@ -9,6 +9,17 @@ wiki page](http://wiki.srct.gmu.edu/wiki/index.php/Whatsopen).
 
 Contributing
 ---
+UPDATE:
+
+Please join the #whats-open channel at srct.slack.com in order to chat with project
+members about how to contribute. There are pinned posts in the sidebar of that channel
+containing step by step instructions about how to get setup in addition to info about 
+branches and the direction of the project.
+
+Thanks!
+
+
+OUTDATED:
 
 What's Open needs all the help it can get. Even if you don't feel 
 like you can be helpful with the heavily technical aspects, 
