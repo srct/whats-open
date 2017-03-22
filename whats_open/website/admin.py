@@ -4,7 +4,7 @@ from website.models import Facility, Category, Schedule, OpenTime
 
 class OpenTimeInline(admin.TabularInline):
     model = OpenTime
-    fk_name = 'schedule'
+    fk_name = 'open_time_schedule'
 
 
 class ScheduleAdmin(admin.ModelAdmin):

@@ -1,4 +1,4 @@
-Django==1.8.5
-djangorestframework==3.3.0
-gunicorn==19.3.0
-wheel==0.24.0
+Django>=1.9,<1.10
+djangorestframework==3.6.2
+gunicorn==19.7.1
+wheel==0.29.0

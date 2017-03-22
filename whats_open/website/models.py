@@ -20,12 +20,12 @@ class Category(BaseModel):
 class Facility(BaseModel):
     """Represents a dining location on campus."""
     name = models.CharField(max_length=100)
-    category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
+    facility_category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     main_schedule = models.ForeignKey('Schedule',
             related_name='facility_main')
     special_schedules = models.ManyToManyField('Schedule',
-            related_name='facility_special', null=True, blank=True)
+            related_name='facility_special', blank=True)
      
     class Meta:
         verbose_name = "facility"
@@ -90,7 +90,7 @@ class Schedule(BaseModel):
 
 class OpenTime(BaseModel):
     """Represents a period time when a Facility is open"""
-    schedule = models.ForeignKey('Schedule', related_name='open_times')
+    open_time_schedule = models.ForeignKey('Schedule', related_name='open_times')
     start_day = models.IntegerField()  # 0-6, Monday == 0
     start_time = models.TimeField()
     end_day = models.IntegerField()  # 0-6, Monday == 0
