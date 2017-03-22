@@ -28,7 +28,7 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         queryset = Facility.objects.all()
-        open_now = self.request.QUERY_PARAMS.get('open', None)
+        open_now = self.request.query_params.get('open', None)
         if open_now is not None:
             results = []
             for fac in queryset:

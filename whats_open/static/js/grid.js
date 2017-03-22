@@ -1,4 +1,4 @@
-var facilities = [];
+var facilities = JSON.parse(localStorage['facilities'] || "[]" );
 
 function correct_grid_overflow(){
     // This function ensures that all text inside the grid-boxes display nicely on one line. 
@@ -138,26 +138,66 @@ function update_grid(facilities) {
     });
 }
 
-$.ajax({
-    url: '/api/facilities/.json',
-}).done(function (data) {
-    facilities = data;
-    update_grid(facilities);
-    construct_grid(facilities);
-    // Every second, check and see if it is necessary to update the grid. 
-    var last_updated = new Date();
-    setInterval(function(){
-    	now = new Date();
-    	// If the hour has changed, it the half hour has changed 
-    	// or it has been over a half hour (180000 milliseconds) since the last update.
-    	if (last_updated.getHours() != now.getHours() ||
-    	   (last_updated.getMinutes() < 30 && now.getMinutes() >= 30) || now - last_updated > 1800000){
-	    	update_grid(facilities);
-	    	construct_grid(facilities);
-	    	last_updated = new Date(); 
-    	}
-    }, 1000);
-    $(window).on('resize', function(){
-        correct_grid_overflow();
+$(function() {
+
+      update_grid(facilities);
+      construct_grid(facilities);
+
+  $.ajax({
+      url: '/api/facilities/?format=json',
+  }).done(function (data) {
+      facilities = data;
+      localStorage['facilities'] = JSON.stringify(facilities);
+      update_grid(facilities);
+      construct_grid(facilities);
+      // Every second, check and see if it is necessary to update the grid. 
+      var last_updated = new Date();
+      setInterval(function(){
+        now = new Date();
+        // If the hour has changed, it the half hour has changed 
+        // or it has been over a half hour (180000 milliseconds) since the last update.
+        if (last_updated.getHours() != now.getHours() ||
+          (last_updated.getMinutes() < 30 && now.getMinutes() >= 30) || now - last_updated > 1800000){
+          update_grid(facilities);
+          construct_grid(facilities);
+          last_updated = new Date(); 
+        }
+      }, 1000);
+      $(window).on('resize', function(){
+          correct_grid_overflow();
+      });
+    
+    //-------------------------------------------------------------------------
+    //-- FROM typeAhead.js
+    //-------------------------------------------------------------------------
+
+    //collecting list of facility names from server data  
+    var rest_names = [];
+    
+    for (var i = 0; i < data.length; i++) {
+      rest_names.push(data[i].name);
+    };
+    // For doumentation on jQuery's autocomplete: (api.jqueryui.com/autocomplete)         
+      $("#searchBar").autocomplete({  
+        source: rest_names,
+        //making it so the search result list doesn't physically appear 
+        messages: { 
+            noResults: '',
+            results: function(){} 
+          },
+          minLength: 0,
+          response: function(event, ui) {
+        //ui.content array contains all names that are returned from the search
+              results = $.map(ui.content, function(r) { return r.value; });
+              filtered = $.grep(facilities, function (r, idx) {
+                      return ($.inArray(r.name, results) != -1);
+              });
+              construct_grid(filtered);
+              // To prevent the page width from extending
+              $('.ui-autocomplete').remove();
+      }
     });
+  });
+
 });
+
