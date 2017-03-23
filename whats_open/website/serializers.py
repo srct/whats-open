@@ -4,18 +4,18 @@ from website.models import Category, Facility, Schedule, OpenTime
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        #fields = '__all__'
 
 class OpenTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = OpenTime
-        fields = '__all__'
+        #fields = '__all__'
 
 class ScheduleSerializer(serializers.ModelSerializer):
     open_times = OpenTimeSerializer(many=True, read_only=True)
     class Meta:
         model = Schedule
-        fields = ( 'id', 'open_times', 'last_modified', 'name', 'valid_start', 'valid_end' )
+        #fields = ( 'id', 'open_times', 'last_modified', 'name', 'valid_start', 'valid_end' )
 
 class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     category = CategorySerializer(many=False, read_only=True)
@@ -24,5 +24,5 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Facility
-        fields = ( 'id', 'category', 'main_schedule', 'special_schedules', 'location', 'last_modified', 'name' )
+        fields = ( 'id', 'category', 'main_schedule', 'special_schedules', 'location', 'modified', 'name' )
 
