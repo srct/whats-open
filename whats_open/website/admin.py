@@ -13,6 +13,14 @@ class FacilityAdmin(admin.ModelAdmin):
     model = Facility
     list_display = ['name', 'location' ]
     list_filter = ['facility_category', ]
+    fieldsets = (
+        (None, {
+             'fields': ('name', 'facility_category',
+                       ('location', 'on_campus'),
+                       'main_schedule', 'special_schedules',
+                       'owners'),
+               }),
+    )
 
 class ScheduleAdmin(admin.ModelAdmin):
     inlines = [OpenTimeInline, ]
