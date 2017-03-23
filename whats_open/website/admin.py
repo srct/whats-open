@@ -4,6 +4,7 @@ from .models import Facility, Schedule, OpenTime, Category
 class OpenTimeInline(admin.TabularInline):
     model = OpenTime
     fk_name = 'schedule'
+    max_num = 7
 
 class OpenTimeAdmin(admin.ModelAdmin):
     pass
