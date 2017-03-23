@@ -29,7 +29,8 @@ class Facility(TimeStampedModel):
     main_schedule = models.ForeignKey('Schedule',
             related_name='facility_main')
     special_schedules = models.ManyToManyField('Schedule',
-            related_name='facility_special', blank=True)
+            related_name='facility_special', blank=True,
+            help_text='This schedule will come into effect only for its specified duration.')
      
     class Meta:
         verbose_name = "facility"
