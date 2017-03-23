@@ -26,6 +26,7 @@ class FacilityAdmin(admin.ModelAdmin):
     )
 
 class ScheduleAdmin(admin.ModelAdmin):
+    list_display = ['name', 'modified']
     inlines = [OpenTimeInline, ]
     fieldsets = (
         (None, {
