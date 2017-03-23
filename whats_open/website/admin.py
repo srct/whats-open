@@ -10,7 +10,9 @@ class OpenTimeAdmin(admin.ModelAdmin):
     pass
 
 class FacilityAdmin(admin.ModelAdmin):
-    pass
+    model = Facility
+    list_display = ['name', 'location' ]
+    list_filter = ['facility_category', ]
 
 class ScheduleAdmin(admin.ModelAdmin):
     inlines = [OpenTimeInline, ]
