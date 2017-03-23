@@ -24,6 +24,12 @@ class FacilityAdmin(admin.ModelAdmin):
 
 class ScheduleAdmin(admin.ModelAdmin):
     inlines = [OpenTimeInline, ]
+    fieldsets = (
+        (None, {
+             'fields': ('name',
+                       ('valid_start', 'valid_end'),)
+               }),
+    )
 
 class CategoryAdmin(admin.ModelAdmin):
     pass
