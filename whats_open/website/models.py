@@ -90,10 +90,29 @@ class Schedule(BaseModel):
 
 class OpenTime(BaseModel):
     """Represents a period time when a Facility is open"""
-    open_time_schedule = models.ForeignKey('Schedule', related_name='open_times')
-    start_day = models.IntegerField()  # 0-6, Monday == 0
+
+    MONDAY = 0
+    TUESDAY = 1
+    WEDNESDAY = 2
+    THURSDAY = 3
+    FRIDAY = 4
+    SATURDAY = 5
+    SUNDAY = 6
+
+    DAY_CHOICES = (
+        (MONDAY, 'Monday'),
+        (TUESDAY, 'Tuesday'),
+        (WEDNESDAY, 'Wednesday'),
+        (THURSDAY, 'Thursday'),
+        (FRIDAY, 'Friday'),
+        (SATURDAY, 'Saturday'),
+        (SUNDAY, 'Sunday'),
+    )
+
+    schedule = models.ForeignKey('Schedule', related_name='open_times')
+    start_day = models.IntegerField(default=0, choices=DAY_CHOICES)
     start_time = models.TimeField()
-    end_day = models.IntegerField()  # 0-6, Monday == 0
+    end_day = models.IntegerField(default=0, choices=DAY_CHOICES)
     end_time = models.TimeField()
 
     def isOpenNow(self):
