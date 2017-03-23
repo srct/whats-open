@@ -16,10 +16,13 @@ class FacilityAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
              'fields': ('name', 'facility_category',
-                       ('location', 'on_campus'),
-                       'main_schedule', 'special_schedules',
-                       'owners'),
-               }),
+                        ('location', 'on_campus'),
+                        'main_schedule', 'special_schedules', ),
+        }),
+        ('Advanced', {
+             'fields': ('owners', ),
+             'classes': ('collapse', ),
+        }),
     )
 
 class ScheduleAdmin(admin.ModelAdmin):
