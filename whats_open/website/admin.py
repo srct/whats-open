@@ -4,15 +4,36 @@ from .models import Facility, Schedule, OpenTime, Category
 class OpenTimeInline(admin.TabularInline):
     model = OpenTime
     fk_name = 'schedule'
+    max_num = 7
 
 class OpenTimeAdmin(admin.ModelAdmin):
     pass
 
 class FacilityAdmin(admin.ModelAdmin):
-    pass
+    model = Facility
+    list_display = ['name', 'location' ]
+    list_filter = ['facility_category', ]
+    fieldsets = (
+        (None, {
+             'fields': ('name', 'facility_category',
+                        ('location', 'on_campus'),
+                        'main_schedule', 'special_schedules', ),
+        }),
+        ('Advanced', {
+             'fields': ('owners', ),
+             'classes': ('collapse', ),
+        }),
+    )
 
 class ScheduleAdmin(admin.ModelAdmin):
+    list_display = ['name', 'modified']
     inlines = [OpenTimeInline, ]
+    fieldsets = (
+        (None, {
+             'fields': ('name',
+                       ('valid_start', 'valid_end'),)
+               }),
+    )
 
 class CategoryAdmin(admin.ModelAdmin):
     pass
