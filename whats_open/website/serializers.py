@@ -24,5 +24,7 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Facility
-        fields = ( 'id', 'category', 'main_schedule', 'special_schedules', 'location', 'modified', 'name' )
+        fields = ('id', 'slug', 'name', 'campus', 'location', 'category',
+                  'main_schedule', 'special_schedules',
+                  'modified', )
 
