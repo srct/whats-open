@@ -26,6 +26,7 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Facility.objects.all()
     serializer_class = FacilitySerializer
+    lookup_field = 'slug'
 
     def get_queryset(self):
         queryset = Facility.objects.all()

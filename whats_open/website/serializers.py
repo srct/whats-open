@@ -13,6 +13,7 @@ class OpenTimeSerializer(serializers.ModelSerializer):
 
 class ScheduleSerializer(serializers.ModelSerializer):
     open_times = OpenTimeSerializer(many=True, read_only=True)
+
     class Meta:
         model = Schedule
         fields = ( 'id', 'open_times', 'modified', 'name', 'valid_start', 'valid_end' )
@@ -24,7 +25,7 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Facility
-        fields = ('id', 'slug', 'name', 'campus', 'location', 'category',
+        fields = ('slug', 'name', 'campus', 'location', 'category',
                   'main_schedule', 'special_schedules',
                   'modified', )
 
