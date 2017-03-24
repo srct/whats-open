@@ -4,7 +4,7 @@ from website.models import Category, Facility, Schedule, OpenTime
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ('slug', 'name', 'modified', )
 
 class OpenTimeSerializer(serializers.ModelSerializer):
     class Meta:
