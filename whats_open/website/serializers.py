@@ -2,9 +2,11 @@ from rest_framework import serializers
 from website.models import Category, Facility, Schedule, OpenTime
 
 class CategorySerializer(serializers.ModelSerializer):
+    facilities = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
+
     class Meta:
         model = Category
-        fields = ('slug', 'name', 'modified', )
+        fields = ('slug', 'name', 'modified', 'facilities')
 
 class OpenTimeSerializer(serializers.ModelSerializer):
     class Meta:
