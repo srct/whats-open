@@ -16,7 +16,7 @@ class FacilityAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
              'fields': ('name', 'facility_category',
-                        ('location', 'on_campus'),
+                        ('campus', 'location'),
                         'main_schedule', 'special_schedules', ),
         }),
         ('Advanced', {
