@@ -1,18 +1,35 @@
 from django.contrib import admin
 from .models import Facility, Schedule, OpenTime, Category
 
+
 class OpenTimeInline(admin.TabularInline):
     model = OpenTime
     fk_name = 'schedule'
     max_num = 7
 
+
 class OpenTimeAdmin(admin.ModelAdmin):
     pass
+
+
+class CampusFilter(admin.SimpleListFilter):
+    title = 'campus'
+    parameter_name = 'campus'
+
+    def lookups(self, request, model_admin):
+        return Facility.CAMPUS_CHOICES
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(campus=self.value())
+        else:
+            return queryset
+
 
 class FacilityAdmin(admin.ModelAdmin):
     model = Facility
     list_display = ['name', 'location' ]
-    list_filter = ['facility_category', ]
+    list_filter = ['facility_category', CampusFilter]
     fieldsets = (
         (None, {
              'fields': ('name', 'facility_category',
@@ -25,6 +42,7 @@ class FacilityAdmin(admin.ModelAdmin):
         }),
     )
 
+
 class ScheduleAdmin(admin.ModelAdmin):
     list_display = ['name', 'modified']
     inlines = [OpenTimeInline, ]
@@ -35,8 +53,10 @@ class ScheduleAdmin(admin.ModelAdmin):
                }),
     )
 
+
 class CategoryAdmin(admin.ModelAdmin):
     pass
+
 
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Schedule, ScheduleAdmin)
