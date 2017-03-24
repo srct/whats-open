@@ -1,10 +1,4 @@
 Django>1.10, <1.11
-argparse
 django-autoslug==1.9.3
-django-floppyforms
-django-cas-client
-django-leaflet
-django-model-utils
+django-cas-client==1.2.0
 djangorestframework==3.6.2 
-distribute
-wsgiref
