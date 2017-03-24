@@ -18,14 +18,18 @@ from rest_framework.decorators import api_view
 import hashlib
 import json
 
+
 # Rest Framework Class Views
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    lookup_field = 'slug'
+
 
 class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Facility.objects.all()
     serializer_class = FacilitySerializer
+    lookup_field = 'slug'
 
     def get_queryset(self):
         queryset = Facility.objects.all()
@@ -41,9 +45,11 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         else:
             return queryset
 
+
 class ScheduleViewSet(viewsets.ModelViewSet):
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
+
 
 class OpenTimeViewSet(viewsets.ModelViewSet):
     queryset = OpenTime.objects.all()

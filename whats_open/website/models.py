@@ -4,8 +4,10 @@ from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
 import datetime
 
+
 class Category(TimeStampedModel):
     name = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from='name', unique=True)  # instead of id
 
     class Meta:
         verbose_name = "category"
@@ -16,22 +18,38 @@ class Category(TimeStampedModel):
     def __unicode__(self):
         return '%s' % self.name
 
+
 class Facility(TimeStampedModel):
     """Represents a facility location on campus."""
+
     name = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='name',unique=True)  # instead of id
 
-    facility_category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
-    on_campus = models.BooleanField(default=True)
+    facility_category = models.ForeignKey('Category', related_name="facilities",
+                                          null=True, blank=True)
+
+    FAIRFAX = 'fairfax'
+    PRINCE_WILLIAM = 'scitech'
+    ARLINGTON = 'arlington'
+    OFF_CAMPUS = 'off'
+    CAMPUS_CHOICES = (
+        (FAIRFAX, 'Fairfax'),
+        (PRINCE_WILLIAM, 'Science and Technology'),
+        (ARLINGTON, 'Arlington'),
+        (OFF_CAMPUS, 'Off Campus'),
+    )
+
+    campus = models.CharField(max_length=100, choices=CAMPUS_CHOICES, default='fairfax')
     location = models.CharField(max_length=100, null=True, blank=True)
 
-    owners = models.ManyToManyField(User)
     main_schedule = models.ForeignKey('Schedule',
             related_name='facility_main')
     special_schedules = models.ManyToManyField('Schedule',
             related_name='facility_special', blank=True,
             help_text='This schedule will come into effect only for its specified duration.')
      
+    owners = models.ManyToManyField(User, blank=True)
+
     class Meta:
         verbose_name = "facility"
         verbose_name_plural = "facilities"
@@ -62,6 +80,7 @@ class Facility(TimeStampedModel):
 
     def __unicode__(self):
         return self.name
+
 
 class Schedule(TimeStampedModel):
     """
