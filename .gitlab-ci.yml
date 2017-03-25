@@ -1,0 +1,19 @@
+types:
+  - test
+
+before_script:
+  - apt-get update -qy
+  - pip install -r requirements/test.txt
+  - cd whats_open/
+  - python manage.py makemigrations
+  - python manage.py makemigrations website
+  - python manage.py migrate
+  - echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('root', 'root@srct.gmu.edu', 'root') " | python manage.py shell
+
+whats-open-py2.7:
+  image: library/python:2.7
+  type: test
+  script:
+    - python manage.py test
+    - coverage run --source=website --omit=*migrations/*,*admin.py,*__init__.py,*.pyc manage.py test
+    - coverage html -i && grep pc_cov htmlcov/index.html | egrep -o "[0-9]+\%" | awk '{ print "covered " $1;}'
