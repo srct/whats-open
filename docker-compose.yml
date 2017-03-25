@@ -1,0 +1,13 @@
+version: '2'
+services:
+  web:
+    build: .
+    restart: always
+    ports:
+      - '8000:8000'
+    command: /bin/bash ./startup.sh -python whats_open/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/whats_open
+    environment: 
+      - superuser=admin
+      - email_domain=@masonlive.gmu.edu
