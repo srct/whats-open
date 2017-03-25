@@ -18,8 +18,15 @@ section), but sometimes it's the small things that count, so don't be afraid of
 contributing just for a spelling mistake.
 
 If you need help at all please contact any SRCT member in the `#whats-open` 
-channel in our [slack group](https://srct.slack.com). We want people to contribute, so if you are struggling, or just want to 
-learn, then we are willing to help.
+channel in our [slack group](https://srct.slack.com). We want people to 
+contribute, so if you are struggling, or just want to learn, then we are 
+willing to help.
+
+Check out some of the other What's Open projects!
+ - [https://git.gmu.edu/srct/whats-open-android]()
+ - [https://git.gmu.edu/srct/whats-open-ios]()
+ - [https://git.gmu.edu/srct/whats-open-web]()
+ - [https://git.gmu.edu/srct/whats-open-alexa]()
 
 # Setup instructions for local development
 
@@ -91,7 +98,56 @@ the SRCT code respository with SSH.
 
 ## 3) Get whats-open up and running
 
-#### Prerequisites & Required Packages
+Now that we have `git` setup and cloned down the code you can
+
+    cd whats-open/
+
+and get to working on setting up a development environment! There are two options
+to go about doing this: `Docker` and `Manual Setup`.
+
+### Docker
+
+We can automate the setup process through [Docker](https://www.docker.com/what-docker)
+containers! This allows us to quickly get started and standardize development
+environments across machines.
+
+Installing Docker on your system:
+
+ - For macOS: [https://docs.docker.com/docker-for-mac/]()
+ - For Windows: [https://docs.docker.com/docker-for-windows/]()
+ - For your specific *nix distro: [https://docs.docker.com/engine/installation/]() 
+
+Additionally, you will need to install docker-compose: [https://docs.docker.com/compose/install/]()
+
+Next inside the `whats-open/` root directory run:
+
+    docker-compose build
+
+If that doesn't work, try:
+
+    sudo docker-compose build
+
+Then, follow up with:
+
+    docker-compose up
+
+If that doesn't work, try:
+
+    sudo docker-compose build
+
+You should see that the server is running by going to [http://localhost:8000]()
+in your browser. Any changes you make to your local file system will be mirrored in the server.
+
+If you would like to log into the admin interface then use the following credentials:
+
+```
+user: admin@masonlive.gmu.edu
+pass: admin
+```
+
+### Manual Setup
+
+Manual Setup involves all of the same steps as Docker, but just done manually.
 
 First, install python, pip, and virtualenv on your system.
   * `python` is the programming language used for Django, the web framework used by whats-open.
@@ -111,7 +167,6 @@ you install `python`, `pip`, and `virtualenv`.
 
 Next with,
 
-    cd whats-open/
     virtualenv venv
     source venv/bin/activate
     pip install -r requirements.txt
@@ -150,7 +205,6 @@ If you're new to Django and don't know where to start, I highly recommend
 giving the [tutorial](https://docs.djangoproject.com/en/dev/intro/tutorial01/)
 a try. However, it leaves out a lot of important things, so remember, Google is
 your friend.
-
 For the JavaScript, I will be using jQuery whenever possible because I prefer
 it to straight up JavaScript. jQuery has [great
 documentation](http://docs.jquery.com/) and I've found [Mozilla's documentation
