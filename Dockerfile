@@ -26,7 +26,6 @@ ENV PYTHONUNBUFFERED 1
 
 # Update the sources list
 RUN apt-get update
-RUN apt-get install netcat -y
 
 RUN mkdir /whats_open
 WORKDIR /whats_open
