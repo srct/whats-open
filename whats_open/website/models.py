@@ -1,8 +1,15 @@
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+# Python stdlib Imports
+import datetime
+
+# Django Imports
 from django.db import models
 from django.contrib.auth.models import User
 from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
-import datetime
 
 class Category(TimeStampedModel):
     name = models.CharField(max_length=100)
@@ -13,7 +20,7 @@ class Category(TimeStampedModel):
         # Sort by name in admin view
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.name
 
 class Facility(TimeStampedModel):
@@ -60,7 +67,7 @@ class Facility(TimeStampedModel):
             return True
         return False
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class Schedule(TimeStampedModel):
@@ -88,7 +95,7 @@ class Schedule(TimeStampedModel):
                 return True
         return False
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -144,7 +151,7 @@ class OpenTime(TimeStampedModel):
                 return False
         return True
 
-    def __unicode__(self):
+    def __str__(self):
         weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
                 'Saturday', 'Sunday']
         return '%s %s to %s %s' % (weekdays[self.start_day],

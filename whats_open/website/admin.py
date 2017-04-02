@@ -1,4 +1,11 @@
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+# Django Imports
 from django.contrib import admin
+
+# App Imports
 from .models import Facility, Schedule, OpenTime, Category
 
 class OpenTimeInline(admin.TabularInline):
