@@ -14,11 +14,11 @@ before_script:
   - pip install -r requirements/test.txt
   - cd whats_open/
   - export WOPEN_SECRET_KEY=$(dd if=/dev/urandom count=100 | tr -dc "A-Za-z0-9" | fold -w 60 | head -n1 2>/dev/null)
-  - WOPEN_EMAIL_DOMAIN=@masonlive.gmu.edu
-  - WOPEN_DB_NAME=wopen
-  - WOPEN_DB_USER=wopen
-  - WOPEN_DB_PASSWORD=wopen
-  - WOPEN_DB_HOST=mysql
+  - WOPEN_EMAIL_DOMAIN="@masonlive.gmu.edu"
+  - WOPEN_DB_NAME="wopen"
+  - WOPEN_DB_USER="wopen"
+  - WOPEN_DB_PASSWORD="wopen"
+  - WOPEN_DB_HOST="mysql"
   - WOPEN_DB_PORT=3306
   - WOPEN_SUPERUSER=admin
   - python manage.py makemigrations
