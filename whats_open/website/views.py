@@ -39,9 +39,9 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         if open_now is not None:
             results = []
             for fac in queryset:
-                print fac
+                print(fac)
                 if fac.isOpen():
-                    print True
+                    print(True)
                     results.append(fac)
             return results
         else:
