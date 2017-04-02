@@ -1,6 +1,7 @@
 """"Base Django settings for whats_open."""
 
 import os
+import sys
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
@@ -18,16 +19,6 @@ SITE_NAME = basename(DJANGO_ROOT)
 # name in our dotted import paths:
 path.append(DJANGO_ROOT)
 ########## END PATH CONFIGURATION
-
-
-########## DEBUG CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = False
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
-TEMPLATE_DEBUG = DEBUG
-########## END DEBUG CONFIGURATION
-
 
 ########## MANAGER CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
@@ -124,7 +115,6 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 ########## END STATIC FILE CONFIGURATION
 
@@ -178,8 +168,6 @@ TEMPLATES = [
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
             ],
-            # https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
-            'debug': DEBUG
         }
     }
 ]
@@ -227,7 +215,7 @@ CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 
 ########## APP CONFIGURATION
-DJANGO_APPS = (
+INSTALLED_APPS = (
     # Default Django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -236,23 +224,14 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Useful template tags:
-    # 'django.contrib.humanize',
-
     # Admin panel and documentation:
     'django.contrib.admin',
     'django.contrib.admindocs',
-)
 
-# Apps specific for this project go here.
-LOCAL_APPS = (
+    # Apps specific for this project go here.
     'website',
-    #'guardian',
     'rest_framework',
 )
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 
 ########## END APP CONFIGURATION
 
@@ -294,7 +273,12 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout
+        },
     },
     'loggers': {
         'django.request': {
@@ -302,19 +286,12 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propogate': True
+        },
     }
 }
-########## END LOGGING CONFIGURATION
 
-########## MANAGEMENT CONFIGURATION
-#CAS_GATEWAY=True
-#ANONYMOUS_USER_ID = -1
-#AUTHENTICATION_BACKENDS = (
-#  'django.contrib.auth.backends.ModelBackend',  # this is default
-#  'cas.middleware.CASMiddleware',
-#  #'guardian.backends.ObjectPermissionBackend',
-#)
-#
-#LOGIN_URL='/management/login/'
-#LOGIN_REDIRECT='/management/'
-########## END MANAGEMENT CONFIGURATION
+########## END LOGGING CONFIGURATION
