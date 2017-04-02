@@ -160,15 +160,106 @@ Open a terminal and run the following command:
 
 Next, with:
 
-    sudo apt install python3 python3-dev python3-pip
+    sudo apt install python3 python3-dev python3-pip 
     sudo pip3 install virtualenv
 
 you install `python`, `pip`, and `virtualenv`.
 
-Next with,
+#### Database Setup
+
+What's Open is built on top of a `MySQL` database and thus, we must set it up.
+
+Run:
+
+    sudo apt install mysql-server mysql-client libmysqlclient-dev python-mysqldb
+
+to install mysql packages onto your system.
+
+Load up the mysql shell by running
+
+    mysql -u root -p
+
+and putting in your mysql password.
+
+Create the database by running:
+
+    CREATE DATABASE wopen;
+
+You can choose a different name for your database if you desire.
+
+Double check your database was created by running:
+
+    SHOW DATABASES;
+
+Though you can use an existing user to access this database, here's how to create
+a new user and give them the necessary permissions to your newly created database:
+
+    CREATE USER 'wopen'@'localhost' IDENTIFIED BY 'password';
+
+For local development, password strength is less important, but use a strong 
+passphrase for deployment. You can choose a different username.
+
+    GRANT ALL ON wopen.* TO 'wopen'@'localhost';
+
+This allows your database user to create all the tables it needs on the What's 
+Open database.
+
+Run:
+
+    GRANT ALL ON test_wopen.* TO 'wopen'@'localhost'; FLUSH PRIVILEGES;
+
+When running test cases, django creates a test database so your 'real' database
+doesn't get screwed up. This database is called 'test_' + whatever your normal 
+database is named. Note that for permissions it doesn't matter that this database 
+hasn't yet been created.
+
+The .* is to grant access all tables in the database, and 'flush privileges' 
+reloads privileges to ensure that your user is ready to go.
+
+Exit the mysql shell by typing:
+
+    exit
+
+
+At this point we will need to set some environment variables. 
+
+If you are using bash then just copy paste the following into your terminal:
+
+```
+export WOPEN_SECRET_KEY=$(dd if=/dev/urandom count=100 | tr -dc "A-Za-z0-9" | fold -w 60 | head -n1 2>/dev/null)
+export WOPEN_EMAIL_DOMAIN="@masonlive.gmu.edu"
+export WOPEN_DB_NAME="wopen"
+export WOPEN_DB_USER="wopen"
+export WOPEN_DB_PASSWORD="password"
+export WOPEN_DB_PORT=3306
+export WOPEN_DB_HOST=
+```
+
+## The Virtual Enviornment
+
+Virtual environments are used to keep separate project packages from the main 
+computer, so you can use different versions of packages across different 
+projects and ease deployment server setup.
+
+It's often recommended to create a special directory to store all of your 
+virtual environments together (ie. development/virtualenv/), though they can be 
+placed wherever is most convenient.
+
+Then in your virtual environment directory run:
 
     virtualenv -p python3 whats_open
     source whats_open/bin/activate
+
+to create your virtual environment and activate it. If you ever need to exit 
+your virtual environment, simply run:
+
+    deactivate
+
+Now, the packages you need to install for Go are in in the top level of the 
+project's directory structure(whats-open/).
+
+Next with,
+
     pip install -r requirements.txt
     cd whats_open/
     python3 manage.py makemigrations
