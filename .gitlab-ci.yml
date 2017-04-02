@@ -16,8 +16,8 @@ before_script:
   - export WOPEN_SECRET_KEY=$(dd if=/dev/urandom count=100 | tr -dc "A-Za-z0-9" | fold -w 60 | head -n1 2>/dev/null)
   - export WOPEN_EMAIL_DOMAIN="@masonlive.gmu.edu"
   - export WOPEN_DB_NAME="wopen"
-  - export WOPEN_DB_USER="wopen"
-  - export WOPEN_DB_PASSWORD="wopen"
+  - export WOPEN_DB_USER="root"
+  - export WOPEN_DB_PASSWORD="root"
   - export WOPEN_DB_HOST="mysql"
   - export WOPEN_DB_PORT=3306
   - export WOPEN_SUPERUSER=admin
