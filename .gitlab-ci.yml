@@ -18,7 +18,7 @@ before_script:
   - WOPEN_DB_NAME=wopen
   - WOPEN_DB_USER=wopen
   - WOPEN_DB_PASSWORD=wopen
-  - WOPEN_DB_HOST=wopen_db
+  - WOPEN_DB_HOST=mysql
   - WOPEN_DB_PORT=3306
   - WOPEN_SUPERUSER=admin
   - python manage.py makemigrations
