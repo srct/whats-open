@@ -160,18 +160,19 @@ Open a terminal and run the following command:
 
 Next, with:
 
-    sudo apt install python python-dev python-pip
-    sudo pip install virtualenv
+    sudo apt install python3 python3-dev python3-pip
+    sudo pip3 install virtualenv
 
 you install `python`, `pip`, and `virtualenv`.
 
 Next with,
 
-    virtualenv venv
-    source venv/bin/activate
+    virtualenv -p python3 whats_open
+    source whats_open/bin/activate
     pip install -r requirements.txt
-    python manage.py makemigrations
-    python manage.py migrate
+    cd whats_open/
+    python3 manage.py makemigrations
+    python3 manage.py migrate
 
 you setup the project.
 
@@ -179,7 +180,7 @@ you setup the project.
 
 Now that everything is set-up you can run the server on your computer.
 
-    python manage.py runserver
+    python3 manage.py runserver
 
 Go to [http://127.0.0.1:8000/]() in your browser and you should see the website. 
 
