@@ -18,7 +18,7 @@
 # (You'll need to reverse proxy port 8000 via nginx)
 
 # Set the base image to Ubuntu
-FROM python:2.7
+FROM python:3.6
 ENV PYTHONUNBUFFERED 1
 
 # File Author / Maintainer
