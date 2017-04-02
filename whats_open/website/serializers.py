@@ -1,5 +1,12 @@
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+# App Imports
+from .models import Category, Facility, Schedule, OpenTime
+
+# Other Imports
 from rest_framework import serializers
-from website.models import Category, Facility, Schedule, OpenTime
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:

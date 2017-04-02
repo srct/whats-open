@@ -1,22 +1,28 @@
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+# Python stdlib Imports
+import hashlib
+import json
+
+# Django Imports
 from django.template import RequestContext
-from website.models import Facility, OpenTime
-from website.api import export_data
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.views.decorators.http import condition
 from django.views.generic import ListView, DetailView
 from model_utils.models import TimeStampedModel
 
-from website.models import Facility, OpenTime, Category, Schedule
-from website.api import export_data
-from website.serializers import  CategorySerializer, FacilitySerializer, ScheduleSerializer, OpenTimeSerializer
+# App Imports
+from .models import Facility, OpenTime, Category, Schedule
+from .api import export_data
+from .serializers import  CategorySerializer, FacilitySerializer, ScheduleSerializer, OpenTimeSerializer
 
+# Other Imports
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
-import hashlib
-import json
 
 # Rest Framework Class Views
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):

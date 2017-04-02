@@ -1,8 +1,15 @@
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+# Python stdlib Imports
+import datetime
+
+# Django Imports
 from django.db import models
 from django.contrib.auth.models import User
 from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
-import datetime
 
 class Category(TimeStampedModel):
     name = models.CharField(max_length=100)
