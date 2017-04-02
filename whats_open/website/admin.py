@@ -23,7 +23,7 @@ class FacilityAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
              'fields': ('name', 'facility_category',
-                        ('location', 'on_campus'),
+                        ('location', 'on_campus'), 'address',
                         'main_schedule', 'special_schedules', ),
         }),
         ('Advanced', {
@@ -47,5 +47,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Schedule, ScheduleAdmin)
-#admin.site.register(OpenTime, OpenTimeAdmin)
 admin.site.register(Category, CategoryAdmin)

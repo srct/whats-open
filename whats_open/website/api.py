@@ -19,7 +19,8 @@ def export_data():
     for facility in alphalist:
         facility_data = {
             'name': facility.name,
-            'location': facility.location, 
+            'location': facility.location,
+            'address': facility.address,
             'id': facility.id
         }
         open_times = list()

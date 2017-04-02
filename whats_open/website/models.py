@@ -31,6 +31,7 @@ class Facility(TimeStampedModel):
     facility_category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
     on_campus = models.BooleanField(default=True)
     location = models.CharField(max_length=100, null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
 
     owners = models.ManyToManyField(User)
     main_schedule = models.ForeignKey('Schedule',
