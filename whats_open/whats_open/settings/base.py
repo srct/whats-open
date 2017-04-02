@@ -31,22 +31,6 @@ ADMINS = (
 MANAGERS = ADMINS
 ########## END MANAGER CONFIGURATION
 
-
-########## DATABASE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': normpath(join(DJANGO_ROOT, 'database/database.db')),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
-}
-########## END DATABASE CONFIGURATION
-
-
 ########## GENERAL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -140,6 +124,19 @@ FIXTURE_DIRS = (
 )
 ########## END FIXTURE CONFIGURATION
 
+########## DATABASE CONFIGURATION
+# Use the same DB everywhere.
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ['WOPEN_DB_NAME'],
+        'USER': os.environ['WOPEN_DB_USER'],
+        'PASSWORD': os.environ['WOPEN_DB_PASSWORD'],
+        'HOST': os.environ['WOPEN_DB_HOST'],
+        'PORT': os.environ['WOPEN_DB_PORT'],
+    }
+}
 
 ########## TEMPLATE CONFIGURATION
 TEMPLATES = [
