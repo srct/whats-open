@@ -1,4 +1,4 @@
-Django>1.10, <1.11
+Django>=1.11
 django-autoslug==1.9.3
 django-cas-client==1.2.0
 djangorestframework==3.6.2 
