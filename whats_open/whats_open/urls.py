@@ -1,20 +1,27 @@
-from django.conf.urls import patterns, include, url
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
-# Uncomment the next two lines to enable the admin:
+# Django Imports
+from django.conf.urls import include, url
 from django.contrib import admin
+import django.contrib.auth.views
+
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'whats_open.views.home', name='home'),
-    # url(r'^whats_open/', include('whats_open.foo.urls')),
+urlpatterns = [
+    # / - The homepage
+    url(r'^', include('website.urls')),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
+    # /admin - The admin panels
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'', include('website.urls')),
+    # /admin/docs - Documentation for admin
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-)
+    # /api-auth - API Auth page
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # /logout - Redirect to the homepage on logout
+    url(r'^logout/$', django.contrib.auth.views.logout, {'next_page': '/'}),
+]

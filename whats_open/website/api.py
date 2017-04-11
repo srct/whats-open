@@ -1,5 +1,12 @@
-from website.models import Facility
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+# Python stdlib Imports
 import re
+
+# App Imports
+from .models import Facility
 
 def export_data():
     facilities = list()
@@ -12,7 +19,8 @@ def export_data():
     for facility in alphalist:
         facility_data = {
             'name': facility.name,
-            'location': facility.location, 
+            'location': facility.location,
+            'address': facility.address,
             'id': facility.id
         }
         open_times = list()

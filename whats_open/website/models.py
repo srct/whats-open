@@ -1,11 +1,17 @@
-from django.db import models
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+# Python stdlib Imports
 import datetime
 
+# Django Imports
+from django.db import models
+from django.contrib.auth.models import User
+from model_utils.models import TimeStampedModel
+from autoslug import AutoSlugField
 
-class BaseModel(models.Model):
-    last_modified = models.DateTimeField('Last Modified', auto_now=True)
-
-class Category(BaseModel):
+class Category(TimeStampedModel):
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -14,18 +20,25 @@ class Category(BaseModel):
         # Sort by name in admin view
         ordering = ['name']
 
-    def __unicode__(self):
-        return self.name
+    def __str__(self):
+        return '%s' % self.name
 
-class Facility(BaseModel):
-    """Represents a dining location on campus."""
+class Facility(TimeStampedModel):
+    """Represents a facility location on campus."""
     name = models.CharField(max_length=100)
-    category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
+    slug = AutoSlugField(populate_from='name',unique=True)  # instead of id
+
+    facility_category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
+    on_campus = models.BooleanField(default=True)
     location = models.CharField(max_length=100, null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
+
+    owners = models.ManyToManyField(User)
     main_schedule = models.ForeignKey('Schedule',
             related_name='facility_main')
     special_schedules = models.ManyToManyField('Schedule',
-            related_name='facility_special', null=True, blank=True)
+            related_name='facility_special', blank=True,
+            help_text='This schedule will come into effect only for its specified duration.')
      
     class Meta:
         verbose_name = "facility"
@@ -55,11 +68,10 @@ class Facility(BaseModel):
             return True
         return False
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
-
-class Schedule(BaseModel):
+class Schedule(TimeStampedModel):
     """
     Contains opening and closing times for each day in a week.
 
@@ -84,16 +96,35 @@ class Schedule(BaseModel):
                 return True
         return False
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
-class OpenTime(BaseModel):
+class OpenTime(TimeStampedModel):
     """Represents a period time when a Facility is open"""
+
+    MONDAY = 0
+    TUESDAY = 1
+    WEDNESDAY = 2
+    THURSDAY = 3
+    FRIDAY = 4
+    SATURDAY = 5
+    SUNDAY = 6
+
+    DAY_CHOICES = (
+        (MONDAY, 'Monday'),
+        (TUESDAY, 'Tuesday'),
+        (WEDNESDAY, 'Wednesday'),
+        (THURSDAY, 'Thursday'),
+        (FRIDAY, 'Friday'),
+        (SATURDAY, 'Saturday'),
+        (SUNDAY, 'Sunday'),
+    )
+
     schedule = models.ForeignKey('Schedule', related_name='open_times')
-    start_day = models.IntegerField()  # 0-6, Monday == 0
+    start_day = models.IntegerField(default=0, choices=DAY_CHOICES)  # 0-6, Monday == 0
     start_time = models.TimeField()
-    end_day = models.IntegerField()  # 0-6, Monday == 0
+    end_day = models.IntegerField(default=0, choices=DAY_CHOICES)
     end_time = models.TimeField()
 
     def isOpenNow(self):
@@ -121,7 +152,7 @@ class OpenTime(BaseModel):
                 return False
         return True
 
-    def __unicode__(self):
+    def __str__(self):
         weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
                 'Saturday', 'Sunday']
         return '%s %s to %s %s' % (weekdays[self.start_day],

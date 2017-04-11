@@ -1,14 +1,25 @@
-from django.conf.urls import patterns, include, url
-from website.views import *
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+# Django Imports
+from django.conf.urls import include, url
+
+# App Imports
+from .views import CategoryViewSet, FacilityViewSet, ScheduleViewSet
+
+# Other Imports
 from rest_framework.routers import DefaultRouter
 
-router = DefaultRouter()
-router.register(r'categories', CategoryViewSet)
-router.register(r'facilities', FacilityViewSet)
-router.register(r'schedules', ScheduleViewSet)
-router.register(r'opentimes', OpenTimeViewSet)
+# Instiantiate our DefaultRouter
+ROUTER = DefaultRouter()
 
-urlpatterns = patterns('website.views',
-    url(r'^api/', include(router.urls)),
-    url(r'^$', 'facility_grid', name='facility_grid'),
-)
+# Register views to the API router
+ROUTER.register(r'categories', CategoryViewSet)
+ROUTER.register(r'facilities', FacilityViewSet)
+ROUTER.register(r'schedules', ScheduleViewSet)
+
+urlpatterns = [
+    # /api - Root API URL
+    url(r'^api/', include(ROUTER.urls)),
+]

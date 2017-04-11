@@ -1,6 +1,7 @@
 """"Base Django settings for whats_open."""
 
 import os
+import sys
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
@@ -19,78 +20,72 @@ SITE_NAME = basename(DJANGO_ROOT)
 path.append(DJANGO_ROOT)
 ########## END PATH CONFIGURATION
 
-
-########## DEBUG CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = False
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
-TEMPLATE_DEBUG = DEBUG
-########## END DEBUG CONFIGURATION
-
-
 ########## MANAGER CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
+# Insert a ('Name', 'Email') inside ADMINS tuple
 ADMINS = (
-    ('Your Name', 'your_email@example.com'),
+    ('SRCT Admin', 'srct@gmu.edu'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 ########## END MANAGER CONFIGURATION
 
-
-########## DATABASE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': normpath(join(DJANGO_ROOT, 'database.db')),
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
-}
-########## END DATABASE CONFIGURATION
-
-
 ########## GENERAL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
 TIME_ZONE = 'America/New_York'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
 USE_I18N = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
+# If you set this to False, Django will not format dates, numbers and
+# calendars according to the current locale.
 USE_L10N = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
+# If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 ########## END GENERAL CONFIGURATION
 
 
 ########## MEDIA CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = normpath(join(SITE_ROOT, 'media'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
 ########## END MEDIA CONFIGURATION
 
 ########## STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/home/media/media.lawrence.com/static/" 
 STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
@@ -116,7 +111,7 @@ SECRET_KEY = r"{{ secret_key }}"
 
 
 ########## SITE CONFIGURATION
-# Hosts/domain names that are valid for this site
+# Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
 ########## END SITE CONFIGURATION
@@ -129,30 +124,50 @@ FIXTURE_DIRS = (
 )
 ########## END FIXTURE CONFIGURATION
 
+########## DATABASE CONFIGURATION
+# Use the same DB everywhere.
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ['WOPEN_DB_NAME'],
+        'USER': os.environ['WOPEN_DB_USER'],
+        'PASSWORD': os.environ['WOPEN_DB_PASSWORD'],
+        'HOST': os.environ['WOPEN_DB_HOST'],
+        'PORT': os.environ['WOPEN_DB_PORT'],
+    }
+}
 
 ########## TEMPLATE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.tz',
-    'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.request',
-)
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
-TEMPLATE_DIRS = (
-    normpath(join(SITE_ROOT, 'templates')),
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
+        'DIRS': [
+            normpath(join(SITE_ROOT, 'templates'))
+        ],
+        'OPTIONS': {
+            # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
+            ],
+            # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
+        }
+    }
+]
 ########## END TEMPLATE CONFIGURATION
 
 
@@ -178,6 +193,7 @@ ROOT_URLCONF = '%s.urls' % SITE_NAME
 
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
+# Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
 ########## END WSGI CONFIGURATION
 
@@ -196,7 +212,7 @@ CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 
 ########## APP CONFIGURATION
-DJANGO_APPS = (
+INSTALLED_APPS = (
     # Default Django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -205,23 +221,14 @@ DJANGO_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Useful template tags:
-    # 'django.contrib.humanize',
-
     # Admin panel and documentation:
     'django.contrib.admin',
     'django.contrib.admindocs',
-)
 
-# Apps specific for this project go here.
-LOCAL_APPS = (
-    'south',
+    # Apps specific for this project go here.
     'website',
     'rest_framework',
 )
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
 
 ########## END APP CONFIGURATION
 
@@ -263,7 +270,12 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout
+        },
     },
     'loggers': {
         'django.request': {
@@ -271,6 +283,12 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propogate': True
+        },
     }
 }
+
 ########## END LOGGING CONFIGURATION

@@ -1,0 +1,47 @@
+services:
+  - mysql:latest
+
+variables:
+  MYSQL_DATABASE: wopen
+  MYSQL_ROOT_PASSWORD: root
+
+types:
+  - test
+
+before_script:
+  - apt-get update -qy
+  - apt-get install -y mysql-client libmysqlclient-dev python-mysqldb  
+  - pip install -r requirements/test.txt
+  - cd whats_open/
+  - export WOPEN_SECRET_KEY=$(dd if=/dev/urandom count=100 | tr -dc "A-Za-z0-9" | fold -w 60 | head -n1 2>/dev/null)
+  - export WOPEN_EMAIL_DOMAIN="@masonlive.gmu.edu"
+  - export WOPEN_DB_NAME="wopen"
+  - export WOPEN_DB_USER="root"
+  - export WOPEN_DB_PASSWORD="root"
+  - export WOPEN_DB_HOST="mysql"
+  - export WOPEN_DB_PORT=3306
+  - export WOPEN_SUPERUSER=admin
+  - python manage.py makemigrations
+  - python manage.py makemigrations website
+  - python manage.py migrate
+  - echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('root', 'root@srct.gmu.edu', 'root') " | python manage.py shell
+
+whats-open-py2.7:
+  image: library/python:2.7
+  type: test
+  script:
+    - python manage.py test
+
+whats-open-py3.5:
+  image: library/python:3.5
+  type: test
+  script:
+    - python manage.py test
+
+whats-open-py3.6:
+  image: library/python:3.6
+  type: test
+  script:
+    - python manage.py test
+    - coverage run --source=website --omit=*migrations/*,*admin.py,*__init__.py,*.pyc manage.py test
+    - coverage html -i && grep pc_cov htmlcov/index.html | egrep -o "[0-9]+\%" | awk '{ print "covered " $1;}'
