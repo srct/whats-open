@@ -16,9 +16,8 @@ class ScheduleSerializer(serializers.ModelSerializer):
         model = Schedule
 
 class FacilitySerializer(serializers.ModelSerializer):
-    category = serializers.RelatedField(many=False)
-    main_schedule = serializers.RelatedField(many=False)
-    special_schedules = serializers.RelatedField(many=True)
+    main_schedule = ScheduleSerializer()
+    special_schedules = ScheduleSerializer(many=True)
 
     class Meta:
         model = Facility

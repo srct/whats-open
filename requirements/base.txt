@@ -3,4 +3,4 @@ South==1.0
 argparse
 distribute
 wsgiref
-djangorestframework>=2.3
+djangorestframework>=2.3,<3.0
