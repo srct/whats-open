@@ -7,7 +7,7 @@ Student Run Computing and Technology (SRCT) to display which dining locations
 are currently open on George Mason University's campus.
 
 This repo is a simple Django Rest Framework (DRF) project that contains the
-database backend and API for SRCT developed What's Open applications.
+database backend and API for SRCT-developed What's Open applications.
 
 What's Open needs all the help it can get. Even if you don't feel
 like you can be helpful with the heavily technical aspects,
