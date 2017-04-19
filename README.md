@@ -23,10 +23,10 @@ contribute, so if you are struggling, or just want to learn, then we are
 willing to help.
 
 Check out some of the other What's Open projects!
- - [https://git.gmu.edu/srct/whats-open-android]()
- - [https://git.gmu.edu/srct/whats-open-ios]()
- - [https://git.gmu.edu/srct/whats-open-web]()
- - [https://git.gmu.edu/srct/whats-open-alexa]()
+ - https://git.gmu.edu/srct/whats-open-android
+ - https://git.gmu.edu/srct/whats-open-ios
+ - https://git.gmu.edu/srct/whats-open-web
+ - https://git.gmu.edu/srct/whats-open-alexa
 
 # Setup instructions for local development
 
