@@ -7,30 +7,30 @@ Student Run Computing and Technology (SRCT) to display which dining locations
 are currently open on George Mason University's campus.
 
 This repo is a simple Django Rest Framework (DRF) project that contains the
-database backend and API for SRCT developed What's Open applications. 
+database backend and API for SRCT-developed What's Open applications.
 
-What's Open needs all the help it can get. Even if you don't feel 
-like you can be helpful with the heavily technical aspects, 
+What's Open needs all the help it can get. Even if you don't feel
+like you can be helpful with the heavily technical aspects,
 we definitely need designers and technical writers.
- 
-There are many things that can be done with this project (see the project [Issues](https://git.gmu.edu/srct/whats-open/issues) 
-section), but sometimes it's the small things that count, so don't be afraid of 
+
+There are many things that can be done with this project (see the project [Issues](https://git.gmu.edu/srct/whats-open/issues)
+section), but sometimes it's the small things that count, so don't be afraid of
 contributing just for a spelling mistake.
 
-If you need help at all please contact any SRCT member in the `#whats-open` 
-channel in our [slack group](https://srct.slack.com). We want people to 
-contribute, so if you are struggling, or just want to learn, then we are 
+If you need help at all please contact any SRCT member in the `#whats-open`
+channel in our [slack group](https://srct.slack.com). We want people to
+contribute, so if you are struggling, or just want to learn, then we are
 willing to help.
 
 Check out some of the other What's Open projects!
- - [https://git.gmu.edu/srct/whats-open-android]()
- - [https://git.gmu.edu/srct/whats-open-ios]()
- - [https://git.gmu.edu/srct/whats-open-web]()
- - [https://git.gmu.edu/srct/whats-open-alexa]()
+ - https://git.gmu.edu/srct/whats-open-android
+ - https://git.gmu.edu/srct/whats-open-ios
+ - https://git.gmu.edu/srct/whats-open-web
+ - https://git.gmu.edu/srct/whats-open-alexa
 
 # Setup instructions for local development
 
-What's Open currently supports developers on Linux and macOS systems. Here's our 
+What's Open currently supports developers on Linux and macOS systems. Here's our
 walk-through of steps we will take:
 
 1. Install `git` on your system.
@@ -58,7 +58,7 @@ Next, with:
 you install `git` onto your system.
 
 **with pacman:**
-  
+
     pacman -S git
 
 ### On macOS
@@ -113,11 +113,11 @@ environments across machines.
 
 Installing Docker on your system:
 
- - For macOS: [https://docs.docker.com/docker-for-mac/]()
- - For Windows: [https://docs.docker.com/docker-for-windows/]()
- - For your specific *nix distro: [https://docs.docker.com/engine/installation/]() 
+ - For macOS: https://docs.docker.com/docker-for-mac/
+ - For Windows: https://docs.docker.com/docker-for-windows/
+ - For your specific \*nix distro: https://docs.docker.com/engine/installation/
 
-Additionally, you will need to install docker-compose: [https://docs.docker.com/compose/install/]()
+Additionally, you will need to install docker-compose: https://docs.docker.com/compose/install/
 
 Next inside the `whats-open/` root directory run:
 
@@ -135,7 +135,7 @@ If that doesn't work, try:
 
     sudo docker-compose build
 
-You should see that the server is running by going to [http://localhost:8000]()
+You should see that the server is running by going to http://localhost:8000
 in your browser. Any changes you make to your local file system will be mirrored in the server.
 
 If you would like to log into the admin interface then use the following credentials:
@@ -160,7 +160,7 @@ Open a terminal and run the following command:
 
 Next, with:
 
-    sudo apt install python3 python3-dev python3-pip 
+    sudo apt install python3 python3-dev python3-pip
     sudo pip3 install virtualenv
 
 you install `python`, `pip`, and `virtualenv`.
@@ -196,12 +196,12 @@ a new user and give them the necessary permissions to your newly created databas
 
     CREATE USER 'wopen'@'localhost' IDENTIFIED BY 'password';
 
-For local development, password strength is less important, but use a strong 
+For local development, password strength is less important, but use a strong
 passphrase for deployment. You can choose a different username.
 
     GRANT ALL ON wopen.* TO 'wopen'@'localhost';
 
-This allows your database user to create all the tables it needs on the What's 
+This allows your database user to create all the tables it needs on the What's
 Open database.
 
 Run:
@@ -209,11 +209,11 @@ Run:
     GRANT ALL ON test_wopen.* TO 'wopen'@'localhost'; FLUSH PRIVILEGES;
 
 When running test cases, django creates a test database so your 'real' database
-doesn't get screwed up. This database is called 'test_' + whatever your normal 
-database is named. Note that for permissions it doesn't matter that this database 
+doesn't get screwed up. This database is called 'test_' + whatever your normal
+database is named. Note that for permissions it doesn't matter that this database
 hasn't yet been created.
 
-The .* is to grant access all tables in the database, and 'flush privileges' 
+The .* is to grant access all tables in the database, and 'flush privileges'
 reloads privileges to ensure that your user is ready to go.
 
 Exit the mysql shell by typing:
@@ -221,7 +221,7 @@ Exit the mysql shell by typing:
     exit
 
 
-At this point we will need to set some environment variables. 
+At this point we will need to set some environment variables.
 
 If you are using bash then just copy paste the following into your terminal:
 
@@ -237,12 +237,12 @@ export WOPEN_DB_HOST=
 
 ## The Virtual Enviornment
 
-Virtual environments are used to keep separate project packages from the main 
-computer, so you can use different versions of packages across different 
+Virtual environments are used to keep separate project packages from the main
+computer, so you can use different versions of packages across different
 projects and ease deployment server setup.
 
-It's often recommended to create a special directory to store all of your 
-virtual environments together (ie. development/virtualenv/), though they can be 
+It's often recommended to create a special directory to store all of your
+virtual environments together (ie. development/virtualenv/), though they can be
 placed wherever is most convenient.
 
 Then in your virtual environment directory run:
@@ -250,12 +250,12 @@ Then in your virtual environment directory run:
     virtualenv -p python3 whats_open
     source whats_open/bin/activate
 
-to create your virtual environment and activate it. If you ever need to exit 
+to create your virtual environment and activate it. If you ever need to exit
 your virtual environment, simply run:
 
     deactivate
 
-Now, the packages you need to install for Go are in in the top level of the 
+Now, the packages you need to install for Go are in in the top level of the
 project's directory structure(whats-open/).
 
 Next with,
@@ -273,18 +273,18 @@ Now that everything is set-up you can run the server on your computer.
 
     python3 manage.py runserver
 
-Go to [http://127.0.0.1:8000/]() in your browser and you should see the website. 
+Go to http://127.0.0.1:8000/ in your browser and you should see the website.
 
-Initially, there won't be any restaurants showing. You will need to add them to 
-the database. 
+Initially, there won't be any restaurants showing. You will need to add them to
+the database.
 
 Run,
 
     python manage.py createsuperuser
 
-to create a superuser to use when signing in to the admin interface. 
+to create a superuser to use when signing in to the admin interface.
 
-Go to [http://127.0.0.1:8000/admin/]() to add new Restaurant and Schedule objects 
+Go to http://127.0.0.1:8000/admin/ to add new Restaurant and Schedule objects
 to your database.
 
 With that, everything should be good to go!
@@ -305,7 +305,7 @@ useful as well. But if your Google-fu is sharp, that should suffice.
 
 ## CONTRIBUTING.md
 
-This document goes into detail about how to contribute to the repo, including 
+This document goes into detail about how to contribute to the repo, including
 guidelines for commit messages and details on the workflow of the project.
 
 ## Opening issues
@@ -315,8 +315,8 @@ close issues with poor descriptions or who do not follow the standard.
 
 ## Coding style
 
-You should adhere to the style of the repo code. Consistancy is key! PEP8 
-guidelines are strongly reccomended but not enforced at the time. Please comment your code, I will not accept commits that contain uncommented code.
+You should adhere to the style of the repo code. Consistency is key! PEP8
+guidelines are strongly recommended but not enforced at the time. Please comment your code, I will not accept commits that contain uncommented code.
 
 ## Getting Help
 
