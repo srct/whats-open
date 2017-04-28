@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from website.models import Category, Facility, Schedule, OpenTime
 
+
 class CategorySerializer(serializers.ModelSerializer):
     facilities = serializers.SlugRelatedField(many=True, read_only=True, slug_field='slug')
 
@@ -11,7 +12,8 @@ class CategorySerializer(serializers.ModelSerializer):
 class OpenTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = OpenTime
-        fields = '__all__'
+        fields = ('schedule', 'modified',
+                  'start_day', 'end_day', 'start_time', 'end_time')
 
 class ScheduleSerializer(serializers.ModelSerializer):
     open_times = OpenTimeSerializer(many=True, read_only=True)
