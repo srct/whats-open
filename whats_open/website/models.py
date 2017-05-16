@@ -23,23 +23,47 @@ class Category(TimeStampedModel):
     def __str__(self):
         return '%s' % self.name
 
-class Facility(TimeStampedModel):
-    """Represents a facility location on campus."""
-    name = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from='name',unique=True)  # instead of id
+class Location(TimeStampedModel):
+    """
+    Represents a specific location (unique lat, lon) that a Facility can be
+    found in real life.
 
-    facility_category = models.ForeignKey('Category', related_name="facilities", null=True, blank=True)
-    on_campus = models.BooleanField(default=True)
-    location = models.CharField(max_length=100, null=True, blank=True)
+    """
+    # The building that the facility is located in (on campus)
+    building = models.CharField(max_length=100, null=True, blank=True)
+    # The physical address of the facility
     address = models.CharField(max_length=100, null=True, blank=True)
+    on_campus = models.BooleanField(default=True)
 
+class Facility(TimeStampedModel):
+    """
+    Represents a specific facility location.
+
+    """
+    # The name of the Facility
+    name = models.CharField(max_length=100)
+    # Instead of id
+    slug = AutoSlugField(populate_from='name', unique=True)
+
+    # The category that this facility falls under
+    facility_category = models.ForeignKey('Category', related_name="facilities",
+                                          null=True, blank=True)
+    # The location object that relates to this facility
+    facility_location = models.ForeignKey('Location', related_name="facilities")
+
+    # The User(s) that claim ownership over this facility
     owners = models.ManyToManyField(User)
+
+    # The schedule that is defaulted to if no special schedule is in effect
     main_schedule = models.ForeignKey('Schedule',
-            related_name='facility_main')
+                                      related_name='facility_main')
+
+    # A schedule that has a specific start and end date
     special_schedules = models.ManyToManyField('Schedule',
-            related_name='facility_special', blank=True,
-            help_text='This schedule will come into effect only for its specified duration.')
-     
+                                               related_name='facility_special',
+                                               blank=True,
+                                               help_text='This schedule will come into effect only for its specified duration.')
+
     class Meta:
         verbose_name = "facility"
         verbose_name_plural = "facilities"
