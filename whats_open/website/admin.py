@@ -36,8 +36,8 @@ class ScheduleAdmin(admin.ModelAdmin):
     inlines = [OpenTimeInline, ]
     fieldsets = (
         (None, {
-            'fields': ('name',
-                       ('valid_start', 'valid_end'), )
+            # (name, (start, end))
+            'fields': ('name', ('valid_start', 'valid_end'))
         }),
     )
 

@@ -12,7 +12,7 @@ from .views import CategoryViewSet, FacilityViewSet, ScheduleViewSet
 # Other Imports
 from rest_framework.routers import DefaultRouter
 
-# Instiantiate our DefaultRouter
+# Instantiate our DefaultRouter
 ROUTER = DefaultRouter()
 
 # Register views to the API router
