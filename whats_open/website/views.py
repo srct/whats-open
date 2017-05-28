@@ -1,3 +1,6 @@
+"""
+Rest Framework Class Views
+"""
 # Future Imports
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
@@ -5,12 +8,12 @@ from __future__ import (absolute_import, division, print_function,
 # App Imports
 from .models import Facility, OpenTime, Category, Schedule, Location
 from .serializers import (CategorySerializer, FacilitySerializer,
-                          ScheduleSerializer, OpenTimeSerializer, LocationSerializer)
+                          ScheduleSerializer, OpenTimeSerializer, 
+                          LocationSerializer)
 
 # Other Imports
 from rest_framework import viewsets
 
-# Rest Framework Class Views
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """
     """

@@ -7,7 +7,8 @@ from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
 
 # App Imports
-from .views import CategoryViewSet, FacilityViewSet, ScheduleViewSet, LocationViewSet
+from .views import (CategoryViewSet, FacilityViewSet, ScheduleViewSet,
+                    LocationViewSet)
 
 # Other Imports
 from rest_framework.routers import DefaultRouter
@@ -19,7 +20,7 @@ ROUTER = DefaultRouter()
 ROUTER.register(r'categories', CategoryViewSet)
 ROUTER.register(r'facilities', FacilityViewSet)
 ROUTER.register(r'schedules', ScheduleViewSet)
-ROUTER.register(r'location', LocationViewSet)
+ROUTER.register(r'locations', LocationViewSet)
 
 urlpatterns = [
     # / - Default route

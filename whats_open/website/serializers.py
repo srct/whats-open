@@ -1,3 +1,6 @@
+"""
+Rest Framework Serializers
+"""
 # Future Imports
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
@@ -7,6 +10,13 @@ from .models import Category, Facility, Schedule, OpenTime, Location
 
 # Other Imports
 from rest_framework import serializers
+
+class OpenTimeSerializer(serializers.ModelSerializer):
+    """
+    """
+    class Meta:
+        model = OpenTime
+        fields = '__all__'
 
 class CategorySerializer(serializers.ModelSerializer):
     """
@@ -20,14 +30,6 @@ class LocationSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Location
-        fields = '__all__'
-
-
-class OpenTimeSerializer(serializers.ModelSerializer):
-    """
-    """
-    class Meta:
-        model = OpenTime
         fields = '__all__'
 
 class ScheduleSerializer(serializers.ModelSerializer):
@@ -50,5 +52,5 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Facility
-        fields = ('id', 'facility_category', 'facility_location', 'main_schedule',
-                  'special_schedules', 'modified', 'name')
+        fields = ('id', 'facility_category', 'facility_location',
+                  'main_schedule', 'special_schedules', 'modified', 'name')

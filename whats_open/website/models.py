@@ -19,7 +19,7 @@ class Category(TimeStampedModel):
     class Meta:
         verbose_name = "category"
         verbose_name_plural = "categories"
-        # Sort by name in admin view
+        # Sort by name in admin view.
         ordering = ['name']
 
     def __str__(self):
@@ -27,15 +27,26 @@ class Category(TimeStampedModel):
 
 class Location(TimeStampedModel):
     """
-    Represents a specific location (unique lat, lon) that a Facility can be
-    found in real life.
+    Represents a specific location that a Facility can be found.
     """
-    # The building that the facility is located in (on campus)
-    building = models.CharField(max_length=100, null=True, blank=True)
-    # The physical address of the facility
-    address = models.CharField(max_length=100, null=True, blank=True)
-    # Boolean for whether or not the location is "on campus" or not
+    # The building that the facility is located in (on campus).
+    building = models.CharField(max_length=100)
+    # The physical address of the facility.
+    address = models.CharField(max_length=100)
+    # Boolean for whether or not the location is "on campus" or not.
     on_campus = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "location"
+        verbose_name_plural = "locations"
+
+    def __str__(self):
+        """
+        String representation of a Location object.
+        """
+        return 'Found in %s at %s | On Campus: %s' % (self.building,
+                                                      self.address,
+                                                      self.on_campus)
 
 class Facility(TimeStampedModel):
     """
