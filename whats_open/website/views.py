@@ -3,9 +3,9 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 # App Imports
-from .models import Facility, OpenTime, Category, Schedule
+from .models import Facility, OpenTime, Category, Schedule, Location
 from .serializers import (CategorySerializer, FacilitySerializer,
-                          ScheduleSerializer, OpenTimeSerializer)
+                          ScheduleSerializer, OpenTimeSerializer, LocationSerializer)
 
 # Other Imports
 from rest_framework import viewsets
@@ -16,6 +16,12 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+class LocationViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    """
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
 
 class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -31,9 +37,7 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         if open_now is not None:
             results = []
             for fac in queryset:
-                print(fac)
                 if fac.isOpen():
-                    print(True)
                     results.append(fac)
             return results
         else:
