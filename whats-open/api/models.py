@@ -16,6 +16,8 @@ import datetime
 # Django Imports
 from django.db import models
 from django.contrib.auth.models import User
+
+# Other Imports
 from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
 
