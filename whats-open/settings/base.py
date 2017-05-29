@@ -12,9 +12,6 @@ DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 # Absolute filesystem path to the top-level project folder:
 SITE_ROOT = dirname(DJANGO_ROOT)
 
-# Site name:
-SITE_NAME = basename(DJANGO_ROOT)
-
 # Add our project to our pythonpath, this way we don't need to type our project
 # name in our dotted import paths:
 path.append(DJANGO_ROOT)
@@ -187,14 +184,14 @@ MIDDLEWARE_CLASSES = (
 
 ########## URL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
-ROOT_URLCONF = '%s.urls' % SITE_NAME
+ROOT_URLCONF = 'settings.urls'
 ########## END URL CONFIGURATION
 
 
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = '%s.wsgi.application' % SITE_NAME
+WSGI_APPLICATION = 'settings.wsgi.application'
 ########## END WSGI CONFIGURATION
 
 
@@ -226,7 +223,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     # Apps specific for this project go here.
-    'website',
+    'api',
     'rest_framework',
 )
 

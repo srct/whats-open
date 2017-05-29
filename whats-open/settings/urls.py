@@ -11,7 +11,7 @@ admin.autodiscover()
 
 urlpatterns = [
     # / - The homepage
-    url(r'^', include('website.urls')),
+    url(r'^', include('api.urls')),
 
     # /admin - The admin panels
     url(r'^admin/', include(admin.site.urls)),
