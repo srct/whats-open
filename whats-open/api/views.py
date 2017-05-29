@@ -1,4 +1,6 @@
 """
+api/views.py
+
 Rest Framework Class Views
 """
 # Future Imports
@@ -40,7 +42,7 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         if open_now is not None:
             results = []
             for fac in queryset:
-                if fac.isOpen():
+                if fac.is_open_now():
                     results.append(fac)
             return results
         else:

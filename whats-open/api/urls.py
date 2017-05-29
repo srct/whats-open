@@ -1,3 +1,10 @@
+"""
+api/urls.py
+
+Define the routes that the API will serve content through.
+
+http://www.django-rest-framework.org/api-guide/routers/
+"""
 # Future Imports
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
