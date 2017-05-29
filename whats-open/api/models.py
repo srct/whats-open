@@ -1,3 +1,11 @@
+"""
+api/models.py
+
+Define the objects that will be stored in the database and later served through
+the API.
+
+https://docs.djangoproject.com/en/1.11/topics/db/models/
+"""
 # Future Imports
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
@@ -13,7 +21,15 @@ from autoslug import AutoSlugField
 
 class Category(TimeStampedModel):
     """
+    Represents the "category" that a Facility falls under. A Category is a
+    grouping of Facilities that serve a common/similar purpose.
+
+    ex.
+    - Dining
+    - Gyms
+    - Study areas (Libraries, The Ridge, JC, etc)
     """
+    # The name of the category
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -23,7 +39,10 @@ class Category(TimeStampedModel):
         ordering = ['name']
 
     def __str__(self):
-        return '%s' % self.name
+        """
+        String representation of a Category object.
+        """
+        return self.name
 
 class Location(TimeStampedModel):
     """
@@ -50,17 +69,18 @@ class Location(TimeStampedModel):
 
 class Facility(TimeStampedModel):
     """
-    Represents a specific facility location.
+    Represents a specific facility location. A Facility is some type of
+    establishment that has a schedule of open hours and a location that serves
+    a specific purpose that can be categorized.
     """
     # The name of the Facility
     name = models.CharField(max_length=100)
     # Instead of id
     slug = AutoSlugField(populate_from='name', unique=True)
 
-    # The category that this facility falls under
+    # The category that this facility can be grouped with
     facility_category = models.ForeignKey('Category',
-                                          related_name="facilities",
-                                          null=True, blank=True)
+                                          related_name="categories")
     # The location object that relates to this facility
     facility_location = models.ForeignKey('Location',
                                           related_name="facilities")
@@ -81,72 +101,101 @@ class Facility(TimeStampedModel):
                                                             specified duration.
                                                             """)
 
+    def is_open(self):
+        """
+        Return true if this facility is currently open.
+
+        First checks any valid special schedules and then checks the main,
+        default, schedule.
+        """
+        # Get the current date
+        today = datetime.datetime.today().date()
+        # Check special schedules first, loop through all of them
+        for schedule in self.special_schedules.all():
+            # Special schedules must have valid_start and valid_end set
+            if schedule.valid_start and schedule.valid_end:
+                # If a special schedule in in effect
+                if schedule.valid_start <= today <= schedule.valid_end:
+                    # Check if the facility is open or not based on that 
+                    # special schedule
+                    if schedule.is_open_now():
+                        # Open
+                        return True
+                    else:
+                        # Closed
+                        return False
+        # If no special schedule is in effect then check if the facility is
+        # open using the main_schedule
+        if self.main_schedule.is_open_now():
+            # Open
+            return True
+        else:
+            # Closed
+            return False
+
     class Meta:
         verbose_name = "facility"
         verbose_name_plural = "facilities"
         # Sort by name in admin view
         ordering = ['name']
 
-    def isOpen(self):
-        """
-        Return true if this facility is currently open.
-
-        First checks any valid special schedules and then checks the
-        main default schedule.
-        """
-        today = datetime.datetime.today().date()
-        # Check special schedules first
-        for schedule in self.special_schedules.all():
-            # Special schedules must have valid_start and valid_end set
-            if schedule.valid_start and schedule.valid_end:
-                if schedule.valid_start <= today <= schedule.valid_end:
-                    if schedule.isOpenNow():
-                        return True
-                    else:
-                        return False
-        if self.main_schedule.isOpenNow():
-            return True
-        return False
-
     def __str__(self):
+        """
+        String representation of a Facility object.
+        """
         return self.name
 
 class Schedule(TimeStampedModel):
     """
-    Contains opening and closing times for each day in a week.
-
-    For special (temporary) schedules, start and end dates for
-    when this schedule will be valid can also be set.
+    A period of time between two dates that represents the beginning and end of
+    a "schedule" or rather, a collection of open times for a facility.
     """
+    # The name of the schedule
     name = models.CharField(max_length=100)
+
+    # The start date of the schedule
     # (inclusive)
     valid_start = models.DateField('Start Date', null=True, blank=True,
                                    help_text="""Date that this schedule goes
                                                 into effect""")
+    # The end date of the schedule
+    # (inclusive)
     valid_end = models.DateField('End Date', null=True, blank=True,
                                  help_text="""Last day that this schedule is
                                               in effect""")
 
-    class Meta:
-        ordering = ['name']
-
-    def isOpenNow(self):
+    def is_open_now(self):
         """
         Return true if this schedule is open right now.
         """
-        for time in OpenTime.objects.filter(schedule=self):
-            if time.isOpenNow():
+        # Loop through all the open times that correspond to this schedule
+        for open_time in OpenTime.objects.filter(schedule=self):
+            # If the current time we are looking at is open, then the schedule 
+            # will say that the facility is open
+            if open_time.is_open_now():
+                # Open
                 return True
+        # Closed (all open times are not open)
         return False
 
+    class Meta:
+        # Sort by name in admin view
+        ordering = ['name']
+
     def __str__(self):
+        """
+        String representation of a Schedule object.
+        """
         return self.name
 
 
 class OpenTime(TimeStampedModel):
     """
-    Represents a period time when a Facility is open.
+    Represents a time period when a Facility is open.
+
+    Monday = 0, Sunday = 6.
     """
+    # Define integer constants to represent days of the week
     MONDAY = 0
     TUESDAY = 1
     WEDNESDAY = 2
@@ -155,6 +204,7 @@ class OpenTime(TimeStampedModel):
     SATURDAY = 5
     SUNDAY = 6
 
+    # Tuple that ties a day of the week with an integer representation
     DAY_CHOICES = (
         (MONDAY, 'Monday'),
         (TUESDAY, 'Tuesday'),
@@ -165,41 +215,73 @@ class OpenTime(TimeStampedModel):
         (SUNDAY, 'Sunday'),
     )
 
+    # The schedule that this period of open time is a part of
     schedule = models.ForeignKey('Schedule', related_name='open_times')
-    # 0-6, Monday == 0
+
+    # The day that the open time begins on
     start_day = models.IntegerField(default=0, choices=DAY_CHOICES)
-    start_time = models.TimeField()
+    # The day that the open time ends on
     end_day = models.IntegerField(default=0, choices=DAY_CHOICES)
+
+    # The time of day that the open time begins at
+    start_time = models.TimeField()
+    # The time of day that the open time ends
     end_time = models.TimeField()
 
-    def isOpenNow(self):
+    def is_open_now(self):
         """
-        Return true if the current time is this OpenTime's range
+        Return true if the current time is this OpenTime's range.
         """
+        # Get the current datetime
         today = datetime.datetime.today()
+        # Check that the start occurs before the end
         if self.start_day <= self.end_day:
+            # If today is the start_day
             if self.start_day == today.weekday():
+                # If the start_time has not occurred
                 if self.start_time > today.time():
+                    # Closed
                     return False
+            # If the start_day has not occurred
             elif self.start_day > today.weekday():
+                # Closed
                 return False
+            # If the end_day is today
             if self.end_day == today.weekday():
+                # If the end_time has already occurred
                 if self.end_time < today.time():
+                    # Closed
                     return False
+            # If the end_day has already occurred
             elif self.end_day < today.weekday():
+                # Closed
                 return False
+        # The end_day > start_day
         else:
+            # If today is the start_day
             if self.start_day == today.weekday():
+                # If the start_time has not occurred
                 if self.start_time > today.time():
+                    # Closed
                     return False
+            # If the end_day is today
             if self.end_day == today.weekday():
+                # If the end_time has already occurred
                 if self.end_time < today.time():
+                    # Closed
                     return False
+            # If the current date takes place after the end_date but before
+            # start_day
             if self.end_day < today.weekday() < self.start_day:
+                # Closed
                 return False
+        # All checks passed, it's Open
         return True
 
     def __str__(self):
+        """
+        String representation of a OpenTime object.
+        """
         weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
                     'Saturday', 'Sunday']
         return '%s %s to %s %s' % (weekdays[self.start_day],
