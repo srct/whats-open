@@ -17,10 +17,14 @@ from .models import Facility, Schedule, OpenTime, Category, Location
 
 class FacilityAdmin(admin.ModelAdmin):
     """
+    Custom Admin panel for the Facility model.
+
+    Allows admins to create new facilities through the admin interface.
     """
-    model = Facility
-    list_display = ['name', ]
+    # Allow filtering by the following fields
     list_filter = ['facility_category', 'facility_location']
+    # Modify the rendered layout of the "create a new facility" page
+    # We are basically reordering things to look nicer to the user here
     fieldsets = (
         (None, {
             'fields': ('name', 'facility_category', 'facility_location',
@@ -41,9 +45,17 @@ class OpenTimeInline(admin.TabularInline):
 
 class ScheduleAdmin(admin.ModelAdmin):
     """
+    Custom Admin panel for the Schedule model.
+
+    Allows admins to create new schedules through the admin interface.
+    Additionally, we append the OpenTimeInline table to allow for open times to
+    be defined for the schedule we are creating.
     """
+    # Allow filtering by the following fields
     list_display = ['name', 'modified']
+    # Append the OpenTimeInline table to the end of our admin panel
     inlines = [OpenTimeInline, ]
+    # Modify the rendered layout of the "create a new facility" page
     fieldsets = (
         (None, {
             'fields': ('name',
@@ -53,7 +65,7 @@ class ScheduleAdmin(admin.ModelAdmin):
         }),
     )
 
-# Register the administration panels
+# Register the custom administration panels
 # https://docs.djangoproject.com/en/1.11/ref/contrib/admin/#modeladmin-objects
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Schedule, ScheduleAdmin)
