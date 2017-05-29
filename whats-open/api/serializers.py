@@ -63,6 +63,12 @@ class ScheduleSerializer(serializers.ModelSerializer):
 class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     """
     Serializer for the Facility model.
+
+    From the docs:
+        The HyperlinkedModelSerializer class is similar to the ModelSerializer
+        class except that it uses hyperlinks to represent relationships, rather
+        than primary keys.
+        http://www.django-rest-framework.org/api-guide/serializers/#hyperlinkedmodelserializer
     """
     # Append a serialized Category object
     facility_category = CategorySerializer(many=False, read_only=True)
