@@ -13,7 +13,7 @@ from __future__ import (absolute_import, division, print_function,
 from django.contrib import admin
 
 # App Imports
-from .models import Facility, Schedule, OpenTime, Category, Location
+from .models import Facility, Schedule, OpenTime, Category, Location, Alert
 
 class FacilityAdmin(admin.ModelAdmin):
     """
@@ -60,3 +60,4 @@ admin.site.register(Schedule, ScheduleAdmin)
 # Use the default ModelAdmin interface for these
 admin.site.register(Category)
 admin.site.register(Location)
+admin.site.register(Alert)

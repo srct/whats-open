@@ -8,10 +8,17 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 # App Imports
-from .models import Category, Facility, Schedule, OpenTime, Location
+from .models import Category, Facility, Schedule, OpenTime, Location, Alert
 
 # Other Imports
 from rest_framework import serializers
+
+class AlertSerializer(serializers.ModelSerializer):
+    """
+    """
+    class Meta:
+        model = Alert
+        fields = '__all__'
 
 class OpenTimeSerializer(serializers.ModelSerializer):
     """
