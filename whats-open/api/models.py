@@ -297,13 +297,6 @@ class Alert(TimeStampedModel):
     in effect, election reminder, advertising for other SRCT projects.
 
     Alerts last for a period of time until the information is no longer dank.
-
-    alert: {
-        urgency_tag: [info, slight, major, emergency],
-        message: String(),
-        startDate: Date(),
-        endDate: Date()
-    }
     """
     # Define string constants to represent urgency tag levels
     INFO = 'info'
@@ -311,7 +304,7 @@ class Alert(TimeStampedModel):
     MAJOR = 'major'
     EMERGENCY = 'emergency'
 
-    # Tuple that ties a urgency tag with an integer representation
+    # Tuple that ties a urgency tag with a string representation
     URGENCY_CHOICES = (
         (INFO, 'Info'),
         (SLIGHT, 'Slight'),
