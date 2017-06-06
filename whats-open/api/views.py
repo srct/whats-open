@@ -8,13 +8,19 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 # App Imports
-from .models import Facility, OpenTime, Category, Schedule, Location
+from .models import Facility, OpenTime, Category, Schedule, Location, Alert
 from .serializers import (CategorySerializer, FacilitySerializer,
                           ScheduleSerializer, OpenTimeSerializer, 
-                          LocationSerializer)
+                          LocationSerializer, AlertSerializer)
 
 # Other Imports
 from rest_framework import viewsets
+
+class AlertViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    """
+    queryset = Alert.objects.all()
+    serializer_class = AlertSerializer
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """

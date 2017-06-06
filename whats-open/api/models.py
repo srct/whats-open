@@ -329,4 +329,4 @@ class Alert(TimeStampedModel):
         """
         String representation of an Alert object.
         """
-        return "%s | %s" % (self.message, self.urgency_tag)
+        return "%s" % (self.message)
