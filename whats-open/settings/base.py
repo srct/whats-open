@@ -224,6 +224,10 @@ INSTALLED_APPS = (
 
     # Apps specific for this project go here.
     'api',
+
+    # Third party apps
+    'taggit',
+    'taggit_serializer',
     'rest_framework',
 )
 
