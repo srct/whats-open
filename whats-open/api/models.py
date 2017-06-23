@@ -291,3 +291,44 @@ class OpenTime(TimeStampedModel):
                                    # to
                                    weekdays[self.end_day],
                                    self.end_time.strftime("%H:%M:%S"))
+
+class Alert(TimeStampedModel):
+    """
+    Some type of notification that is displayed to clients that conveys a
+    message. Past examples include: random closings, modified schedules being
+    in effect, election reminder, advertising for other SRCT projects.
+
+    Alerts last for a period of time until the information is no longer dank.
+    """
+    # Define string constants to represent urgency tag levels
+    INFO = 'info'  # SRCT announcements
+    MINOR = 'minor'  # Holiday hours are in effect
+    MAJOR = 'major'  # The hungry patriot is closed today
+    EMERGENCY = 'emergency'  # Extreme weather
+
+    # Tuple that ties a urgency tag with a string representation
+    URGENCY_CHOICES = (
+        (INFO, 'Info'),
+        (MINOR, 'Minor'),
+        (MAJOR, 'Major'),
+        (EMERGENCY, 'Emergency'),
+    )
+
+    # The urgency tag for this Alert
+    urgency_tag = models.CharField(max_length=10, default='Info',
+                                   choices=URGENCY_CHOICES)
+
+    # The text that is displayed that describes the Alert
+    message = models.CharField(max_length=140)
+
+    # The date + time that the alert will be start being served
+    start_datetime = models.DateTimeField()
+
+    # The date + time that the alert will stop being served
+    end_datetime = models.DateTimeField()
+
+    def __str__(self):
+        """
+        String representation of an Alert object.
+        """
+        return "%s" % (self.message)
