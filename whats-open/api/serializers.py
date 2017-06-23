@@ -23,7 +23,7 @@ class AlertSerializer(serializers.ModelSerializer):
         model = Alert
         fields = '__all__'
 
-class OpenTimeSerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     """
     """
     class Meta:
