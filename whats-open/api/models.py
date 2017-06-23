@@ -12,7 +12,6 @@ from __future__ import (absolute_import, division, print_function,
 
 # Python stdlib Imports
 import datetime
-import re
 
 # Django Imports
 from django.db import models
