@@ -28,8 +28,8 @@ class FacilityAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('name', 'facility_category', 'facility_location',
-                       'main_schedule', 'special_schedules', 'tags',
-                       'tapingo_url', 'owners'),
+                       'main_schedule', 'special_schedules', 
+                       'facility_product_tags', 'tapingo_url', 'owners'),
         }),
     )
 

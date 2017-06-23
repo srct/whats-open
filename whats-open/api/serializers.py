@@ -86,13 +86,14 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     main_schedule = ScheduleSerializer(many=False, read_only=True)
     # Append a serialized Schedule object to represent special_schedules
     special_schedules = ScheduleSerializer(many=True, read_only=True)
-
-    tags = TagListSerializerField()
+    # Append a serialized TagList object that represents the product tags for a
+    # Facility
+    facility_product_tags = TagListSerializerField()
 
     class Meta:
         # Choose the model to be serialized
         model = Facility
         # List the fields that we are serializing
-        fields = ('id', 'facility_category', 'facility_location', 'tags',
-                  'tapingo_url', 'main_schedule', 'special_schedules',
-                  'modified', 'name')
+        fields = ('id', 'facility_category', 'facility_location',
+                  'facility_product_tags', 'tapingo_url', 'main_schedule',
+                  'special_schedules', 'modified', 'name')
