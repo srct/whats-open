@@ -21,6 +21,7 @@ from django.core.validators import RegexValidator
 # Other Imports
 from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
+from taggit.managers import TaggableManager
 
 class Category(TimeStampedModel):
     """
@@ -108,6 +109,7 @@ class Facility(TimeStampedModel):
     tapingo_url = models.URLField(blank=True, validators=[RegexValidator(regex='^https:\/\/www.tapingo.com\/',
                                                                          message='The link is not a valid tapingo link. Example: https://www.tapingo.com/order/restaurant/starbucks-gmu-johnson/',
                                                                          code='invalid_tapingo_url')])
+    tags = TaggableManager()
 
     def is_open(self):
         """

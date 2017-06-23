@@ -15,6 +15,8 @@ from .models import Category, Facility, Schedule, OpenTime, Location, Alert
 
 # Other Imports
 from rest_framework import serializers
+from taggit_serializer.serializers import (TagListSerializerField,
+                                           TaggitSerializer)
 
 class AlertSerializer(serializers.ModelSerializer):
     """
@@ -85,9 +87,12 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     # Append a serialized Schedule object to represent special_schedules
     special_schedules = ScheduleSerializer(many=True, read_only=True)
 
+    tags = TagListSerializerField()
+
     class Meta:
         # Choose the model to be serialized
         model = Facility
         # List the fields that we are serializing
-        fields = ('id', 'facility_category', 'facility_location', 'tapingo_url',
-                  'main_schedule', 'special_schedules', 'modified', 'name')
+        fields = ('id', 'facility_category', 'facility_location', 'tags',
+                  'tapingo_url', 'main_schedule', 'special_schedules',
+                  'modified', 'name')
