@@ -107,7 +107,7 @@ class Facility(TimeStampedModel):
     # URL, if it exists, to the Tapingo page that is associated with this
     # facility
     tapingo_url = models.URLField(blank=True, validators=[RegexValidator(regex='^https:\/\/www.tapingo.com\/',
-                                                                         message='The link is not a valid tapingo link Example: https://www.tapingo.com/order/restaurant/starbucks-gmu-johnson/',
+                                                                         message='The link is not a valid tapingo link. Example: https://www.tapingo.com/order/restaurant/starbucks-gmu-johnson/',
                                                                          code='invalid_tapingo_url')])
 
     def is_open(self):
