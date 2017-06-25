@@ -126,7 +126,7 @@ FIXTURE_DIRS = (
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.contrib.gis.db.backends.mysql',
         'NAME': os.environ['WOPEN_DB_NAME'],
         'USER': os.environ['WOPEN_DB_USER'],
         'PASSWORD': os.environ['WOPEN_DB_PASSWORD'],
@@ -221,6 +221,7 @@ INSTALLED_APPS = (
     # Admin panel and documentation:
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.gis',
 
     # Apps specific for this project go here.
     'api',
@@ -229,6 +230,7 @@ INSTALLED_APPS = (
     'taggit',
     'taggit_serializer',
     'rest_framework',
+    'rest_framework_gis',
 )
 
 ########## END APP CONFIGURATION

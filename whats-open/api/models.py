@@ -15,6 +15,7 @@ import datetime
 
 # Django Imports
 from django.db import models
+from django.contrib.gis.db.models import PointField
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 
@@ -58,6 +59,8 @@ class Location(TimeStampedModel):
     address = models.CharField(max_length=100)
     # Boolean for whether or not the location is "on campus" or not.
     on_campus = models.BooleanField(default=True)
+    # A GeoJson coordinate pair that represents the physical location
+    coordinate_location = PointField()
 
     class Meta:
         verbose_name = "location"
