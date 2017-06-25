@@ -11,7 +11,7 @@ from __future__ import (absolute_import, division, print_function,
 
 # Django Imports
 from django.contrib import admin
-
+from django.contrib.gis.admin import OSMGeoAdmin
 # App Imports
 from .models import Facility, Schedule, OpenTime, Category, Location, Alert
 
@@ -70,7 +70,8 @@ class ScheduleAdmin(admin.ModelAdmin):
 # https://docs.djangoproject.com/en/1.11/ref/contrib/admin/#modeladmin-objects
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Schedule, ScheduleAdmin)
+# https://docs.djangoproject.com/en/1.11/ref/contrib/gis/admin/#osmgeoadmin
+admin.site.register(Location, OSMGeoAdmin)
 # Use the default ModelAdmin interface for these
 admin.site.register(Category)
-admin.site.register(Location)
 admin.site.register(Alert)
