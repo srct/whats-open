@@ -165,6 +165,15 @@ Next, with:
 
 you install `python`, `pip`, and `virtualenv`.
 
+You will also need the following `gdal` packages for GeoDjango support:
+
+```
+sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
+sudo apt update 
+sudo apt upgrade # if you already have gdal 1.11 installed 
+sudo apt install gdal-bin python-gdal python3-gdal # if you don't have gdal 1.11 already installed 
+``` 
+
 #### Database Setup
 
 What's Open is built on top of a `MySQL` database and thus, we must set it up.
