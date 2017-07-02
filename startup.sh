@@ -3,7 +3,6 @@ until nc -z wopen_db 3306; do
     sleep 1
 done
 
-
 export WOPEN_SECRET_KEY=$(dd if=/dev/urandom count=100 | tr -dc "A-Za-z0-9" | fold -w 60 | head -n1 2>/dev/null)
 
 python whats-open/manage.py flush --no-input
