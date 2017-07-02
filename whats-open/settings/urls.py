@@ -1,3 +1,8 @@
+"""
+settings/urls.py
+
+Top level url patterns.
+"""
 # Future Imports
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
@@ -7,10 +12,12 @@ from django.conf.urls import include, url
 from django.contrib import admin
 import django.contrib.auth.views
 
+# Automatically populate the admin pages
 admin.autodiscover()
 
+# Define all the top level url patterns in a list
 urlpatterns = [
-    # / - The homepage
+    # / - Load in all urls from the `api` app
     url(r'^', include('api.urls')),
 
     # /admin - The admin panels

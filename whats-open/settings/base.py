@@ -1,11 +1,21 @@
-""""Base Django settings for whats_open."""
+""""
+settings/base.py
 
+Base Django settings for whats-open.
+"""
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+# Python std. lib. imports
 import os
 import sys
-from os.path import abspath, basename, dirname, join, normpath
+from os.path import abspath, dirname, join, normpath
 from sys import path
 
-########## PATH CONFIGURATION
+"""
+PATH CONFIGURATION
+"""
 # Absolute filesystem path to the Django project directory:
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
 
@@ -15,9 +25,10 @@ SITE_ROOT = dirname(DJANGO_ROOT)
 # Add our project to our pythonpath, this way we don't need to type our project
 # name in our dotted import paths:
 path.append(DJANGO_ROOT)
-########## END PATH CONFIGURATION
 
-########## MANAGER CONFIGURATION
+"""
+MANAGER CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 # Insert a ('Name', 'Email') inside ADMINS tuple
 ADMINS = (
@@ -26,9 +37,10 @@ ADMINS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
-########## END MANAGER CONFIGURATION
 
-########## GENERAL CONFIGURATION
+"""
+GENERAL CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -56,10 +68,10 @@ USE_L10N = True
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
-########## END GENERAL CONFIGURATION
 
-
-########## MEDIA CONFIGURATION
+"""
+MEDIA CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -70,25 +82,21 @@ MEDIA_ROOT = normpath(join(SITE_ROOT, 'media'))
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
-########## END MEDIA CONFIGURATION
 
-########## STATIC FILE CONFIGURATION
+"""
+STATIC FILE CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/home/media/media.lawrence.com/static/" 
-STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
+# Example: "/home/media/media.lawrence.com/static/"
+STATIC_ROOT = normpath(join(SITE_ROOT, 'static'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
-
-# See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = (
-    normpath(join(SITE_ROOT, 'static')),
-)
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
@@ -97,31 +105,34 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-########## END STATIC FILE CONFIGURATION
 
-
-########## SECRET CONFIGURATION
+"""
+SECRET CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key should only be used for development and testing.
 SECRET_KEY = r"{{ secret_key }}"
-########## END SECRET CONFIGURATION
 
-
-########## SITE CONFIGURATION
+"""
+SITE CONFIGURATION
+"""
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
 ########## END SITE CONFIGURATION
 
 
-########## FIXTURE CONFIGURATION
+"""
+FIXTURE CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
 FIXTURE_DIRS = (
     normpath(join(SITE_ROOT, 'fixtures')),
 )
-########## END FIXTURE CONFIGURATION
 
-########## DATABASE CONFIGURATION
+"""
+DATABASE CONFIGURATION
+"""
 # Use the same DB everywhere.
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
@@ -135,7 +146,9 @@ DATABASES = {
     }
 }
 
-########## TEMPLATE CONFIGURATION
+"""
+TEMPLATE CONFIGURATION
+"""
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -165,10 +178,10 @@ TEMPLATES = [
         }
     }
 ]
-########## END TEMPLATE CONFIGURATION
 
-
-########## MIDDLEWARE CONFIGURATION
+"""
+MIDDLEWARE CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#middleware-classes
 MIDDLEWARE_CLASSES = (
     # Default Django middleware.
@@ -179,36 +192,36 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-########## END MIDDLEWARE CONFIGURATION
 
-
-########## URL CONFIGURATION
+"""
+URL CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
 ROOT_URLCONF = 'settings.urls'
-########## END URL CONFIGURATION
 
-
-########## WSGI CONFIGURATION
+"""
+WSGI CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'settings.wsgi.application'
-########## END WSGI CONFIGURATION
 
-
-########## SERIALIZER CONFIGURATION
+"""
+SERIALIZER CONFIGURATION
+"""
 # http://djx.readthedocs.org/en/latest/topics/http/sessions.html#session-serialization
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
-########## END SERIALIZER CONFIGURATION
 
-
-########## CACHE MIDDLEWARE CONFIGURATION
+"""
+CACHE MIDDLEWARE CONFIGURATION
+"""
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 259200
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
-########## END CACHE MIDDLEWARE CONFIGURATION
 
-
-########## APP CONFIGURATION
+"""
+APP CONFIGURATION
+"""
 INSTALLED_APPS = (
     # Default Django apps:
     'django.contrib.auth',
@@ -233,10 +246,9 @@ INSTALLED_APPS = (
     'rest_framework_gis',
 )
 
-########## END APP CONFIGURATION
-
-
-########## DJANGO REST FRAMEWORK CONFIGURATION
+"""
+DJANGO REST FRAMEWORK CONFIGURATION
+"""
 # http://www.django-rest-framework.org/api-guide/settings
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
@@ -250,10 +262,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-########## END DJANGO REST FRAMEWORK CONFIGURATION
 
-
-########## LOGGING CONFIGURATION
+"""
+LOGGING CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -293,5 +305,3 @@ LOGGING = {
         },
     }
 }
-
-########## END LOGGING CONFIGURATION

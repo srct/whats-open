@@ -1,3 +1,8 @@
+"""
+manage.py
+
+Do not touch at all. This is the main entry point for interacting with Django.
+"""
 #!/usr/bin/env python
 import os
 import sys
