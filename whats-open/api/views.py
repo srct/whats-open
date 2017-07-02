@@ -10,7 +10,7 @@ from __future__ import (absolute_import, division, print_function,
 # App Imports
 from .models import Facility, OpenTime, Category, Schedule, Location, Alert
 from .serializers import (CategorySerializer, FacilitySerializer,
-                          ScheduleSerializer, OpenTimeSerializer, 
+                          ScheduleSerializer, OpenTimeSerializer,
                           LocationSerializer, AlertSerializer)
 
 # Other Imports
@@ -18,50 +18,63 @@ from rest_framework import viewsets
 
 class AlertViewSet(viewsets.ReadOnlyModelViewSet):
     """
+    Return all Alert objects.
     """
-    queryset = Alert.objects.all()
     serializer_class = AlertSerializer
+
+    def get_queryset(self):
+        return Alert.objects.all()
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """
+    Return all Category objects.
     """
-    queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+    def get_queryset(self):
+        return Category.objects.all()
 
 class LocationViewSet(viewsets.ReadOnlyModelViewSet):
     """
+    Return all Location objects.
     """
-    queryset = Location.objects.all()
     serializer_class = LocationSerializer
+
+    def get_queryset(self):
+        return Location.objects.all()
 
 class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     """
     """
-    queryset = Facility.objects.all()
     serializer_class = FacilitySerializer
 
     def get_queryset(self):
         """
         """
-        queryset = Facility.objects.all()
-        open_now = self.request.query_params.get('open', None)
+        open_now = self.request.query_params.get('open_now', None)
         if open_now is not None:
             results = []
-            for fac in queryset:
-                if fac.is_open_now():
-                    results.append(fac)
-            return results
+            for fac in Facility.objects.all():
+                if fac.is_open():
+                    results.append(fac.pk)
+            return Facility.objects.filter(pk__in=results)
         else:
-            return queryset
+            return Facility.objects.all()
 
 class ScheduleViewSet(viewsets.ModelViewSet):
     """
+    Return all Schedule objects.
     """
-    queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
+
+    def get_queryset(self):
+        return Schedule.objects.all()
 
 class OpenTimeViewSet(viewsets.ModelViewSet):
     """
+    Return all OpenTime objects.
     """
-    queryset = OpenTime.objects.all()
     serializer_class = OpenTimeSerializer
+
+    def get_queryset(self):
+        return OpenTime.objects.all()
