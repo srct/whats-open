@@ -148,6 +148,16 @@ class Facility(TimeStampedModel):
             # Closed
             return False
 
+    def clean_special_schedules(self):
+        """
+        Loop through every special_schedule and remove entries that have
+        expired.
+        """
+        for special_schedule in self.special_schedules.all():
+            # If it ends before today
+            if special_schedule.valid_end < datetime.date.today():
+                self.special_schedules.remove(special_schedule)
+
     class Meta:
         verbose_name = "facility"
         verbose_name_plural = "facilities"
