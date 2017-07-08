@@ -1,21 +1,27 @@
-"""Development settings and globals."""
+"""
+settings/local.py
 
-from __future__ import absolute_import
+Development settings and globals.
+"""
+# Future Imports
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
+# Import the base settings and override where necessary
 from .base import *
 
-
-########## DEBUG CONFIGURATION
+"""
+DEBUG CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
 DEBUG = True
-########## END DEBUG CONFIGURATION
 
-########## CACHE CONFIGURATION
+"""
+CACHE CONFIGURATION
+"""
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
-########## END CACHE CONFIGURATION
-
