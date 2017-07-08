@@ -15,8 +15,7 @@ from .models import Category, Facility, Schedule, OpenTime, Location, Alert
 
 # Other Imports
 from rest_framework import serializers
-from taggit_serializer.serializers import (TagListSerializerField,
-                                           TaggitSerializer)
+from taggit_serializer.serializers import TagListSerializerField
 
 class AlertSerializer(serializers.ModelSerializer):
     """
