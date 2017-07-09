@@ -81,7 +81,7 @@ class Facility(TimeStampedModel):
     a specific purpose that can be categorized.
     """
     # The name of the Facility
-    name = models.CharField(max_length=100)
+    facility_name = models.CharField(max_length=100)
     # Instead of id
     slug = AutoSlugField(populate_from='name', unique=True)
 
@@ -162,13 +162,13 @@ class Facility(TimeStampedModel):
         verbose_name = "facility"
         verbose_name_plural = "facilities"
         # Sort by name in admin view
-        ordering = ['name']
+        ordering = ['facility_name']
 
     def __str__(self):
         """
         String representation of a Facility object.
         """
-        return self.name
+        return self.facility_name
 
 class Schedule(TimeStampedModel):
     """
