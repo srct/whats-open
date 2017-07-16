@@ -22,9 +22,51 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class AlertViewSet(viewsets.ReadOnlyModelViewSet):
     """
+    Some type of notification that is displayed to clients that conveys a message.
+
+    Past examples include:
+        - random closings
+        - modified schedules being in effect
+        - election reminder
+        - advertising for other SRCT projects
+
+    Alerts last for a period of time until the information is no longer dank.
+
+    GET /api/alerts/
     Return all Alert objects.
+
+    Built-in query parameters:
+
+    GET /api/alerts/?search=
+    Query parameter that returns objects that match a keyword provided in the search.
+
+    GET /api/alerts/?ordering=
+    Query parameter that orders the returned objects based on the provided field to order by.
+
+    Additionally, you can query against any field you like:
+
+    ie.
+    GET /api/alerts/?urgency_tag=major
+    will return the Alert objects that are tagged as "major" urgency.
     """
+    # All model fields that are available for filtering
+    FILTER_FIELDS = (
+        # Alert fields
+        'urgency_tag',
+        'message',
+        'start_datetime',
+        'end_datetime'
+    )
+
+    # Associate a serializer with the ViewSet
     serializer_class = AlertSerializer
+
+    # Setup filtering
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
+                       filters.OrderingFilter, )
+    search_fields = FILTER_FIELDS
+    ordering_fields = FILTER_FIELDS
+    filter_fields = FILTER_FIELDS
 
     def get_queryset(self):
         """
@@ -35,9 +77,45 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """
+    A Category is a grouping of Facilities that serve a common/similar purpose.
+
+    ex.
+        - Dining
+        - Gyms
+        - Study areas (Libraries, The Ridge, JC, etc)
+
+    GET /api/categories/
     Return all Category objects.
+
+    Built-in query parameters:
+
+    GET /api/categories/?search=
+    Query parameter that returns objects that match a keyword provided in the search.
+
+    GET /api/categories/?ordering=
+    Query parameter that orders the returned objects based on the provided field to order by.
+
+    Additionally, you can query against any field you like:
+
+    ie.
+    GET /api/categories/?name=dining
+    will return the Category object that is named "dining".
     """
+    # All model fields that are available for filtering
+    FILTER_FIELDS = (
+        # Category fields
+        'name',
+    )
+
+    # Associate a serializer with the ViewSet
     serializer_class = CategorySerializer
+
+    # Setup filtering
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
+                       filters.OrderingFilter, )
+    search_fields = FILTER_FIELDS
+    ordering_fields = FILTER_FIELDS
+    filter_fields = FILTER_FIELDS
 
     def get_queryset(self):
         """
@@ -48,9 +126,42 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class LocationViewSet(viewsets.ReadOnlyModelViewSet):
     """
+    Represents a specific location that a Facility can be found.
+
+    GET /api/locations/
     Return all Location objects.
+
+    Built-in query parameters:
+
+    GET /api/locations/?search=
+    Query parameter that returns objects that match a keyword provided in the search.
+
+    GET /api/locations/?ordering=
+    Query parameter that orders the returned objects based on the provided field to order by.
+
+    Additionally, you can query against any field you like:
+
+    ie.
+    GET /api/locations/?building=Johnson+Center
+    will return all Location objects located in the "Johnson Center" building.
     """
+    # All model fields that are available for filtering
+    FILTER_FIELDS = (
+        # Location fields
+        'building',
+        'address',
+        'on_campus'
+    )
+
+    # Associate a serializer with the ViewSet
     serializer_class = LocationSerializer
+
+    # Setup filtering
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
+                       filters.OrderingFilter, )
+    search_fields = FILTER_FIELDS
+    ordering_fields = FILTER_FIELDS
+    filter_fields = FILTER_FIELDS
 
     def get_queryset(self):
         """
@@ -88,6 +199,7 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     GET /api/facilities/?closed_now
     Query parameter that only returns closed Facility objects.
     """
+    # All model fields that are available for filtering
     FILTER_FIELDS = (
         # Facility fields
         'facility_name',
@@ -110,6 +222,8 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
 
     # Associate a serializer with the ViewSet
     serializer_class = FacilitySerializer
+
+    # Setup filtering
     filter_backends = (filters.SearchFilter, DjangoFilterBackend,
                        filters.OrderingFilter, )
     search_fields = FILTER_FIELDS
@@ -151,10 +265,40 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     """
     A period of time between two dates that represents the beginning and end of a "schedule" or rather, a collection of open times for a facility.
 
-    GET /api/schedules
+    GET /api/schedules/
     Return all Schedule objects that have not expired. (ie. end_date is before today)
+
+    Built-in query parameters:
+
+    GET /api/schedules/?search=
+    Query parameter that returns objects that match a keyword provided in the search.
+
+    GET /api/schedules/?ordering=
+    Query parameter that orders the returned objects based on the provided field to order by.
+
+    Additionally, you can query against any field you like:
+
+    ie.
+    GET /api/schedules/?name=southside_main
+    will return the Schedule object that has "southside_main" as its name.
     """
+    # All model fields that are available for filtering
+    FILTER_FIELDS = (
+        # Schedule fields
+        'name',
+        'valid_start',
+        'valid_end',
+    )
+
+    # Associate a serializer with the ViewSet
     serializer_class = ScheduleSerializer
+
+    # Setup filtering
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
+                       filters.OrderingFilter, )
+    search_fields = FILTER_FIELDS
+    ordering_fields = FILTER_FIELDS
+    filter_fields = FILTER_FIELDS
 
     def get_queryset(self):
         """
@@ -174,8 +318,14 @@ class ScheduleViewSet(viewsets.ModelViewSet):
 
 class OpenTimeViewSet(viewsets.ModelViewSet):
     """
-    Return all OpenTime objects.
+    Represents a time period when a Facility is open.
+
+    Monday = 0, Sunday = 6.
+
+    These objects are returned within a larger Schedule object and thus are not
+    an endpoint that is query-able, so just return everything when requested.
     """
+    # Associate a serializer with the ViewSet
     serializer_class = OpenTimeSerializer
 
     def get_queryset(self):
