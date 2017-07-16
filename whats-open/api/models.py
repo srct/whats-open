@@ -83,7 +83,7 @@ class Facility(TimeStampedModel):
     # The name of the Facility
     facility_name = models.CharField(max_length=100)
     # Instead of id
-    slug = AutoSlugField(populate_from='name', unique=True)
+    slug = AutoSlugField(populate_from='facility_name', unique=True)
 
     # The category that this facility can be grouped with
     facility_category = models.ForeignKey('Category',

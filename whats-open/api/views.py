@@ -88,12 +88,33 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     GET /api/facilities/?closed_now
     Query parameter that only returns closed Facility objects.
     """
+    FILTER_FIELDS = (
+        # Facility fields
+        'facility_name',
+        'tapingo_url',
+        'facility_product_tags__name',
+        # Category fields
+        'facility_category__name',
+        # Location fields
+        'facility_location__building',
+        'facility_location__address',
+        'facility_location__on_campus',
+        # Schedule fields
+        'main_schedule__name',
+        'main_schedule__valid_start',
+        'main_schedule__valid_end',
+        'special_schedules__name',
+        'special_schedules__valid_start',
+        'special_schedules__valid_end',
+    )
+
     # Associate a serializer with the ViewSet
     serializer_class = FacilitySerializer
-    filter_backends = (DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter, )
-    search_fields = ('facility_name',)
-    ordering_fields = ('facility_name',)
-    filter_fields = ('facility_name', 'facility_product_tags__name')
+    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
+                       filters.OrderingFilter, )
+    search_fields = FILTER_FIELDS
+    ordering_fields = FILTER_FIELDS
+    filter_fields = FILTER_FIELDS
 
     def get_queryset(self):
         """
