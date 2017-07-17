@@ -24,11 +24,11 @@ from rest_framework.routers import DefaultRouter
 ROUTER = DefaultRouter()
 
 # Register views to the API router
+ROUTER.register(r'alerts', AlertViewSet, 'alert')
 ROUTER.register(r'categories', CategoryViewSet, 'category')
 ROUTER.register(r'facilities', FacilityViewSet, 'facility')
-ROUTER.register(r'schedules', ScheduleViewSet, 'schedule')
 ROUTER.register(r'locations', LocationViewSet, 'location')
-ROUTER.register(r'alerts', AlertViewSet, 'alert')
+ROUTER.register(r'schedules', ScheduleViewSet, 'schedule')
 
 urlpatterns = [
     # / - Default route

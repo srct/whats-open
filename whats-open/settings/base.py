@@ -244,6 +244,8 @@ INSTALLED_APPS = (
     'taggit_serializer',
     'rest_framework',
     'rest_framework_gis',
+    'django_filters',
+    'crispy_forms',
 )
 
 """
