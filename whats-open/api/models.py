@@ -18,6 +18,7 @@ from django.db import models
 from django.contrib.gis.db.models import PointField
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
+from django.utils import timezone
 
 # Other Imports
 from model_utils.models import TimeStampedModel
@@ -358,6 +359,14 @@ class Alert(TimeStampedModel):
 
     # The date + time that the alert will stop being served
     end_datetime = models.DateTimeField()
+
+    def is_active(self):
+        """
+        Check if the current Alert object is active (Alert-able).
+        """
+        # Get the current datetime
+        now = timezone.now()
+        return self.start_datetime < now < self.end_datetime
 
     def __str__(self):
         """

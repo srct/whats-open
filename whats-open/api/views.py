@@ -42,7 +42,7 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
 
     [GET /api/alerts/](/api/alerts/?format=json)
 
-    Return all Alert objects.
+    Return all active Alert objects.
 
     ## Built-in query parameters
 
@@ -83,6 +83,14 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
     [GET /api/alerts/?urgency_tag=major](/api/alerts/?urgency_tag=major&format=json)
 
     Return all Alert objects that are tagged as "major" urgency.
+
+    ## Custom query parameters
+
+    ### **all_alerts**
+
+    [GET /api/alerts/?all_alerts](/api/alerts/?all_alerts&format=json)
+
+    Return all Alert objects.
     """
     # All model fields that are available for filtering
     FILTER_FIELDS = (
@@ -108,7 +116,21 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
         Handle incoming GET requests and enumerate objects that get returned by
         the API.
         """
-        return Alert.objects.all()
+        # Define ?all_alerts
+        all_alerts = self.request.query_params.get('all_alerts', None)
+
+        # Return all Alert objects if requested
+        if all_alerts is not None:
+            return Alert.objects.all()
+        # Default behavior
+        else:
+            alertable = []
+            # Enumerate all Alert objects that are active
+            for alert in Alert.objects.all():
+                if alert.is_active():
+                    alertable.append(alert.pk)
+            # Return active Alerts
+            return Alert.objects.filter(pk__in=alertable)
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """
