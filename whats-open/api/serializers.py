@@ -51,7 +51,8 @@ class OpenTimeSerializer(serializers.ModelSerializer):
         # Choose the model to be serialized
         model = OpenTime
         # Serialize all of the fields
-        fields = '__all__'
+        fields = ('schedule', 'modified',
+                  'start_day', 'end_day', 'start_time', 'end_time')
 
 class ScheduleSerializer(serializers.ModelSerializer):
     """
@@ -93,6 +94,7 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
         # Choose the model to be serialized
         model = Facility
         # List the fields that we are serializing
-        fields = ('id', 'facility_category', 'facility_location',
-                  'facility_product_tags', 'tapingo_url', 'main_schedule',
-                  'special_schedules', 'modified', 'facility_name')
+        fields = ('slug', 'facility_name', 'facility_location', 'facility_category',
+                  'facility_product_tags', 'tapingo_url',
+                  'main_schedule', 'special_schedules',
+                  'modified', )

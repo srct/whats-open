@@ -390,6 +390,7 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
+    lookup_field = 'slug'
 
     def get_queryset(self):
         """
