@@ -112,11 +112,8 @@ class Facility(TimeStampedModel):
     special_schedules = models.ManyToManyField('Schedule',
                                                related_name='facility_special',
                                                blank=True,
-                                               help_text="""This schedule will
-                                                            come into effect
-                                                            only for its
-                                                            specified duration.
-                                                            """)
+                                               help_text="This schedule will come into effect only for its specified duration.")
+
     # URL, if it exists, to the Tapingo page that is associated with this
     # facility
     tapingo_url = models.URLField(blank=True, validators=[RegexValidator(regex='^https:\/\/www.tapingo.com\/',
@@ -191,27 +188,33 @@ class Schedule(TimeStampedModel):
     # The start date of the schedule
     # (inclusive)
     valid_start = models.DateField('Start Date', null=True, blank=True,
-                                   help_text="""Date that this schedule goes
-                                                into effect""")
+                                   help_text="Date that this schedule goes into effect")
     # The end date of the schedule
     # (inclusive)
     valid_end = models.DateField('End Date', null=True, blank=True,
-                                 help_text="""Last day that this schedule is
-                                              in effect""")
+                                 help_text="Last day that this schedule is in effect")
+    # Boolean for if this schedule is 24 hours
+    twenty_four_hours = models.BooleanField('24 hour schedule?', blank=True,
+                                            default=False, help_text="Toggle to True if the Facility is open 24 hours. You do not need to specify any Open Times, it will always be displayed as open.")
 
     def is_open_now(self):
         """
         Return true if this schedule is open right now.
         """
-        # Loop through all the open times that correspond to this schedule
-        for open_time in OpenTime.objects.filter(schedule=self):
-            # If the current time we are looking at is open, then the schedule 
-            # will say that the facility is open
-            if open_time.is_open_now():
-                # Open
-                return True
-        # Closed (all open times are not open)
-        return False
+        # If the schedule is a 24 hour one, then it's open.
+        if self.twenty_four_hours:
+            return True
+        # Otherwise let's check if it's open.
+        else:
+            # Loop through all the open times that correspond to this schedule
+            for open_time in OpenTime.objects.filter(schedule=self):
+                # If the current time we are looking at is open, then the schedule 
+                # will say that the facility is open
+                if open_time.is_open_now():
+                    # Open
+                    return True
+            # Closed (all open times are not open)
+            return False
 
     class Meta:
         # Sort by name in admin view
