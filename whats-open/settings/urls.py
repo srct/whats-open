@@ -20,11 +20,11 @@ urlpatterns = [
     # / - Load in all urls from the `api` app
     url(r'^', include('api.urls')),
 
-    # /admin - The admin panels
-    url(r'^admin/', include(admin.site.urls)),
-
     # /admin/docs - Documentation for admin
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+
+    # /admin - The admin panels
+    url(r'^admin/', include(admin.site.urls)),
 
     # /api-auth - API Auth page
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
