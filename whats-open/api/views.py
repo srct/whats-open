@@ -374,9 +374,11 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         'main_schedule__name',
         'main_schedule__valid_start',
         'main_schedule__valid_end',
+        'main_schedule__twenty_four_hours',
         'special_schedules__name',
         'special_schedules__valid_start',
         'special_schedules__valid_end',
+        'special_schedules__twenty_four_hours'
     )
 
     # Associate a serializer with the ViewSet
@@ -481,6 +483,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
         'name',
         'valid_start',
         'valid_end',
+        'twenty_four_hours'
     )
 
     # Associate a serializer with the ViewSet

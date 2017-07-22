@@ -62,7 +62,8 @@ class ScheduleAdmin(admin.ModelAdmin):
             'fields': ('name',
                        # Pair valid_start and valid_end together on the same
                        # line
-                       ('valid_start', 'valid_end'))
+                       ('valid_start', 'valid_end'),
+                       'twenty_four_hours')
         }),
     )
 
