@@ -248,7 +248,8 @@ class LocationViewSet(viewsets.ReadOnlyModelViewSet):
         # Location fields
         'building',
         'address',
-        'on_campus'
+        'on_campus',
+        'campus_region'
     )
 
     # Associate a serializer with the ViewSet
@@ -346,6 +347,7 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         'facility_location__building',
         'facility_location__address',
         'facility_location__on_campus',
+        'facility_location__campus_region',
         # Schedule fields
         'main_schedule__name',
         'main_schedule__valid_start',

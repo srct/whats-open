@@ -53,10 +53,19 @@ class Location(TimeStampedModel):
     """
     Represents a specific location that a Facility can be found.
     """
+    CAMPUS_LOCATIONS = (
+        # (set in model, human readable version)
+        ("prince william", "Prince William County Science and Technology"),
+        ("korea", "Mason Korea"),
+        ("fairfax", "Fairfax"),
+        ("arlington", "Arlington")
+    )
     # The building that the facility is located in (on campus).
     building = models.CharField(max_length=100)
     # The physical address of the facility.
     address = models.CharField(max_length=100)
+    campus_region = models.CharField(choices=CAMPUS_LOCATIONS,
+                                     max_length=100, default="fairfax")
     # Boolean for whether or not the location is "on campus" or not.
     on_campus = models.BooleanField(default=True)
     # A GeoJson coordinate pair that represents the physical location
