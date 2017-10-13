@@ -121,19 +121,17 @@ Additionally, you will need to install docker-compose: https://docs.docker.com/c
 
 Next inside the `whats-open/` root directory run:
 
-    docker-compose build
+    docker build . -t 'whats-open-api'
 
-If that doesn't work, try:
+This builds the docker image that we will deploy to the swarm in a stack.
 
-    sudo docker-compose build
+Initialize your swarm:
 
-Then, follow up with:
+    docker swarm init
 
-    docker-compose up
+And finally,
 
-If that doesn't work, try:
-
-    sudo docker-compose build
+    docker stack deploy whats-open-api_stack -c docker-compose.yml
 
 You should see that the server is running by going to http://localhost:8000
 in your browser. Any changes you make to your local file system will be mirrored in the server.
