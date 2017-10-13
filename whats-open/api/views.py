@@ -124,11 +124,12 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
             return Alert.objects.all()
         # Default behavior
         else:
-            alertable = []
             # Enumerate all Alert objects that are active
-            for alert in Alert.objects.all():
-                if alert.is_active():
-                    alertable.append(alert.pk)
+            alertable = [
+                alert.pk
+                for alert in Alert.objects.all()
+                if alert.is_active()
+            ]
             # Return active Alerts
             return Alert.objects.filter(pk__in=alertable)
 
@@ -403,11 +404,11 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         closed_now = self.request.query_params.get('closed_now', None)
         if open_now is not None or closed_now is not None:
             # List of all open facilities
-            open_facilities = []
-            for facility in Facility.objects.all():
-                if facility.is_open():
-                    # Append the primary key
-                    open_facilities.append(facility.pk)
+            open_facilities = [
+                facility.pk
+                for facility in Facility.objects.all()
+                if facility.is_open()
+            ]
             # Return all Facility objects with the primary keys located in the
             # open_facilities list
             if open_now:
@@ -503,13 +504,13 @@ class ScheduleViewSet(viewsets.ModelViewSet):
         the API.
         """
         # List of all schedules that are outdated
-        filter_old_schedules = []
-        for schedule in Schedule.objects.all():
-            if schedule.valid_end and schedule.valid_start:
-                # If the schedule ended before today
-                if schedule.valid_end < datetime.date.today():
-                    # Add it to the list of objects we are excluding
-                    filter_old_schedules.append(schedule.pk)
+        filter_old_schedules = [
+            schedule.pk
+            for schedule in Schedule.objects.all()
+            # If the schedule ended before today
+            if schedule.valid_end and schedule.valid_start
+            if schedule.valid_end < datetime.date.today()
+        ]
         # Return all Schedule objects that have not expired
         return Schedule.objects.exclude(pk__in=filter_old_schedules)
 
