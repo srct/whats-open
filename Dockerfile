@@ -1,5 +1,5 @@
 ############################################################
-# Dockerfile to build What's Open Django App
+# What's Open API v2
 ############################################################
 
 # Set the base image to Ubuntu
@@ -10,8 +10,10 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update
 RUN apt-get install netcat libgdal1h libproj-dev proj-data proj-bin -y
 
-RUN mkdir /whats_open
-WORKDIR /whats_open
-ADD /requirements/ /whats_open/
-RUN pip install -r base.txt
-ADD . /whats_open/
+# Copy over all project files into /whats_open
+RUN mkdir /whats-open/
+WORKDIR /whats-open/
+ADD . /whats-open/
+
+# Pip install all required dependecies
+RUN pip install -r /whats-open/requirements/base.txt
