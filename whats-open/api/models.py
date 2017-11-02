@@ -162,7 +162,7 @@ class Facility(TimeStampedModel):
         """
         for special_schedule in self.special_schedules.all():
             # If it ends before today
-            if special_schedule.valid_end < datetime.date.today():
+            if special_schedule.valid_end < datetime.date.today() and special_schedule.schedule_for_removal:
                 self.special_schedules.remove(special_schedule)
 
     class Meta:
@@ -197,6 +197,10 @@ class Schedule(TimeStampedModel):
     # Boolean for if this schedule is 24 hours
     twenty_four_hours = models.BooleanField('24 hour schedule?', blank=True,
                                             default=False, help_text="Toggle to True if the Facility is open 24 hours. You do not need to specify any Open Times, it will always be displayed as open.")
+
+    # Boolean for if this schedule should never be removed.
+    schedule_for_removal = models.BooleanField('Schedule for removal', blank=False,
+                                               default=True, help_text="Toggle to False if the schedule should never be removed in the backend. By default, all schedules are automatically deleted after they have expired.")
 
     def is_open_now(self):
         """
