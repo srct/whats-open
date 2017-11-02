@@ -376,10 +376,12 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         'main_schedule__valid_start',
         'main_schedule__valid_end',
         'main_schedule__twenty_four_hours',
+        'main_schedule__schedule_for_removal',
         'special_schedules__name',
         'special_schedules__valid_start',
         'special_schedules__valid_end',
-        'special_schedules__twenty_four_hours'
+        'special_schedules__twenty_four_hours',
+        'special_schedules__schedule_for_removal'
     )
 
     # Associate a serializer with the ViewSet
@@ -485,7 +487,8 @@ class ScheduleViewSet(viewsets.ModelViewSet):
         'name',
         'valid_start',
         'valid_end',
-        'twenty_four_hours'
+        'twenty_four_hours',
+        'schedule_for_removal'
     )
 
     # Associate a serializer with the ViewSet
@@ -509,7 +512,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
             for schedule in Schedule.objects.all()
             # If the schedule ended before today
             if schedule.valid_end and schedule.valid_start
-            if schedule.valid_end < datetime.today()
+            if schedule.valid_end < datetime.datetime.now(schedule.valid_end.tzinfo)
         ]
         # Return all Schedule objects that have not expired
         return Schedule.objects.exclude(pk__in=filter_old_schedules)
