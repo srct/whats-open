@@ -187,12 +187,13 @@ class Schedule(TimeStampedModel):
 
     # The start date of the schedule
     # (inclusive)
-    valid_start = models.DateField('Start Date', null=True, blank=True,
-                                   help_text="Date that this schedule goes into effect")
+    valid_start = models.DateTimeField('Start Date', null=True, blank=True,
+                                       help_text="Date & time that this schedule goes into effect")
     # The end date of the schedule
     # (inclusive)
-    valid_end = models.DateField('End Date', null=True, blank=True,
-                                 help_text="Last day that this schedule is in effect")
+    valid_end = models.DateTimeField('End Date', null=True, blank=True,
+                                     help_text="Last date & time that this schedule is in effect")
+
     # Boolean for if this schedule is 24 hours
     twenty_four_hours = models.BooleanField('24 hour schedule?', blank=True,
                                             default=False, help_text="Toggle to True if the Facility is open 24 hours. You do not need to specify any Open Times, it will always be displayed as open.")

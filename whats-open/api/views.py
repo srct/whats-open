@@ -509,7 +509,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
             for schedule in Schedule.objects.all()
             # If the schedule ended before today
             if schedule.valid_end and schedule.valid_start
-            if schedule.valid_end < datetime.date.today()
+            if schedule.valid_end < datetime.today()
         ]
         # Return all Schedule objects that have not expired
         return Schedule.objects.exclude(pk__in=filter_old_schedules)
