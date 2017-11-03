@@ -66,7 +66,7 @@ class ScheduleSerializer(serializers.ModelSerializer):
         model = Schedule
         # List the fields that we are serializing
         fields = ('id', 'open_times', 'modified', 'name', 'valid_start',
-                  'valid_end', 'twenty_four_hours', 'schedule_for_removal')
+                  'valid_end', 'twenty_four_hours', 'schedule_for_removal', 'promote_to_main')
 
 class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     """

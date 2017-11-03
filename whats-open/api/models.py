@@ -169,15 +169,18 @@ class Facility(TimeStampedModel):
             # Closed
             return False
 
-    def clean_special_schedules(self):
+    def clean_schedules(self):
         """
         Loop through every special_schedule and remove entries that have
-        expired.
+        expired as well as promote special schedules to main if necessary.
         """
         for special_schedule in self.special_schedules.all():
             # If it ends before today
             if special_schedule.valid_end < datetime.date.today() and special_schedule.schedule_for_removal:
                 self.special_schedules.remove(special_schedule)
+            elif special_schedule.promote_to_main:
+                if special_schedule.valid_start < datetime.date.today() and special_schedule.valid_end >= datetime.date.today():
+                    self.main_schedule = special_schedule
 
     class Meta:
         verbose_name = "facility"
@@ -213,8 +216,14 @@ class Schedule(TimeStampedModel):
                                             default=False, help_text="Toggle to True if the Facility is open 24 hours. You do not need to specify any Open Times, it will always be displayed as open.")
 
     # Boolean for if this schedule should never be removed.
-    schedule_for_removal = models.BooleanField('Schedule for removal', blank=False,
-                                               default=True, help_text="Toggle to False if the schedule should never be removed in the backend. By default, all schedules are automatically deleted after they have expired.")
+    schedule_for_removal = models.BooleanField('Schedule for removal?',
+                                               blank=False, default=True,
+                                               help_text="Toggle to False if the schedule should never be removed in the backend. By default, all schedules are automatically deleted after they have expired.")
+    # Boolean for if this schedule should become the main schedule at the point
+    # it goes live 
+    promote_to_main = models.BooleanField('Schedule for promotion?',
+                                          blank=False, default=False,
+                                          help_text="Upon the start of the schedule, it will be promoted to become the main schedule of the Facility it is attached to rather than a special schedule.")
 
     def is_open_now(self):
         """
