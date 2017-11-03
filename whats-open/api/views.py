@@ -408,6 +408,11 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         open_now = self.request.query_params.get('open_now', None)
         # Define ?closed_now
         closed_now = self.request.query_params.get('closed_now', None)
+
+        # Clean the schedules in every Facility
+        for facility in Facility.objects.all():
+            facility.clean_schedules()
+
         if open_now is not None or closed_now is not None:
             # List of all open facilities
             open_facilities = [
@@ -425,9 +430,6 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
                 return Facility.objects.exclude(pk__in=open_facilities)
         # Default behavior
         else:
-            for facility in Facility.objects.all():
-                # Remove all special_schedules that have expired
-                facility.clean_special_schedules()
             return Facility.objects.all()
 
 class ScheduleViewSet(viewsets.ModelViewSet):
@@ -492,7 +494,8 @@ class ScheduleViewSet(viewsets.ModelViewSet):
         'valid_start',
         'valid_end',
         'twenty_four_hours',
-        'schedule_for_removal'
+        'schedule_for_removal',
+        'promote_to_main'
     )
 
     # Associate a serializer with the ViewSet
