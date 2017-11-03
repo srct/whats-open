@@ -106,6 +106,11 @@ class Facility(TimeStampedModel):
     facility_location = models.ForeignKey('Location',
                                           related_name="facilities")
 
+    # A note that can be left on a Facility to provide some additional
+    # information.
+    note = models.TextField('Facility Note', blank=True,
+                            help_text="Additional information that is sent with this Facility.")
+
     # A link to the logo image for this Facility
     logo = models.URLField('Logo URL', blank=True,
                            default="https://imgur.com/q2Phkn9.png",

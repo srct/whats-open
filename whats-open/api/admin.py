@@ -29,7 +29,7 @@ class FacilityAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('facility_name', 'logo', 'facility_category', 'facility_location',
                        'main_schedule', 'special_schedules', 
-                       'facility_product_tags', 'tapingo_url', 'owners'),
+                       'facility_product_tags', 'tapingo_url', 'note', 'owners'),
         }),
     )
 
