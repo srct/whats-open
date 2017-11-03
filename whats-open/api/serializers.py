@@ -94,7 +94,7 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
         # Choose the model to be serialized
         model = Facility
         # List the fields that we are serializing
-        fields = ('slug', 'facility_name', 'facility_location', 'facility_category',
+        fields = ('slug', 'facility_name', 'logo', 'facility_location', 'facility_category',
                   'facility_product_tags', 'tapingo_url',
                   'main_schedule', 'special_schedules',
                   'modified', )
