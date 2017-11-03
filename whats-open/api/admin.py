@@ -73,6 +73,9 @@ class ScheduleAdmin(admin.ModelAdmin):
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Schedule, ScheduleAdmin)
 # https://docs.djangoproject.com/en/1.11/ref/contrib/gis/admin/#osmgeoadmin
+OSMGeoAdmin.default_lon = -8605757.16502
+OSMGeoAdmin.default_lat = 4697457.00333
+OSMGeoAdmin.default_zoom = 15
 admin.site.register(Location, OSMGeoAdmin)
 # Use the default ModelAdmin interface for these
 admin.site.register(Category)
