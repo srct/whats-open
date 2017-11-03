@@ -63,6 +63,10 @@ class Location(TimeStampedModel):
     )
     # The building that the facility is located in (on campus).
     building = models.CharField(max_length=100)
+    friendly_building = models.CharField('Building Abbreviation',
+                                         help_text="Example: Exploratory Hall becomes EXPL",
+                                         blank=True,
+                                         max_length=10)
     # The physical address of the facility.
     address = models.CharField(max_length=100)
     campus_region = models.CharField(choices=CAMPUS_LOCATIONS,
