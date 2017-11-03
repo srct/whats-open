@@ -179,7 +179,8 @@ class Facility(TimeStampedModel):
             if special_schedule.valid_end < datetime.date.today() and special_schedule.schedule_for_removal:
                 self.special_schedules.remove(special_schedule)
             elif special_schedule.promote_to_main:
-                self.main_schedule = special_schedule
+                if special_schedule.valid_start < datetime.date.today() and special_schedule.valid_end >= datetime.date.today():
+                    self.main_schedule = special_schedule
 
     class Meta:
         verbose_name = "facility"
