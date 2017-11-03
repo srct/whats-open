@@ -365,6 +365,7 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         'facility_name',
         'logo',
         'tapingo_url',
+        'note',
         'facility_product_tags__name',
         # Category fields
         'facility_category__name',
