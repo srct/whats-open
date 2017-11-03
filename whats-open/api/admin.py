@@ -43,6 +43,16 @@ class OpenTimeInline(admin.TabularInline):
     model = OpenTime
     # 7 days of the week, so only have 7 rows
     max_num = 7
+    extra = 7
+    # We are basically reordering things to look nicer to the user here
+    fieldsets = (
+        (None, {
+            'fields': (
+                ('start_day', 'start_time'),
+                ('end_day', 'end_time')
+            ),
+        }),
+    )
 
 class ScheduleAdmin(admin.ModelAdmin):
     """
@@ -64,7 +74,8 @@ class ScheduleAdmin(admin.ModelAdmin):
                        # line
                        ('valid_start', 'valid_end'),
                        'twenty_four_hours',
-                       'schedule_for_removal')
+                       'schedule_for_removal',
+                       'promote_to_main')
         }),
     )
 
