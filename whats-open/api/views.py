@@ -270,6 +270,7 @@ class LocationViewSet(viewsets.ReadOnlyModelViewSet):
     FILTER_FIELDS = (
         # Location fields
         'building',
+        'friendly_building',
         'address',
         'on_campus',
         'campus_region'
@@ -368,6 +369,7 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         'facility_category__name',
         # Location fields
         'facility_location__building',
+        'facility_location_friendly_building',
         'facility_location__address',
         'facility_location__on_campus',
         'facility_location__campus_region',
