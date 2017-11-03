@@ -106,6 +106,11 @@ class Facility(TimeStampedModel):
     facility_location = models.ForeignKey('Location',
                                           related_name="facilities")
 
+    # A link to the logo image for this Facility
+    logo = models.URLField('Logo URL', blank=True,
+                           default="https://imgur.com/q2Phkn9.png",
+                           help_text="The absolute URL to the logo image for this Facility.")
+
     # The User(s) that claim ownership over this facility
     owners = models.ManyToManyField(User)
 

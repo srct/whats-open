@@ -363,13 +363,14 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     FILTER_FIELDS = (
         # Facility fields
         'facility_name',
+        'logo',
         'tapingo_url',
         'facility_product_tags__name',
         # Category fields
         'facility_category__name',
         # Location fields
         'facility_location__building',
-        'facility_location_friendly_building',
+        'facility_location__friendly_building',
         'facility_location__address',
         'facility_location__on_campus',
         'facility_location__campus_region',

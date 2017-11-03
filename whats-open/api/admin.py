@@ -27,7 +27,7 @@ class FacilityAdmin(admin.ModelAdmin):
     # We are basically reordering things to look nicer to the user here
     fieldsets = (
         (None, {
-            'fields': ('facility_name', 'facility_category', 'facility_location',
+            'fields': ('facility_name', 'logo', 'facility_category', 'facility_location',
                        'main_schedule', 'special_schedules', 
                        'facility_product_tags', 'tapingo_url', 'owners'),
         }),
