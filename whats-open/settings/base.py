@@ -241,7 +241,6 @@ INSTALLED_APPS = (
 
     # Third party apps
     'taggit',
-    'phonenumber_field',
     'taggit_serializer',
     'rest_framework',
     'rest_framework_gis',
