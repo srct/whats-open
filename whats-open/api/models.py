@@ -135,7 +135,7 @@ class Facility(TimeStampedModel):
                                                                          code='invalid_tapingo_url')])
 
     phone_number = models.CharField(blank=True,max_length=18, validators=[RegexValidator(regex='^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$',
-                                                                         message='Invalid phone number ',
+                                                                         message='Invalid phone number',
                                                                          code='invalid_phone_number')])
                                                                   
     # A comma seperate list of words that neatly an aptly describe the product
