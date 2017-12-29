@@ -26,6 +26,7 @@ from django.utils import timezone
 from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
 from taggit.managers import TaggableManager
+from taggit.models import GenericTaggedItemBase, TagBase
 
 class Category(TimeStampedModel):
     """
@@ -90,6 +91,15 @@ class Location(TimeStampedModel):
                                                       self.address,
                                                       self.on_campus)
 
+# Look I didn't want to do this but APPARENTLY you cannot have two
+# TaggableManager()s on a model and thus you have to make a WHOLE other model
+# to have this work.
+# https://neutron-drive.appspot.com/blog/multiple-tags
+class StupidFacilityLabelHack(TagBase):
+    pass
+class StupidLabelHack(GenericTaggedItemBase):
+    tag = models.ForeignKey(StupidFacilityLabelHack)
+
 class Facility(TimeStampedModel):
     """
     Represents a specific facility location. A Facility is some type of
@@ -142,9 +152,24 @@ class Facility(TimeStampedModel):
                                                                            message='Invalid phone number',
                                                                            code='invalid_phone_number')])
 
-    # A comma seperate list of words that neatly an aptly describe the product
+    # A comma seperate list of words that neatly and aptly describe the product
     # that this facility produces. (ex. for Taco Bell: mexican, taco, cheap)
-    facility_product_tags = TaggableManager()
+    # These words are not shown to the use but are rather used in search.
+    facility_product_tags = TaggableManager(related_name="product_tags", help_text="A comma seperate list of words that neatly and aptly describe the product that this facility produces. These words are not shown to the use but are rather used in search.")
+
+    # Labels to describe the Facility that are displayed to the user and can be
+    # informative. "Takes Mason Money"
+    facility_labels = TaggableManager("labels", related_name="labels", through=StupidLabelHack, help_text="Labels to describe the Facility that are displayed to the user and can be informative.")
+
+    # Tag a Facility to be shown on the ShopMason or Sodoxo (or both)
+    # What's Open sites.
+    FACILITY_CLASSES = (
+        ("shopmason", "shopMason Facility"),
+        ("sodoxo", "Sodoxo Facility")
+    )
+    facility_classifier = models.CharField(choices=FACILITY_CLASSES,
+                                           help_text="Tag this facility to be shown on the ShopMason or Sodoxo What's Open sites.",
+                                           max_length=100, blank=True)
 
     def is_open(self):
         """
