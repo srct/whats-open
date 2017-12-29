@@ -1,12 +1,10 @@
-""""
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
 settings/base.py
 
 Base Django settings for whats-open.
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # Python std. lib. imports
 import os
 import sys
@@ -183,7 +181,7 @@ TEMPLATES = [
 MIDDLEWARE CONFIGURATION
 """
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#middleware-classes
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     # Default Django middleware.
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -191,7 +189,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
 """
 URL CONFIGURATION
