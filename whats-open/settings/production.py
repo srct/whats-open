@@ -1,12 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 settings/production.py
 
 Production settings and globals.
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # Python std. lib imports
 from os import environ
 
@@ -23,6 +21,7 @@ def get_env_setting(setting):
     try:
         return environ[setting]
     except KeyError as ex:
+        print(str(ex))
         error_msg = "Set the %s env variable" % setting
         raise ImproperlyConfigured(error_msg)
 

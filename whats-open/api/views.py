@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 api/views.py
 
@@ -6,10 +8,6 @@ Rest Framework Class Views
 Each ViewSet determines what data is returned when an API endpoint is hit. In
 addition, we define filtering and documentation for each of these endpoints. 
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # Python std. lib. imports
 import datetime
 

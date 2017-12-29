@@ -8,10 +8,6 @@ the API.
 
 https://docs.djangoproject.com/en/1.11/topics/db/models/
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # Python stdlib Imports
 import datetime
 
@@ -98,7 +94,7 @@ class Location(TimeStampedModel):
 class StupidFacilityLabelHack(TagBase):
     pass
 class StupidLabelHack(GenericTaggedItemBase):
-    tag = models.ForeignKey(StupidFacilityLabelHack)
+    tag = models.ForeignKey(StupidFacilityLabelHack, on_delete=models.CASCADE)
 
 class Facility(TimeStampedModel):
     """
@@ -113,10 +109,12 @@ class Facility(TimeStampedModel):
 
     # The category that this facility can be grouped with
     facility_category = models.ForeignKey('Category',
-                                          related_name="categories")
+                                          related_name="categories",
+                                          on_delete=models.CASCADE)
     # The location object that relates to this facility
     facility_location = models.ForeignKey('Location',
-                                          related_name="facilities")
+                                          related_name="facilities",
+                                          on_delete=models.CASCADE)
 
     # A note that can be left on a Facility to provide some additional
     # information.
@@ -133,7 +131,8 @@ class Facility(TimeStampedModel):
 
     # The schedule that is defaulted to if no special schedule is in effect
     main_schedule = models.ForeignKey('Schedule',
-                                      related_name='facility_main')
+                                      related_name='facility_main',
+                                      on_delete=models.CASCADE)
     # A schedule that has a specific start and end date
     special_schedules = models.ManyToManyField('Schedule',
                                                related_name='facility_special',
@@ -316,7 +315,8 @@ class OpenTime(TimeStampedModel):
     )
 
     # The schedule that this period of open time is a part of
-    schedule = models.ForeignKey('Schedule', related_name='open_times')
+    schedule = models.ForeignKey('Schedule', related_name='open_times',
+                                 on_delete=models.CASCADE)
 
     # The day that the open time begins on
     start_day = models.IntegerField(default=0, choices=DAY_CHOICES)

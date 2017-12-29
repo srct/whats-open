@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 api/admin.py
 
@@ -5,10 +7,6 @@ Django admin interface configuration.
 
 https://docs.djangoproject.com/en/1.11/ref/contrib/admin/
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # Django Imports
 from django.contrib import admin
 from django.contrib.gis.admin import OSMGeoAdmin

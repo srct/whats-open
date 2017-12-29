@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 api/serializers.py
 
@@ -6,10 +8,6 @@ can then be easily rendered into JSON, XML or other content types.
 
 http://www.django-rest-framework.org/api-guide/serializers
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # App Imports
 from .models import Category, Facility, Schedule, OpenTime, Location, Alert
 
