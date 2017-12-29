@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 api/models.py
 
@@ -134,10 +136,12 @@ class Facility(TimeStampedModel):
                                                                          message='The link is not a valid tapingo link. Example: https://www.tapingo.com/order/restaurant/starbucks-gmu-johnson/',
                                                                          code='invalid_tapingo_url')])
 
-    phone_number = models.CharField(blank=True,max_length=18, validators=[RegexValidator(regex='^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$',
-                                                                         message='Invalid phone number',
-                                                                         code='invalid_phone_number')])
-                                                                  
+    # Phone number for a location if provided. Accept both ###-###-#### or
+    # without dashes
+    phone_number = models.CharField(blank=True, max_length=18, validators=[RegexValidator(regex='^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$',
+                                                                           message='Invalid phone number',
+                                                                           code='invalid_phone_number')])
+
     # A comma seperate list of words that neatly an aptly describe the product
     # that this facility produces. (ex. for Taco Bell: mexican, taco, cheap)
     facility_product_tags = TaggableManager()
