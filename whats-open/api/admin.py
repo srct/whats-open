@@ -15,6 +15,7 @@ from django.contrib.gis.admin import OSMGeoAdmin
 # App Imports
 from .models import Facility, Schedule, OpenTime, Category, Location, Alert
 
+@admin.register(Facility)
 class FacilityAdmin(admin.ModelAdmin):
     """
     Custom Admin panel for the Facility model.
@@ -27,9 +28,11 @@ class FacilityAdmin(admin.ModelAdmin):
     # We are basically reordering things to look nicer to the user here
     fieldsets = (
         (None, {
-            'fields': ('facility_name', 'logo', 'facility_category', 'facility_location',
-                       'main_schedule', 'special_schedules', 
-                       'facility_product_tags', 'tapingo_url','phone_number', 'note', 'owners'),
+            'fields': ('facility_name', 'logo', 'facility_category',
+                       'facility_location', 'main_schedule', 'special_schedules',
+                       ('facility_product_tags', 'facility_labels',
+                        'facility_classifier'),
+                       'tapingo_url', 'phone_number', 'note', 'owners'),
         }),
     )
 
@@ -54,6 +57,7 @@ class OpenTimeInline(admin.TabularInline):
         }),
     )
 
+@admin.register(Schedule)
 class ScheduleAdmin(admin.ModelAdmin):
     """
     Custom Admin panel for the Schedule model.
@@ -79,10 +83,6 @@ class ScheduleAdmin(admin.ModelAdmin):
         }),
     )
 
-# Register the custom administration panels
-# https://docs.djangoproject.com/en/1.11/ref/contrib/admin/#modeladmin-objects
-admin.site.register(Facility, FacilityAdmin)
-admin.site.register(Schedule, ScheduleAdmin)
 # https://docs.djangoproject.com/en/1.11/ref/contrib/gis/admin/#osmgeoadmin
 OSMGeoAdmin.default_lon = -8605757.16502
 OSMGeoAdmin.default_lat = 4697457.00333

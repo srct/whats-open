@@ -78,23 +78,20 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
         than primary keys.
         http://www.django-rest-framework.org/api-guide/serializers/#hyperlinkedmodelserializer
     """
-    # Append a serialized Category object
+    # Append serialized objects
     facility_category = CategorySerializer(many=False, read_only=True)
-    # Append a serialized Location object
     facility_location = LocationSerializer(many=False, read_only=True)
-    # Append a serialized Schedule object to represent main_schedule
     main_schedule = ScheduleSerializer(many=False, read_only=True)
-    # Append a serialized Schedule object to represent special_schedules
     special_schedules = ScheduleSerializer(many=True, read_only=True)
-    # Append a serialized TagList object that represents the product tags for a
-    # Facility
     facility_product_tags = TagListSerializerField()
+    facility_labels = TagListSerializerField()
+    facility_classifier = TagListSerializerField()
 
     class Meta:
         # Choose the model to be serialized
         model = Facility
         # List the fields that we are serializing
-        fields = ('slug', 'facility_name', 'logo', 'facility_location', 'facility_category',
-                  'facility_product_tags', 'tapingo_url', 'note',
-                  'main_schedule', 'special_schedules',
-                  'modified', )
+        fields = ('slug', 'facility_name', 'logo', 'facility_location',
+                  'facility_category', 'facility_product_tags',
+                  'facility_labels', 'facility_classifier', 'tapingo_url',
+                  'note', 'main_schedule', 'special_schedules', 'modified', )
