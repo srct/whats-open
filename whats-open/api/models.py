@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 api/models.py
 
@@ -6,10 +8,6 @@ the API.
 
 https://docs.djangoproject.com/en/1.11/topics/db/models/
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # Python stdlib Imports
 import datetime
 
@@ -24,6 +22,7 @@ from django.utils import timezone
 from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
 from taggit.managers import TaggableManager
+from taggit.models import GenericTaggedItemBase, TagBase
 
 class Category(TimeStampedModel):
     """
@@ -63,6 +62,10 @@ class Location(TimeStampedModel):
     )
     # The building that the facility is located in (on campus).
     building = models.CharField(max_length=100)
+    friendly_building = models.CharField('Building Abbreviation',
+                                         help_text="Example: Exploratory Hall becomes EXPL",
+                                         blank=True,
+                                         max_length=10)
     # The physical address of the facility.
     address = models.CharField(max_length=100)
     campus_region = models.CharField(choices=CAMPUS_LOCATIONS,
@@ -84,6 +87,15 @@ class Location(TimeStampedModel):
                                                       self.address,
                                                       self.on_campus)
 
+# Look I didn't want to do this but APPARENTLY you cannot have two
+# TaggableManager()s on a model and thus you have to make a WHOLE other model
+# to have this work.
+# https://neutron-drive.appspot.com/blog/multiple-tags
+class StupidFacilityLabelHack(TagBase):
+    pass
+class StupidLabelHack(GenericTaggedItemBase):
+    tag = models.ForeignKey(StupidFacilityLabelHack, on_delete=models.CASCADE)
+
 class Facility(TimeStampedModel):
     """
     Represents a specific facility location. A Facility is some type of
@@ -97,17 +109,30 @@ class Facility(TimeStampedModel):
 
     # The category that this facility can be grouped with
     facility_category = models.ForeignKey('Category',
-                                          related_name="categories")
+                                          related_name="categories",
+                                          on_delete=models.CASCADE)
     # The location object that relates to this facility
     facility_location = models.ForeignKey('Location',
-                                          related_name="facilities")
+                                          related_name="facilities",
+                                          on_delete=models.CASCADE)
+
+    # A note that can be left on a Facility to provide some additional
+    # information.
+    note = models.TextField('Facility Note', blank=True,
+                            help_text="Additional information that is sent with this Facility.")
+
+    # A link to the logo image for this Facility
+    logo = models.URLField('Logo URL', blank=True,
+                           default="https://imgur.com/q2Phkn9.png",
+                           help_text="The absolute URL to the logo image for this Facility.")
 
     # The User(s) that claim ownership over this facility
     owners = models.ManyToManyField(User)
 
     # The schedule that is defaulted to if no special schedule is in effect
     main_schedule = models.ForeignKey('Schedule',
-                                      related_name='facility_main')
+                                      related_name='facility_main',
+                                      on_delete=models.CASCADE)
     # A schedule that has a specific start and end date
     special_schedules = models.ManyToManyField('Schedule',
                                                related_name='facility_special',
@@ -119,9 +144,31 @@ class Facility(TimeStampedModel):
     tapingo_url = models.URLField(blank=True, validators=[RegexValidator(regex='^https:\/\/www.tapingo.com\/',
                                                                          message='The link is not a valid tapingo link. Example: https://www.tapingo.com/order/restaurant/starbucks-gmu-johnson/',
                                                                          code='invalid_tapingo_url')])
-    # A comma seperate list of words that neatly an aptly describe the product
+
+    # Phone number for a location if provided. Accept both ###-###-#### or
+    # without dashes
+    phone_number = models.CharField(blank=True, max_length=18, validators=[RegexValidator(regex='^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$',
+                                                                           message='Invalid phone number',
+                                                                           code='invalid_phone_number')])
+
+    # A comma seperate list of words that neatly and aptly describe the product
     # that this facility produces. (ex. for Taco Bell: mexican, taco, cheap)
-    facility_product_tags = TaggableManager()
+    # These words are not shown to the use but are rather used in search.
+    facility_product_tags = TaggableManager(related_name="product_tags", help_text="A comma seperate list of words that neatly and aptly describe the product that this facility produces. These words are not shown to the use but are rather used in search.")
+
+    # Labels to describe the Facility that are displayed to the user and can be
+    # informative. "Takes Mason Money"
+    facility_labels = TaggableManager("labels", related_name="labels", through=StupidLabelHack, help_text="Labels to describe the Facility that are displayed to the user and can be informative.")
+
+    # Tag a Facility to be shown on the ShopMason or Sodoxo (or both)
+    # What's Open sites.
+    FACILITY_CLASSES = (
+        ("shopmason", "shopMason Facility"),
+        ("sodoxo", "Sodoxo Facility")
+    )
+    facility_classifier = models.CharField(choices=FACILITY_CLASSES,
+                                           help_text="Tag this facility to be shown on the ShopMason or Sodoxo What's Open sites.",
+                                           max_length=100, blank=True)
 
     def is_open(self):
         """
@@ -155,15 +202,18 @@ class Facility(TimeStampedModel):
             # Closed
             return False
 
-    def clean_special_schedules(self):
+    def clean_schedules(self):
         """
         Loop through every special_schedule and remove entries that have
-        expired.
+        expired as well as promote special schedules to main if necessary.
         """
         for special_schedule in self.special_schedules.all():
             # If it ends before today
-            if special_schedule.valid_end < datetime.date.today():
+            if special_schedule.valid_end < datetime.date.today() and special_schedule.schedule_for_removal:
                 self.special_schedules.remove(special_schedule)
+            elif special_schedule.promote_to_main:
+                if special_schedule.valid_start < datetime.date.today() and special_schedule.valid_end >= datetime.date.today():
+                    self.main_schedule = special_schedule
 
     class Meta:
         verbose_name = "facility"
@@ -187,15 +237,26 @@ class Schedule(TimeStampedModel):
 
     # The start date of the schedule
     # (inclusive)
-    valid_start = models.DateField('Start Date', null=True, blank=True,
-                                   help_text="Date that this schedule goes into effect")
+    valid_start = models.DateTimeField('Start Date', null=True, blank=True,
+                                       help_text="Date & time that this schedule goes into effect")
     # The end date of the schedule
     # (inclusive)
-    valid_end = models.DateField('End Date', null=True, blank=True,
-                                 help_text="Last day that this schedule is in effect")
+    valid_end = models.DateTimeField('End Date', null=True, blank=True,
+                                     help_text="Last date & time that this schedule is in effect")
+
     # Boolean for if this schedule is 24 hours
     twenty_four_hours = models.BooleanField('24 hour schedule?', blank=True,
                                             default=False, help_text="Toggle to True if the Facility is open 24 hours. You do not need to specify any Open Times, it will always be displayed as open.")
+
+    # Boolean for if this schedule should never be removed.
+    schedule_for_removal = models.BooleanField('Schedule for removal?',
+                                               blank=False, default=True,
+                                               help_text="Toggle to False if the schedule should never be removed in the backend. By default, all schedules are automatically deleted after they have expired.")
+    # Boolean for if this schedule should become the main schedule at the point
+    # it goes live 
+    promote_to_main = models.BooleanField('Schedule for promotion?',
+                                          blank=False, default=False,
+                                          help_text="Upon the start of the schedule, it will be promoted to become the main schedule of the Facility it is attached to rather than a special schedule.")
 
     def is_open_now(self):
         """
@@ -254,7 +315,8 @@ class OpenTime(TimeStampedModel):
     )
 
     # The schedule that this period of open time is a part of
-    schedule = models.ForeignKey('Schedule', related_name='open_times')
+    schedule = models.ForeignKey('Schedule', related_name='open_times',
+                                 on_delete=models.CASCADE)
 
     # The day that the open time begins on
     start_day = models.IntegerField(default=0, choices=DAY_CHOICES)

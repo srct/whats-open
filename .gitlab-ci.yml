@@ -26,12 +26,6 @@ before_script:
   - python manage.py migrate
   - echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('root', 'root@srct.gmu.edu', 'root') " | python manage.py shell
 
-whats-open-py2.7:
-  image: library/python:2.7
-  type: test
-  script:
-    - python manage.py test
-
 whats-open-py3.5:
   image: library/python:3.5
   type: test

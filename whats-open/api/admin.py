@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 api/admin.py
 
@@ -5,16 +7,13 @@ Django admin interface configuration.
 
 https://docs.djangoproject.com/en/1.11/ref/contrib/admin/
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # Django Imports
 from django.contrib import admin
 from django.contrib.gis.admin import OSMGeoAdmin
 # App Imports
 from .models import Facility, Schedule, OpenTime, Category, Location, Alert
 
+@admin.register(Facility)
 class FacilityAdmin(admin.ModelAdmin):
     """
     Custom Admin panel for the Facility model.
@@ -27,9 +26,11 @@ class FacilityAdmin(admin.ModelAdmin):
     # We are basically reordering things to look nicer to the user here
     fieldsets = (
         (None, {
-            'fields': ('facility_name', 'facility_category', 'facility_location',
-                       'main_schedule', 'special_schedules', 
-                       'facility_product_tags', 'tapingo_url', 'owners'),
+            'fields': ('facility_name', 'logo', 'facility_category',
+                       'facility_location', 'main_schedule', 'special_schedules',
+                       ('facility_product_tags', 'facility_labels',
+                        'facility_classifier'),
+                       'tapingo_url', 'phone_number', 'note', 'owners'),
         }),
     )
 
@@ -43,7 +44,18 @@ class OpenTimeInline(admin.TabularInline):
     model = OpenTime
     # 7 days of the week, so only have 7 rows
     max_num = 7
+    extra = 7
+    # We are basically reordering things to look nicer to the user here
+    fieldsets = (
+        (None, {
+            'fields': (
+                ('start_day', 'start_time'),
+                ('end_day', 'end_time')
+            ),
+        }),
+    )
 
+@admin.register(Schedule)
 class ScheduleAdmin(admin.ModelAdmin):
     """
     Custom Admin panel for the Schedule model.
@@ -63,15 +75,16 @@ class ScheduleAdmin(admin.ModelAdmin):
                        # Pair valid_start and valid_end together on the same
                        # line
                        ('valid_start', 'valid_end'),
-                       'twenty_four_hours')
+                       'twenty_four_hours',
+                       'schedule_for_removal',
+                       'promote_to_main')
         }),
     )
 
-# Register the custom administration panels
-# https://docs.djangoproject.com/en/1.11/ref/contrib/admin/#modeladmin-objects
-admin.site.register(Facility, FacilityAdmin)
-admin.site.register(Schedule, ScheduleAdmin)
 # https://docs.djangoproject.com/en/1.11/ref/contrib/gis/admin/#osmgeoadmin
+OSMGeoAdmin.default_lon = -8605757.16502
+OSMGeoAdmin.default_lat = 4697457.00333
+OSMGeoAdmin.default_zoom = 15
 admin.site.register(Location, OSMGeoAdmin)
 # Use the default ModelAdmin interface for these
 admin.site.register(Category)

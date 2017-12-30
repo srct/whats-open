@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 api/views.py
 
@@ -6,10 +8,6 @@ Rest Framework Class Views
 Each ViewSet determines what data is returned when an API endpoint is hit. In
 addition, we define filtering and documentation for each of these endpoints. 
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # Python std. lib. imports
 import datetime
 
@@ -124,11 +122,12 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
             return Alert.objects.all()
         # Default behavior
         else:
-            alertable = []
             # Enumerate all Alert objects that are active
-            for alert in Alert.objects.all():
-                if alert.is_active():
-                    alertable.append(alert.pk)
+            alertable = [
+                alert.pk
+                for alert in Alert.objects.all()
+                if alert.is_active()
+            ]
             # Return active Alerts
             return Alert.objects.filter(pk__in=alertable)
 
@@ -269,6 +268,7 @@ class LocationViewSet(viewsets.ReadOnlyModelViewSet):
     FILTER_FIELDS = (
         # Location fields
         'building',
+        'friendly_building',
         'address',
         'on_campus',
         'campus_region'
@@ -361,12 +361,17 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     FILTER_FIELDS = (
         # Facility fields
         'facility_name',
+        'facility_classifier',
+        'logo',
         'tapingo_url',
+        'note',
         'facility_product_tags__name',
+        'facility_labels__name',
         # Category fields
         'facility_category__name',
         # Location fields
         'facility_location__building',
+        'facility_location__friendly_building',
         'facility_location__address',
         'facility_location__on_campus',
         'facility_location__campus_region',
@@ -375,10 +380,12 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         'main_schedule__valid_start',
         'main_schedule__valid_end',
         'main_schedule__twenty_four_hours',
+        'main_schedule__schedule_for_removal',
         'special_schedules__name',
         'special_schedules__valid_start',
         'special_schedules__valid_end',
-        'special_schedules__twenty_four_hours'
+        'special_schedules__twenty_four_hours',
+        'special_schedules__schedule_for_removal'
     )
 
     # Associate a serializer with the ViewSet
@@ -401,13 +408,18 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         open_now = self.request.query_params.get('open_now', None)
         # Define ?closed_now
         closed_now = self.request.query_params.get('closed_now', None)
+
+        # Clean the schedules in every Facility
+        for facility in Facility.objects.all():
+            facility.clean_schedules()
+
         if open_now is not None or closed_now is not None:
             # List of all open facilities
-            open_facilities = []
-            for facility in Facility.objects.all():
-                if facility.is_open():
-                    # Append the primary key
-                    open_facilities.append(facility.pk)
+            open_facilities = [
+                facility.pk
+                for facility in Facility.objects.all()
+                if facility.is_open()
+            ]
             # Return all Facility objects with the primary keys located in the
             # open_facilities list
             if open_now:
@@ -418,9 +430,6 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
                 return Facility.objects.exclude(pk__in=open_facilities)
         # Default behavior
         else:
-            for facility in Facility.objects.all():
-                # Remove all special_schedules that have expired
-                facility.clean_special_schedules()
             return Facility.objects.all()
 
 class ScheduleViewSet(viewsets.ModelViewSet):
@@ -484,7 +493,9 @@ class ScheduleViewSet(viewsets.ModelViewSet):
         'name',
         'valid_start',
         'valid_end',
-        'twenty_four_hours'
+        'twenty_four_hours',
+        'schedule_for_removal',
+        'promote_to_main'
     )
 
     # Associate a serializer with the ViewSet
@@ -503,13 +514,13 @@ class ScheduleViewSet(viewsets.ModelViewSet):
         the API.
         """
         # List of all schedules that are outdated
-        filter_old_schedules = []
-        for schedule in Schedule.objects.all():
-            if schedule.valid_end and schedule.valid_start:
-                # If the schedule ended before today
-                if schedule.valid_end < datetime.date.today():
-                    # Add it to the list of objects we are excluding
-                    filter_old_schedules.append(schedule.pk)
+        filter_old_schedules = [
+            schedule.pk
+            for schedule in Schedule.objects.all()
+            # If the schedule ended before today
+            if schedule.valid_end and schedule.valid_start
+            if schedule.valid_end < datetime.datetime.now(schedule.valid_end.tzinfo)
+        ]
         # Return all Schedule objects that have not expired
         return Schedule.objects.exclude(pk__in=filter_old_schedules)
 

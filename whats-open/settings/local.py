@@ -1,12 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 settings/local.py
 
 Development settings and globals.
 """
-# Future Imports
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-
 # Import the base settings and override where necessary
 from .base import *
 

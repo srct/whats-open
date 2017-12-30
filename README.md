@@ -1,6 +1,6 @@
 # What's Open
 
-[![build status](https://git.gmu.edu/srct/whats-open/badges/master/build.svg)](https://git.gmu.edu/srct/whats-open/commits/master) [![coverage report](https://git.gmu.edu/srct/whats-open/badges/master/coverage.svg)](https://git.gmu.edu/srct/whats-open/commits/master) [![python version](https://img.shields.io/badge/python-2.7-blue.svg)]() [![Django version](https://img.shields.io/badge/Django-1.10-brightgreen.svg)]()
+[![build status](https://git.gmu.edu/srct/whats-open/badges/master/build.svg)](https://git.gmu.edu/srct/whats-open/commits/master) [![coverage report](https://git.gmu.edu/srct/whats-open/badges/master/coverage.svg)](https://git.gmu.edu/srct/whats-open/commits/master) [![python version](https://img.shields.io/badge/python-3.5+-blue.svg)]() [![Django version](https://img.shields.io/badge/Django-2.0-brightgreen.svg)]()
 
 The What's Open project is an initiative at George Mason University by Mason
 Student Run Computing and Technology (SRCT) to display which dining locations
@@ -121,19 +121,17 @@ Additionally, you will need to install docker-compose: https://docs.docker.com/c
 
 Next inside the `whats-open/` root directory run:
 
-    docker-compose build
+    docker build . -t 'whats-open-api'
 
-If that doesn't work, try:
+This builds the docker image that we will deploy to the swarm in a stack.
 
-    sudo docker-compose build
+Initialize your swarm:
 
-Then, follow up with:
+    docker swarm init
 
-    docker-compose up
+And finally,
 
-If that doesn't work, try:
-
-    sudo docker-compose build
+    docker stack deploy whats-open-api_stack -c docker-compose.yml
 
 You should see that the server is running by going to http://localhost:8000
 in your browser. Any changes you make to your local file system will be mirrored in the server.
@@ -306,11 +304,6 @@ If you're new to Django and don't know where to start, I highly recommend
 giving the [tutorial](https://docs.djangoproject.com/en/dev/intro/tutorial01/)
 a try. However, it leaves out a lot of important things, so remember, Google is
 your friend.
-For the JavaScript, I will be using jQuery whenever possible because I prefer
-it to straight up JavaScript. jQuery has [great
-documentation](http://docs.jquery.com/) and I've found [Mozilla's documentation
-on JavaScript](https://developer.mozilla.org/en-US/docs/JavaScript) to be
-useful as well. But if your Google-fu is sharp, that should suffice.
 
 ## CONTRIBUTING.md
 
