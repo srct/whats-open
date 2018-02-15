@@ -94,7 +94,7 @@ class Location(TimeStampedModel):
 class StupidFacilityLabelHack(TagBase):
     pass
 class StupidLabelHack(GenericTaggedItemBase):
-    tag = models.ForeignKey(StupidFacilityLabelHack, on_delete=models.CASCADE)
+    tag = models.ForeignKey(StupidFacilityLabelHack, on_delete=models.CASCADE, related_name="%(app_label)s_%(class)s_items")
 
 class Facility(TimeStampedModel):
     """
@@ -185,7 +185,7 @@ class Facility(TimeStampedModel):
             if schedule.valid_start and schedule.valid_end:
                 # If a special schedule in in effect
                 if schedule.valid_start <= today <= schedule.valid_end:
-                    # Check if the facility is open or not based on that 
+                    # Check if the facility is open or not based on that
                     # special schedule
                     if schedule.is_open_now():
                         # Open
@@ -209,10 +209,10 @@ class Facility(TimeStampedModel):
         """
         for special_schedule in self.special_schedules.all():
             # If it ends before today
-            if special_schedule.valid_end < datetime.date.today() and special_schedule.schedule_for_removal:
+            if special_schedule.valid_end < timezone.now()  and special_schedule.schedule_for_removal:
                 self.special_schedules.remove(special_schedule)
             elif special_schedule.promote_to_main:
-                if special_schedule.valid_start < datetime.date.today() and special_schedule.valid_end >= datetime.date.today():
+                if special_schedule.valid_start < timezone.now() and special_schedule.valid_end >= timezone.now():
                     self.main_schedule = special_schedule
 
     class Meta:
@@ -253,7 +253,7 @@ class Schedule(TimeStampedModel):
                                                blank=False, default=True,
                                                help_text="Toggle to False if the schedule should never be removed in the backend. By default, all schedules are automatically deleted after they have expired.")
     # Boolean for if this schedule should become the main schedule at the point
-    # it goes live 
+    # it goes live
     promote_to_main = models.BooleanField('Schedule for promotion?',
                                           blank=False, default=False,
                                           help_text="Upon the start of the schedule, it will be promoted to become the main schedule of the Facility it is attached to rather than a special schedule.")
@@ -269,7 +269,7 @@ class Schedule(TimeStampedModel):
         else:
             # Loop through all the open times that correspond to this schedule
             for open_time in OpenTime.objects.filter(schedule=self):
-                # If the current time we are looking at is open, then the schedule 
+                # If the current time we are looking at is open, then the schedule
                 # will say that the facility is open
                 if open_time.is_open_now():
                     # Open
