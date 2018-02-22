@@ -20,9 +20,11 @@ class FacilityAdmin(admin.ModelAdmin):
 
     Allows admins to create new facilities through the admin interface.
     """
-    def drop_special_schedules(modeladmin, request, queryset):
+    def drop_special_schedules(self, request, queryset):
+        num = queryset.count()
         for facility in queryset:
             facility.special_schedules.clear()
+        self.message_user(request, "Successfully removed special schedules from %d facilities." % num)
 
     actions = [drop_special_schedules, ]
 
