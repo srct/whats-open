@@ -20,6 +20,12 @@ class FacilityAdmin(admin.ModelAdmin):
 
     Allows admins to create new facilities through the admin interface.
     """
+    def drop_special_schedules(modeladmin, request, queryset):
+        for facility in queryset:
+            facility.special_schedules.clear()
+
+    actions = [drop_special_schedules, ]
+
     # Allow filtering by the following fields
     list_filter = ['facility_category', 'facility_location']
     # Modify the rendered layout of the "create a new facility" page
