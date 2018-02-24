@@ -34,6 +34,14 @@ class FacilityAdmin(admin.ModelAdmin):
         }),
     )
 
+    # despite the name of this method, ("change" seems to imply it would affect modify)
+    # it is called only when initially creating a model
+    def get_changeform_initial_data(self, request):
+        initial_data = super(FacilityAdmin, self).get_changeform_initial_data(request)
+        initial_data['owners'] = [request.user, ]
+        return initial_data
+
+
 class OpenTimeInline(admin.TabularInline):
     """
     A table of time periods that represent an "open time" for a Facility.
