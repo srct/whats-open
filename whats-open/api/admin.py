@@ -33,6 +33,8 @@ class FacilityAdmin(admin.ModelAdmin):
                        'tapingo_url', 'phone_number', 'note', 'owners'),
         }),
     )
+    autocomplete_fields = ['main_schedule', 'special_schedules', ]
+
 
     # despite the name of this method, ("change" seems to imply it would affect modify)
     # it is called only when initially creating a model
@@ -88,6 +90,8 @@ class ScheduleAdmin(admin.ModelAdmin):
                        'promote_to_main')
         }),
     )
+    search_fields = ['name', ]  # search terms for autcomplete
+    ordering = ['name', ]  # autocomplete ordering
 
 # https://docs.djangoproject.com/en/1.11/ref/contrib/gis/admin/#osmgeoadmin
 OSMGeoAdmin.default_lon = -8605757.16502
