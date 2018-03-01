@@ -123,7 +123,7 @@ class Facility(TimeStampedModel):
 
     # A link to the logo image for this Facility
     logo = models.URLField('Logo URL', blank=True,
-                           default="https://imgur.com/q2Phkn9.png",
+                           default="https://wopen-cdn.dhaynes.xyz/default.png",
                            help_text="The absolute URL to the logo image for this Facility.")
 
     # The User(s) that claim ownership over this facility
