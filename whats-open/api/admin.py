@@ -10,9 +10,12 @@ https://docs.djangoproject.com/en/1.11/ref/contrib/admin/
 # Django Imports
 from django.contrib import admin
 from django.contrib.gis.admin import OSMGeoAdmin
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 # App Imports
 from .models import Facility, Schedule, OpenTime, Category, Location, Alert
+
 
 @admin.register(Facility)
 class FacilityAdmin(admin.ModelAdmin):
@@ -28,11 +31,24 @@ class FacilityAdmin(admin.ModelAdmin):
         self.message_user(request, "Successfully removed special schedules from %d facilities." % num)
 
     def assign_bulk_schedules(self, request, queryset):
+        num = queryset.count()
+        if 'bulk_schedule' in request.POST:
+            print('request', request.POST)
+            try:
+                new_schedule = Schedule.objects.get(pk=request.POST['schedule'])
+                name = new_schedule.name
+                for facility in queryset:
+                   facility.main_schedule = new_schedule
+                   facility.save()
+                self.message_user(request, "Set %s as main schedule for %d facilities." % (name, num))
+            except ObjectDoesNotExist:
+                self.message_user(request, "Unable to set schedule for %d facilities." % num)
+            return HttpResponseRedirect(request.get_full_path())
         return render(request,
                       'bulk_schedules_intermediate.html',
                       context = {'facilities': queryset,
                                  'schedules': Schedule.objects.all()})
-    assign_bulk_schedules.short_description = 'Assign a schedule to multiple facilities'
+    assign_bulk_schedules.short_description = 'Assign a main schedule for multiple facilities'
 
     # a list of all actions to be added
     actions = [drop_special_schedules, assign_bulk_schedules, ]
