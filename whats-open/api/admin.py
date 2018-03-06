@@ -40,7 +40,7 @@ class FacilityAdmin(admin.ModelAdmin):
                 for facility in queryset:
                    facility.main_schedule = new_schedule
                    facility.save()
-                self.message_user(request, "Set %s as main schedule for %d facilities." % (name, num))
+                self.message_user(request, "Set %s as the main schedule for %d facilities." % (name, num))
             except ObjectDoesNotExist:
                 self.message_user(request, "Unable to set schedule for %d facilities." % num)
             return HttpResponseRedirect(request.get_full_path())
