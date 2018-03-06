@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.11/ref/contrib/admin/
 # Django Imports
 from django.contrib import admin
 from django.contrib.gis.admin import OSMGeoAdmin
+from django.shortcuts import render
 # App Imports
 from .models import Facility, Schedule, OpenTime, Category, Location, Alert
 
@@ -26,7 +27,15 @@ class FacilityAdmin(admin.ModelAdmin):
             facility.special_schedules.clear()
         self.message_user(request, "Successfully removed special schedules from %d facilities." % num)
 
-    actions = [drop_special_schedules, ]
+    def assign_bulk_schedules(self, request, queryset):
+        return render(request,
+                      'bulk_schedules_intermediate.html',
+                      context = {'facilities': queryset,
+                                 'schedules': Schedule.objects.all()})
+    assign_bulk_schedules.short_description = 'Assign a schedule to multiple facilities'
+
+    # a list of all actions to be added
+    actions = [drop_special_schedules, assign_bulk_schedules, ]
 
     # Allow filtering by the following fields
     list_filter = ['facility_category', 'facility_location']
