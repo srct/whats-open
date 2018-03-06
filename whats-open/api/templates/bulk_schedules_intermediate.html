@@ -3,21 +3,21 @@
 {% block content %}
 <form action="" method="post">
   {% csrf_token %}
-
   <label>Schedule</label>
-  <select>
+  <select name="schedule">
   {% for schedule in schedules %}
-    <option>{{ schedule }}</option>
+    <option value={{ schedule.pk }} >{{ schedule }}</option>
   {% endfor %}
   </select>
 
-  <p>Assign this schedule to all of these facilities?</p>
+  <p>Assign this as the main schedule for all of these facilities?</p>
   <ul>
   {% for facility in facilities %}
     <li>{{ facility.facility_name }}</li>
+    <input type="hidden" name="_selected_action" value="{{ facility.pk }}" />
   {% endfor %}
   </ul>
-
+<input type="hidden" name="action" value="assign_bulk_schedules" />
+<input type="submit" name="bulk_schedule" value="Yes, I'm sure" />
 </form>
-<input type="submit" value="Yes, I'm sure">
 {% endblock %}
