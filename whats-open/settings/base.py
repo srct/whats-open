@@ -152,7 +152,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
-            normpath(join(SITE_ROOT, 'templates'))
+            normpath(join(SITE_ROOT, 'templates')),
+            # may specify to avoid requiring paths
+            normpath(join(SITE_ROOT, 'api/templates')),
         ],
         'OPTIONS': {
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
