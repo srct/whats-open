@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<form action="" method="post">
+  {% csrf_token %}
+
+  <label>Schedule</label>
+  <select>
+  {% for schedule in schedules %}
+    <option>{{ schedule }}</option>
+  {% endfor %}
+  </select>
+
+  <p>Assign this schedule to all of these facilities?</p>
+  <ul>
+  {% for facility in facilities %}
+    <li>{{ facility.facility_name }}</li>
+  {% endfor %}
+  </ul>
+
+</form>
+<input type="submit" value="Yes, I'm sure">
+{% endblock %}
