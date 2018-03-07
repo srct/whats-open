@@ -50,8 +50,29 @@ class FacilityAdmin(admin.ModelAdmin):
                                  'schedules': Schedule.objects.all()})
     assign_bulk_schedules.short_description = 'Assign a main schedule for multiple facilities'
 
+    def assign_bulk_special_schedules(self, request, queryset):
+        num = queryset.count()
+        if 'bulk_special_schedule' in request.POST:
+            print('request', request.POST)
+            try:
+                new_special_schedule = Schedule.objects.get(pk=request.POST['special_schedule'])
+                name = new_special_schedule.name
+                for facility in queryset:
+                   facility.special_schedules.add(new_special_schedule)
+                   facility.save()
+                self.message_user(request, "Added %s as a special schedule to %d facilities." % (name, num))
+            except ObjectDoesNotExist:
+                self.message_user(request, "Unable to add a special schedule to %d facilities." % num)
+            return HttpResponseRedirect(request.get_full_path())
+        return render(request,
+                      'bulk_special_schedules_intermediate.html',
+                      context = {'facilities': queryset,
+                                 'schedules': Schedule.objects.all()})
+    assign_bulk_special_schedules.short_description = 'Add a special schedule to multiple facilities'
+
     # a list of all actions to be added
-    actions = [drop_special_schedules, assign_bulk_schedules, ]
+    actions = [drop_special_schedules,
+               assign_bulk_schedules, assign_bulk_special_schedules ]
 
     # Allow filtering by the following fields
     list_filter = ['facility_category', 'facility_location']
