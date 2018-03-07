@@ -28,7 +28,8 @@ class FacilityAdmin(admin.ModelAdmin):
         num = queryset.count()
         for facility in queryset:
             facility.special_schedules.clear()
-        self.message_user(request, "Successfully removed special schedules from %d facilities." % num)
+        self.message_user(request, "Successfully cleared all special schedules for %d facilities." % num)
+    drop_special_schedules.short_description = 'Clear all special schedules'
 
     def assign_bulk_schedules(self, request, queryset):
         num = queryset.count()
@@ -40,15 +41,17 @@ class FacilityAdmin(admin.ModelAdmin):
                 for facility in queryset:
                    facility.main_schedule = new_schedule
                    facility.save()
-                self.message_user(request, "Set %s as the main schedule for %d facilities." % (name, num))
+                self.message_user(request,
+                                  "Set %s as the main schedule for %d facilities." % (name, num))
             except ObjectDoesNotExist:
-                self.message_user(request, "Unable to set schedule for %d facilities." % num)
+                self.message_user(request,
+                                  "Unable to set a new main schedule for %d facilities." % num)
             return HttpResponseRedirect(request.get_full_path())
         return render(request,
                       'bulk_schedules_intermediate.html',
                       context = {'facilities': queryset,
                                  'schedules': Schedule.objects.all()})
-    assign_bulk_schedules.short_description = 'Assign a main schedule for multiple facilities'
+    assign_bulk_schedules.short_description = 'Set a main schedule for multiple facilities'
 
     def assign_bulk_special_schedules(self, request, queryset):
         num = queryset.count()
@@ -60,9 +63,11 @@ class FacilityAdmin(admin.ModelAdmin):
                 for facility in queryset:
                    facility.special_schedules.add(new_special_schedule)
                    facility.save()
-                self.message_user(request, "Added %s as a special schedule to %d facilities." % (name, num))
+                self.message_user(request,
+                                  "Added %s as a special schedule to %d facilities." % (name, num))
             except ObjectDoesNotExist:
-                self.message_user(request, "Unable to add a special schedule to %d facilities." % num)
+                self.message_user(request,
+                                  "Unable to add additional special schedule to %d facilities." % num)
             return HttpResponseRedirect(request.get_full_path())
         return render(request,
                       'bulk_special_schedules_intermediate.html',
