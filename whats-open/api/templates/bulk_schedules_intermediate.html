@@ -1,16 +1,4 @@
-{% extends "admin/base_site.html" %}
-
-{% block extrahead %}
-{{ block.super }}
-<!-- neither jQuery proper nor Django's version is loaded by default on this page -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-{% endblock %}
-
-{% block extrastyle %}
-{{ block.super }}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-{% endblock %}
+{% extends "base_bulk_schedules_intermediate.html" %}
 
 {% block title %}
 Set main schedule for multiple facilities
@@ -47,24 +35,7 @@ Set main schedule for multiple facilities
   </ul>
 <input type="hidden" name="action" value="assign_bulk_schedules" />
 <input type="submit" name="bulk_schedule" value="Yes, I'm sure" />
+<a href="#" class="button cancel-link">No, take me back</a>
 </form>
 
-<script>
-/**
- Django's admin inferface uses this library for its new autocompletion selects
-
- Unfortunately, use of that specific widget and the associated support attributes
- are limited to admin.ModelAdmin change views
-
- See
- https://docs.djangoproject.com/en/2.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin.autocomplete_fields
- https://docs.djangoproject.com/en/2.0/ref/contrib/admin/#reversing-admin-urls
- for more information
-**/
-
-$(document).ready(function() {
-    $('.select2-basic-single').select2({
-    });
-});
-</script>
 {% endblock %}

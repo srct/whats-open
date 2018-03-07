@@ -1,15 +1,4 @@
-{% extends "admin/base_site.html" %}
-
-{% block extrahead %}
-{{ block.super }}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-{% endblock %}
-
-{% block extrastyle %}
-{{ block.super }}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-{% endblock %}
+{% extends "base_bulk_schedules_intermediate.html" %}
 
 {% block title %}
 Add special schedule to multiple facilities
@@ -46,12 +35,7 @@ Add special schedule to multiple facilities
   </ul>
 <input type="hidden" name="action" value="assign_bulk_special_schedules" />
 <input type="submit" name="bulk_special_schedule" value="Yes, I'm sure" />
+<a href="#" class="button cancel-link">No, take me back</a>
 </form>
 
-<script>
-$(document).ready(function() {
-    $('.select2-basic-single').select2({
-    });
-});
-</script>
 {% endblock %}
