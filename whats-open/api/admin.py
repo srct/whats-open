@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.11/ref/contrib/admin/
 """
 # Django Imports
 from django.contrib import admin
+from django.contrib import messages
 from django.contrib.gis.admin import OSMGeoAdmin
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
@@ -47,7 +48,8 @@ class FacilityAdmin(admin.ModelAdmin):
                                   "Set %s as the main schedule for %d facilities." % (name, num))
             except ObjectDoesNotExist:
                 self.message_user(request,
-                                  "Unable to set a new main schedule for %d facilities." % num)
+                                  "Unable to set a new main schedule for %d facilities." % num,
+                                  level=messages.ERROR)
             return HttpResponseRedirect(request.get_full_path())
         return render(request,
                       'bulk_schedules_intermediate.html',
@@ -68,7 +70,8 @@ class FacilityAdmin(admin.ModelAdmin):
                                   "Added %s as a special schedule to %d facilities." % (name, num))
             except ObjectDoesNotExist:
                 self.message_user(request,
-                                  "Unable to add additional special schedule to %d facilities." % num)
+                                  "Unable to add additional special schedule to %d facilities." % num,
+                                  level=messages.ERROR)
             return HttpResponseRedirect(request.get_full_path())
         return render(request,
                       'bulk_special_schedules_intermediate.html',
