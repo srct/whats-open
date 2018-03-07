@@ -28,13 +28,15 @@ class FacilityAdmin(admin.ModelAdmin):
         num = queryset.count()
         for facility in queryset:
             facility.special_schedules.clear()
-        self.message_user(request, "Successfully cleared all special schedules for %d facilities." % num)
+        self.message_user(request,
+                          "Successfully cleared all special schedules for %d facilities." % num)
     drop_special_schedules.short_description = 'Clear all special schedules'
 
     def assign_bulk_schedules(self, request, queryset):
         num = queryset.count()
+        # all admin actions-related requests are post requests, so we're looking for
+        # the one that has the associated value with our confirmation input button
         if 'bulk_schedule' in request.POST:
-            print('request', request.POST)
             try:
                 new_schedule = Schedule.objects.get(pk=request.POST['schedule'])
                 name = new_schedule.name
@@ -56,7 +58,6 @@ class FacilityAdmin(admin.ModelAdmin):
     def assign_bulk_special_schedules(self, request, queryset):
         num = queryset.count()
         if 'bulk_special_schedule' in request.POST:
-            print('request', request.POST)
             try:
                 new_special_schedule = Schedule.objects.get(pk=request.POST['special_schedule'])
                 name = new_special_schedule.name
