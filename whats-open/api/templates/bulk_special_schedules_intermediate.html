@@ -1,5 +1,16 @@
 {% extends "admin/base_site.html" %}
 
+{% block extrahead %}
+{{ block.super }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
 {% block title %}
 Add special schedule to multiple facilities
 {{ block.super }}
@@ -17,12 +28,14 @@ Add special schedule to multiple facilities
 {% block content %}
 <form action="" method="post">
   {% csrf_token %}
-  <label>Special Schedule</label>
-  <select name="special_schedule">
-  {% for schedule in schedules %}
-    <option value={{ schedule.pk }} >{{ schedule }}</option>
-  {% endfor %}
-  </select>
+  <label for="id_label_single">
+    Special Schedule
+      <select name="special_schedule" class="select2-basic-single" id="id_label_single">
+      {% for schedule in schedules %}
+        <option value={{ schedule.pk }} >{{ schedule }}</option>
+      {% endfor %}
+      </select>
+  </label>
 
   <p>Add this special schedule to all of these facilities?</p>
   <ul>
@@ -34,4 +47,11 @@ Add special schedule to multiple facilities
 <input type="hidden" name="action" value="assign_bulk_special_schedules" />
 <input type="submit" name="bulk_special_schedule" value="Yes, I'm sure" />
 </form>
+
+<script>
+$(document).ready(function() {
+    $('.select2-basic-single').select2({
+    });
+});
+</script>
 {% endblock %}
