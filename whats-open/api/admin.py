@@ -52,7 +52,7 @@ class FacilityAdmin(admin.ModelAdmin):
                                   level=messages.ERROR)
             return HttpResponseRedirect(request.get_full_path())
         return render(request,
-                      'bulk_schedules_intermediate.html',
+                      'bulk_schedules.html',
                       context = {'facilities': queryset,
                                  'schedules': Schedule.objects.all()})
     assign_bulk_schedules.short_description = 'Set a main schedule for multiple facilities'
@@ -74,7 +74,7 @@ class FacilityAdmin(admin.ModelAdmin):
                                   level=messages.ERROR)
             return HttpResponseRedirect(request.get_full_path())
         return render(request,
-                      'bulk_special_schedules_intermediate.html',
+                      'bulk_special_schedules.html',
                       context = {'facilities': queryset,
                                  'schedules': Schedule.objects.all()})
     assign_bulk_special_schedules.short_description = 'Add a special schedule to multiple facilities'
