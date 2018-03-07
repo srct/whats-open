@@ -1,5 +1,14 @@
 {% extends "admin/base_site.html" %}
 
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">Home</a>
+  &rsaquo; <a href="{% url 'admin:app_list' 'api' %}">Api</a>
+  &rsaquo; <a href="{% url 'admin:api_facility_changelist' %}">Facilities</a>
+  &rsaquo; Add special schedule to multiple facilities
+</div>
+{% endblock %}
+
 {% block content %}
 <form action="" method="post">
   {% csrf_token %}
