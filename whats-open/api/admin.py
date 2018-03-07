@@ -96,6 +96,16 @@ class FacilityAdmin(admin.ModelAdmin):
                        'tapingo_url', 'phone_number', 'note', 'owners'),
         }),
     )
+    autocomplete_fields = ['main_schedule', 'special_schedules', ]
+
+
+    # despite the name of this method, ("change" seems to imply it would affect modify)
+    # it is called only when initially creating a model
+    def get_changeform_initial_data(self, request):
+        initial_data = super(FacilityAdmin, self).get_changeform_initial_data(request)
+        initial_data['owners'] = [request.user, ]
+        return initial_data
+
 
 class OpenTimeInline(admin.TabularInline):
     """
@@ -143,6 +153,8 @@ class ScheduleAdmin(admin.ModelAdmin):
                        'promote_to_main')
         }),
     )
+    search_fields = ['name', ]  # search terms for autcomplete
+    ordering = ['name', ]  # autocomplete ordering
 
 # https://docs.djangoproject.com/en/1.11/ref/contrib/gis/admin/#osmgeoadmin
 OSMGeoAdmin.default_lon = -8605757.16502
