@@ -31,7 +31,7 @@ class FacilityAdmin(admin.ModelAdmin):
             facility.special_schedules.clear()
         self.message_user(request,
                           "Successfully cleared all special schedules for %d facilities." % num)
-    drop_special_schedules.short_description = 'Clear all special schedules'
+    drop_special_schedules.short_description = 'Clear all special schedules for selected facilities'
 
     def assign_bulk_schedules(self, request, queryset):
         num = queryset.count()
@@ -55,7 +55,7 @@ class FacilityAdmin(admin.ModelAdmin):
                       'bulk_schedules.html',
                       context = {'facilities': queryset,
                                  'schedules': Schedule.objects.all()})
-    assign_bulk_schedules.short_description = 'Set a main schedule for multiple facilities'
+    assign_bulk_schedules.short_description = 'Set a main schedule for selected facilities'
 
     def assign_bulk_special_schedules(self, request, queryset):
         num = queryset.count()
@@ -77,7 +77,7 @@ class FacilityAdmin(admin.ModelAdmin):
                       'bulk_special_schedules.html',
                       context = {'facilities': queryset,
                                  'schedules': Schedule.objects.all()})
-    assign_bulk_special_schedules.short_description = 'Add a special schedule to multiple facilities'
+    assign_bulk_special_schedules.short_description = 'Add a special schedule to selected facilities'
 
     # a list of all actions to be added
     actions = [drop_special_schedules,
