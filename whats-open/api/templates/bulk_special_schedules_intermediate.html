@@ -1,0 +1,23 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<form action="" method="post">
+  {% csrf_token %}
+  <label>Special Schedule</label>
+  <select name="special_schedule">
+  {% for schedule in schedules %}
+    <option value={{ schedule.pk }} >{{ schedule }}</option>
+  {% endfor %}
+  </select>
+
+  <p>Add this special schedule to all of these facilities?</p>
+  <ul>
+  {% for facility in facilities %}
+    <li>{{ facility.facility_name }}</li>
+    <input type="hidden" name="_selected_action" value="{{ facility.pk }}" />
+  {% endfor %}
+  </ul>
+<input type="hidden" name="action" value="assign_bulk_special_schedules" />
+<input type="submit" name="bulk_special_schedule" value="Yes, I'm sure" />
+</form>
+{% endblock %}
