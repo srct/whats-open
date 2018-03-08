@@ -7,7 +7,10 @@
 <script type="text/javascript" src="{% static "admin/js/vendor/jquery/jquery.min.js" %}"></script>
 <script type="text/javascript" src="{% static "admin/js/vendor/select2/select2.full.min.js" %}"></script>
 <!-- Django changes jQuery to django.jQuery in case the version bundled with Django is not the version
-     you want to use in your app -->
+     you want to use in your app
+
+     It's super important that it is loaded after the jQuery library, and
+     any jQuery-reliant libraries are loaded-->
 <script type="text/javascript" src="{% static "admin/js/jquery.init.js" %}"></script>
 <script type="text/javascript" src="{% static "admin/js/cancel.js" %}"></script>
 <script>
@@ -30,6 +33,7 @@
     $(document).ready(function() {
         $('.select2-basic-single').select2();
     });
+// note how this is wrapped in a function to use django.jQuery for references to $
 })(django.jQuery);
 </script>
 {{ block.super }}
