@@ -9,9 +9,14 @@ https://docs.djangoproject.com/en/1.11/ref/contrib/admin/
 """
 # Django Imports
 from django.contrib import admin
+from django.contrib import messages
 from django.contrib.gis.admin import OSMGeoAdmin
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 # App Imports
 from .models import Facility, Schedule, OpenTime, Category, Location, Alert
+
 
 @admin.register(Facility)
 class FacilityAdmin(admin.ModelAdmin):
@@ -20,6 +25,64 @@ class FacilityAdmin(admin.ModelAdmin):
 
     Allows admins to create new facilities through the admin interface.
     """
+    def drop_special_schedules(self, request, queryset):
+        num = queryset.count()
+        for facility in queryset:
+            facility.special_schedules.clear()
+        self.message_user(request,
+                          "Successfully cleared all special schedules for %d facilities." % num)
+    drop_special_schedules.short_description = 'Clear all special schedules for selected facilities'
+
+    def assign_bulk_schedules(self, request, queryset):
+        num = queryset.count()
+        # all admin actions-related requests are post requests, so we're looking for
+        # the one that has the associated value with our confirmation input button
+        if 'bulk_schedule' in request.POST:
+            try:
+                new_schedule = Schedule.objects.get(pk=request.POST['schedule'])
+                name = new_schedule.name
+                for facility in queryset:
+                   facility.main_schedule = new_schedule
+                   facility.save()
+                self.message_user(request,
+                                  "Set %s as the main schedule for %d facilities." % (name, num))
+            except ObjectDoesNotExist:
+                self.message_user(request,
+                                  "Unable to set a new main schedule for %d facilities." % num,
+                                  level=messages.ERROR)
+            return HttpResponseRedirect(request.get_full_path())
+        return render(request,
+                      'bulk_schedules.html',
+                      context = {'facilities': queryset,
+                                 'schedules': Schedule.objects.all()})
+    assign_bulk_schedules.short_description = 'Set a main schedule for selected facilities'
+
+    def assign_bulk_special_schedules(self, request, queryset):
+        num = queryset.count()
+        if 'bulk_special_schedule' in request.POST:
+            try:
+                new_special_schedule = Schedule.objects.get(pk=request.POST['special_schedule'])
+                name = new_special_schedule.name
+                for facility in queryset:
+                   facility.special_schedules.add(new_special_schedule)
+                   facility.save()
+                self.message_user(request,
+                                  "Added %s as a special schedule to %d facilities." % (name, num))
+            except ObjectDoesNotExist:
+                self.message_user(request,
+                                  "Unable to add additional special schedule to %d facilities." % num,
+                                  level=messages.ERROR)
+            return HttpResponseRedirect(request.get_full_path())
+        return render(request,
+                      'bulk_special_schedules.html',
+                      context = {'facilities': queryset,
+                                 'schedules': Schedule.objects.all()})
+    assign_bulk_special_schedules.short_description = 'Add a special schedule to selected facilities'
+
+    # a list of all actions to be added
+    actions = [drop_special_schedules,
+               assign_bulk_schedules, assign_bulk_special_schedules ]
+
     # Allow filtering by the following fields
     list_filter = ['facility_category', 'facility_location']
     # Modify the rendered layout of the "create a new facility" page

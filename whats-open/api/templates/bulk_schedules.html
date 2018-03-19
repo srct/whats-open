@@ -1,0 +1,41 @@
+{% extends "base_bulk_schedules_intermediate.html" %}
+
+{% block title %}
+Set main schedule for multiple facilities
+{{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">Home</a>
+  &rsaquo; <a href="{% url 'admin:app_list' 'api' %}">Api</a>
+  &rsaquo; <a href="{% url 'admin:api_facility_changelist' %}">Facilities</a>
+  &rsaquo; Set main schedule for multiple facilities
+</div>
+{% endblock %}
+
+{% block content %}
+<form action="" method="post">
+  {% csrf_token %}
+  <label for="id_label_single">
+    Schedule
+      <select name="schedule" class="select2-basic-single" id="id_label_single">
+      {% for schedule in schedules %}
+        <option value={{ schedule.pk }} >{{ schedule }}</option>
+      {% endfor %}
+      </select>
+  </label>
+
+  <p>Set this as the main schedule for all of these facilities?</p>
+  <ul>
+  {% for facility in facilities %}
+    <li>{{ facility.facility_name }}</li>
+    <input type="hidden" name="_selected_action" value="{{ facility.pk }}" />
+  {% endfor %}
+  </ul>
+<input type="hidden" name="action" value="assign_bulk_schedules" />
+<input type="submit" name="bulk_schedule" value="Yes, I'm sure" />
+<a href="#" class="button cancel-link">No, take me back</a>
+</form>
+
+{% endblock %}
