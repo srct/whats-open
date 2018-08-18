@@ -56,7 +56,6 @@ class Location(TimeStampedModel):
     CAMPUS_LOCATIONS = (
         # (set in model, human readable version)
         ("prince william", "Prince William County Science and Technology"),
-        ("korea", "Mason Korea"),
         ("fairfax", "Fairfax"),
         ("arlington", "Arlington")
     )
