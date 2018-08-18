@@ -6,9 +6,16 @@
 FROM python:3.6
 ENV PYTHONUNBUFFERED 1
 
-# Update the sources list
-RUN apt-get update
-RUN apt-get install netcat libgdal1h libproj-dev proj-data proj-bin -y
+# Update the sources list and install all packages
+# See: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
+RUN apt-get update && apt-get install -y \
+    netcat \
+    libproj-dev \
+    proj-data \
+    proj-bin \
+    binutils \ 
+    gdal-bin \ 
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy over all project files into /whats_open
 RUN mkdir /whats-open/
