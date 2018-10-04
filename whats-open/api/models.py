@@ -408,15 +408,21 @@ class Alert(TimeStampedModel):
         (INFO, 'Info'),
         (MINOR, 'Minor'),
         (MAJOR, 'Major'),
-        (EMERGENCY, 'Emergency'),
+        (EMERGENCY, 'Emergency'),   
     )
 
     # The urgency tag for this Alert
     urgency_tag = models.CharField(max_length=10, default='Info',
                                    choices=URGENCY_CHOICES)
 
+    
+
     # The text that is displayed that describes the Alert
-    message = models.CharField(max_length=140)
+    subject = models.CharField(max_length=130)
+    body = models.TextField()
+    url = models.URLField(max_length=200)
+    
+    
 
     # The date + time that the alert will be start being served
     start_datetime = models.DateTimeField()
@@ -431,9 +437,11 @@ class Alert(TimeStampedModel):
         # Get the current datetime
         now = timezone.now()
         return self.start_datetime < now < self.end_datetime
+        
 
     def __str__(self):
         """
         String representation of an Alert object.
         """
-        return "%s" % (self.message)
+        return "{0} \n {1} \n {3}".format(self.subject, self.body, self.url)
+        # Returns the subject, body, and url fields
