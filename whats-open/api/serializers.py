@@ -15,47 +15,63 @@ from .models import Category, Facility, Schedule, OpenTime, Location, Alert
 from rest_framework import serializers
 from taggit_serializer.serializers import TagListSerializerField
 
+
 class AlertSerializer(serializers.ModelSerializer):
     """
     """
+
     class Meta:
         model = Alert
-        fields = '__all__'
+        fields = "__all__"
+
 
 class CategorySerializer(serializers.ModelSerializer):
     """
     """
+
     class Meta:
         # Choose the model to be serialized
         model = Category
         # Serialize all of the fields
-        fields = '__all__'
+        fields = "__all__"
+
 
 class LocationSerializer(serializers.ModelSerializer):
     """
     Serializer for the Location model.
     """
+
     class Meta:
         # Choose the model to be serialized
         model = Location
         # Serialize all of the fields
-        fields = '__all__'
+        fields = "__all__"
+
 
 class OpenTimeSerializer(serializers.ModelSerializer):
     """
     Serializer for the OpenTime model.
     """
+
     class Meta:
         # Choose the model to be serialized
         model = OpenTime
         # Serialize all of the fields
-        fields = ('schedule', 'modified',
-                  'start_day', 'end_day', 'start_time', 'end_time')
+        fields = (
+            "schedule",
+            "modified",
+            "start_day",
+            "end_day",
+            "start_time",
+            "end_time",
+        )
+
 
 class ScheduleSerializer(serializers.ModelSerializer):
     """
     Serializer for the Schedule model.
     """
+
     # Append a serialized OpenTime object
     open_times = OpenTimeSerializer(many=True, read_only=True)
 
@@ -63,8 +79,18 @@ class ScheduleSerializer(serializers.ModelSerializer):
         # Choose the model to be serialized
         model = Schedule
         # List the fields that we are serializing
-        fields = ('id', 'open_times', 'modified', 'name', 'valid_start',
-                  'valid_end', 'twenty_four_hours', 'schedule_for_removal', 'promote_to_main')
+        fields = (
+            "id",
+            "open_times",
+            "modified",
+            "name",
+            "valid_start",
+            "valid_end",
+            "twenty_four_hours",
+            "schedule_for_removal",
+            "promote_to_main",
+        )
+
 
 class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     """
@@ -76,6 +102,7 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
         than primary keys.
         http://www.django-rest-framework.org/api-guide/serializers/#hyperlinkedmodelserializer
     """
+
     # Append serialized objects
     facility_category = CategorySerializer(many=False, read_only=True)
     facility_location = LocationSerializer(many=False, read_only=True)
@@ -89,7 +116,19 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
         # Choose the model to be serialized
         model = Facility
         # List the fields that we are serializing
-        fields = ('slug', 'facility_name', 'logo', 'facility_location',
-                  'facility_category', 'phone_number', 'facility_product_tags',
-                  'facility_labels', 'facility_classifier', 'tapingo_url',
-                  'note', 'main_schedule', 'special_schedules', 'modified', )
+        fields = (
+            "slug",
+            "facility_name",
+            "logo",
+            "facility_location",
+            "facility_category",
+            "phone_number",
+            "facility_product_tags",
+            "facility_labels",
+            "facility_classifier",
+            "tapingo_url",
+            "note",
+            "main_schedule",
+            "special_schedules",
+            "modified",
+        )

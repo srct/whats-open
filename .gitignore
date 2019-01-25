@@ -13,5 +13,4 @@ whats_open/secret_key.py
 whats_open/assets/
 static/admin/
 data
-whats-open/api/migrations
 .vscode
