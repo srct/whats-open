@@ -5,6 +5,8 @@ verify_ssl = true
 
 [dev-packages]
 black = "*"
+pylint = "*"
+pylint-django = "*"
 
 [packages]
 django-autoslug-iplweb = "*"
@@ -23,9 +25,6 @@ docutils = "==0.13.1"
 gunicorn = "*"
 Django = "<2.1,>=2.0"
 Markdown = "==2.6.10"
-black = "*"
-pylint = "*"
-pylint-django = "*"
 
 [requires]
 python_version = "3.7"
