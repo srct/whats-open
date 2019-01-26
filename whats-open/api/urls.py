@@ -11,6 +11,9 @@ http://www.django-rest-framework.org/api-guide/routers/
 from django.urls import include, path
 from django.views.generic.base import RedirectView
 
+# Other Imports
+from rest_framework.routers import DefaultRouter
+
 # App Imports
 from .views import (
     CategoryViewSet,
@@ -19,9 +22,6 @@ from .views import (
     LocationViewSet,
     AlertViewSet,
 )
-
-# Other Imports
-from rest_framework.routers import DefaultRouter
 
 # Instantiate our DefaultRouter
 ROUTER = DefaultRouter()

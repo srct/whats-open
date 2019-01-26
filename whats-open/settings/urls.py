@@ -21,8 +21,8 @@ urlpatterns = [
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     # /admin - The admin panels
     path("admin/", admin.site.urls),
-    # /api-auth - API Auth page
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    # /auth - API Auth page
+    path("auth/", include("rest_framework.urls", namespace="rest_framework")),
     # /logout - Redirect to the homepage on logout
     path("logout/", django.contrib.auth.views.logout, {"next_page": "/"}),
 ]

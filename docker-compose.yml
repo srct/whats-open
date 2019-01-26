@@ -27,3 +27,4 @@ services:
       - WOPEN_DB_HOST=db
       - WOPEN_DB_PORT=3306
       - WOPEN_SUPERUSER=admin
+      - WOPEN_ENV="dev"

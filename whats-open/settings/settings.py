@@ -6,23 +6,34 @@ settings/base.py
 Base Django settings for whats-open.
 """
 # Python std. lib. imports
-import os
 import sys
-from os.path import abspath, dirname, join, normpath
-from sys import path
+from os import path, environ
+
+# DEV vs PROD
+if environ["WOPEN_ENV"] != "production":
+    DEBUG = True
+    # dummy cache for development-- doesn't actually cache things
+    CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
+else:
+    DEBUG = False
+    CACHES = {
+        "default": {"BACKEND": "redis_cache.RedisCache", "LOCATION": "localhost:6379"}
+    }
+    ALLOWED_HOSTS = ["*"]
+    SECRET_KEY = environ["WOPEN_SECRET_KEY"]
 
 """
 PATH CONFIGURATION
 """
 # Absolute filesystem path to the Django project directory:
-DJANGO_ROOT = dirname(dirname(abspath(__file__)))
+DJANGO_ROOT = path.dirname(path.dirname(path.abspath(__file__)))
 
 # Absolute filesystem path to the top-level project folder:
-SITE_ROOT = dirname(DJANGO_ROOT)
+SITE_ROOT = path.dirname(DJANGO_ROOT)
 
 # Add our project to our pythonpath, this way we don't need to type our project
 # name in our dotted import paths:
-path.append(DJANGO_ROOT)
+sys.path.append(DJANGO_ROOT)
 
 """
 MANAGER CONFIGURATION
@@ -71,7 +82,7 @@ MEDIA CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = normpath(join(SITE_ROOT, "media"))
+MEDIA_ROOT = path.normpath(path.join(SITE_ROOT, "media"))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
@@ -87,7 +98,7 @@ STATIC FILE CONFIGURATION
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = normpath(join(SITE_ROOT, "static"))
+STATIC_ROOT = path.normpath(path.join(SITE_ROOT, "static"))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 # URL prefix for static files.
@@ -122,7 +133,7 @@ ALLOWED_HOSTS = ["*"]
 FIXTURE CONFIGURATION
 """
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
-FIXTURE_DIRS = (normpath(join(SITE_ROOT, "fixtures")),)
+FIXTURE_DIRS = (path.normpath(path.join(SITE_ROOT, "fixtures")),)
 
 """
 DATABASE CONFIGURATION
@@ -132,11 +143,11 @@ DATABASE CONFIGURATION
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.mysql",
-        "NAME": os.environ["WOPEN_DB_NAME"],
-        "USER": os.environ["WOPEN_DB_USER"],
-        "PASSWORD": os.environ["WOPEN_DB_PASSWORD"],
-        "HOST": os.environ["WOPEN_DB_HOST"],
-        "PORT": os.environ["WOPEN_DB_PORT"],
+        "NAME": environ["WOPEN_DB_NAME"],
+        "USER": environ["WOPEN_DB_USER"],
+        "PASSWORD": environ["WOPEN_DB_PASSWORD"],
+        "HOST": environ["WOPEN_DB_HOST"],
+        "PORT": environ["WOPEN_DB_PORT"],
     }
 }
 
@@ -148,9 +159,9 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         "DIRS": [
-            normpath(join(SITE_ROOT, "templates")),
+            path.normpath(path.join(SITE_ROOT, "templates")),
             # may specify to avoid requiring paths
-            normpath(join(SITE_ROOT, "api/templates")),
+            path.normpath(path.join(SITE_ROOT, "api/templates")),
         ],
         "OPTIONS": {
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors

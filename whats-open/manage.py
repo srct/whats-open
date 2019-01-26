@@ -8,8 +8,8 @@ Do not touch at all. This is the main entry point for interacting with Django.
 import os
 import sys
 
-if __name__ == "__main__": 
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.local")
+if __name__ == "__main__":
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.settings")
 
     from django.core.management import execute_from_command_line
 

@@ -12,8 +12,9 @@ before_script:
   - apt-get update -qy
   - apt-get install -y mysql-client default-libmysqlclient-dev python-mysqldb
     gdal-bin libproj-dev proj-data proj-bin binutils
-  - pip install -r requirements/test.txt
   - cd whats-open/
+  - pip install pipenv
+  - pipenv install --system --deploy
   - export WOPEN_SECRET_KEY=$(dd if=/dev/urandom count=100 | tr -dc "A-Za-z0-9"
     | fold -w 60 | head -n1 2>/dev/null)
   - export WOPEN_EMAIL_DOMAIN="@masonlive.gmu.edu"
