@@ -126,7 +126,7 @@ class FacilityAdmin(admin.ModelAdmin):
                     "facility_location",
                     "main_schedule",
                     "special_schedules",
-                    ("facility_product_tags", "facility_labels", "facility_classifier"),
+                    ("facility_product_tags", "facility_classifier"),
                     "tapingo_url",
                     "phone_number",
                     "note",

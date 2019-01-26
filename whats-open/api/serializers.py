@@ -8,12 +8,12 @@ can then be easily rendered into JSON, XML or other content types.
 
 http://www.django-rest-framework.org/api-guide/serializers
 """
-# App Imports
-from .models import Category, Facility, Schedule, OpenTime, Location, Alert
-
 # Other Imports
 from rest_framework import serializers
 from taggit_serializer.serializers import TagListSerializerField
+
+# App Imports
+from .models import Category, Facility, Schedule, OpenTime, Location, Alert
 
 
 class AlertSerializer(serializers.ModelSerializer):
@@ -109,7 +109,6 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     main_schedule = ScheduleSerializer(many=False, read_only=True)
     special_schedules = ScheduleSerializer(many=True, read_only=True)
     facility_product_tags = TagListSerializerField()
-    facility_labels = TagListSerializerField()
     facility_classifier = TagListSerializerField()
 
     class Meta:
@@ -124,7 +123,6 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
             "facility_category",
             "phone_number",
             "facility_product_tags",
-            "facility_labels",
             "facility_classifier",
             "tapingo_url",
             "note",

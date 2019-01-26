@@ -73,9 +73,7 @@ class Location(TimeStampedModel):
     )
     # The physical address of the facility.
     address = models.CharField(max_length=100)
-    campus_region = models.CharField(
-        choices=CAMPUS_LOCATIONS, max_length=100, default="fairfax"
-    )
+    campus_region = models.CharField(choices=CAMPUS_LOCATIONS, max_length=100)
     # Boolean for whether or not the location is "on campus" or not.
     on_campus = models.BooleanField(default=True)
     # A GeoJson coordinate pair that represents the physical location
@@ -183,15 +181,12 @@ class Facility(TimeStampedModel):
         help_text="A comma seperate list of words that neatly and aptly describe the product that this facility produces. These words are not shown to the use but are rather used in search.",
     )
 
-    # Tag a Facility to be shown on the ShopMason or Sodoxo (or both)
+    # Tag a Facility to be shown on the ShopMason
     # What's Open sites.
-    FACILITY_CLASSES = (
-        ("shopmason", "shopMason Facility"),
-        ("sodoxo", "Sodoxo Facility"),
-    )
+    FACILITY_CLASSES = (("shopmason", "shopMason Facility"),)
     facility_classifier = models.CharField(
         choices=FACILITY_CLASSES,
-        help_text="Tag this facility to be shown on the ShopMason or Sodoxo What's Open sites.",
+        help_text="Tag this facility to be shown on the ShopMason What's Open sites.",
         max_length=100,
         blank=True,
     )
