@@ -185,8 +185,6 @@ class ScheduleAdmin(admin.ModelAdmin):
                     # Pair valid_start and valid_end together on the same line
                     ("valid_start", "valid_end"),
                     "twenty_four_hours",
-                    "schedule_for_removal",
-                    "promote_to_main",
                 )
             },
         ),

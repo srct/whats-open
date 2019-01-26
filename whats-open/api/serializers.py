@@ -87,8 +87,6 @@ class ScheduleSerializer(serializers.ModelSerializer):
             "valid_start",
             "valid_end",
             "twenty_four_hours",
-            "schedule_for_removal",
-            "promote_to_main",
         )
 
 
