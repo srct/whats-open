@@ -508,7 +508,9 @@ class Alert(TimeStampedModel):
     )
 
     # The text that is displayed that describes the Alert
-    message = models.CharField(max_length=140)
+    subject = models.CharField(max_length=130)
+    body = models.TextField()
+    url = models.URLField(max_length=200)
 
     # The date + time that the alert will be start being served
     start_datetime = models.DateTimeField()
@@ -528,4 +530,5 @@ class Alert(TimeStampedModel):
         """
         String representation of an Alert object.
         """
-        return "%s" % (self.message)
+        return "{0} \n {1} \n {3}".format(self.subject, self.body, self.url)
+        # Returns the subject, body, and url fields
