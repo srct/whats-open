@@ -4,7 +4,6 @@ services:
 variables:
   MYSQL_DATABASE: wopen
   MYSQL_ROOT_PASSWORD: root
-  WOPEN_ENV: dev
 
 types:
   - test
@@ -25,6 +24,7 @@ before_script:
   - export WOPEN_DB_HOST="mysql"
   - export WOPEN_DB_PORT=3306
   - export WOPEN_SUPERUSER=admin
+  - export WOPEN_ENV=dev
   - python manage.py makemigrations
   - python manage.py makemigrations api
   - python manage.py migrate
