@@ -145,7 +145,7 @@ class FacilityAdmin(admin.ModelAdmin):
         return initial_data
 
 
-class OpenTimeInline(admin.TabularInline):
+class OpenTimeInline(admin.StackedInline):
     """
     A table of time periods that represent an "open time" for a Facility.
 
@@ -154,9 +154,7 @@ class OpenTimeInline(admin.TabularInline):
 
     # Columns correspond to each attribute in the OpenTime table
     model = OpenTime
-    # 7 days of the week, so only have 7 rows
-    max_num = 7
-    extra = 7
+    extra = 1
     # We are basically reordering things to look nicer to the user here
     fieldsets = (
         (None, {"fields": (("start_day", "start_time"), ("end_day", "end_time"))}),
@@ -184,8 +182,7 @@ class ScheduleAdmin(admin.ModelAdmin):
             {
                 "fields": (
                     "name",
-                    # Pair valid_start and valid_end together on the same
-                    # line
+                    # Pair valid_start and valid_end together on the same line
                     ("valid_start", "valid_end"),
                     "twenty_four_hours",
                     "schedule_for_removal",
