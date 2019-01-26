@@ -18,6 +18,8 @@ services:
     ports:
       - "8000:8000"
     command: ./docker-startup.sh
+    volumes:
+      - .:/whats-open
     depends_on:
       - db
     environment:
