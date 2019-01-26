@@ -23,10 +23,11 @@ contribute, so if you are struggling, or just want to learn, then we are
 willing to help.
 
 Check out some of the other What's Open projects!
- - https://git.gmu.edu/srct/whats-open-android
- - https://git.gmu.edu/srct/whats-open-ios
- - https://git.gmu.edu/srct/whats-open-web
- - https://git.gmu.edu/srct/whats-open-alexa
+
+- https://git.gmu.edu/srct/whats-open-android
+- https://git.gmu.edu/srct/whats-open-ios
+- https://git.gmu.edu/srct/whats-open-web
+- https://git.gmu.edu/srct/whats-open-alexa
 
 # Setup instructions for local development
 
@@ -113,9 +114,9 @@ environments across machines.
 
 Installing Docker on your system:
 
- - For macOS: https://docs.docker.com/docker-for-mac/
- - For Windows: https://docs.docker.com/docker-for-windows/
- - For your specific \*nix distro: https://docs.docker.com/engine/installation/
+- For macOS: https://docs.docker.com/docker-for-mac/
+- For Windows: https://docs.docker.com/docker-for-windows/
+- For your specific \*nix distro: https://docs.docker.com/engine/installation/
 
 Additionally, you will need to install docker-compose: https://docs.docker.com/compose/install/
 
@@ -148,9 +149,10 @@ pass: admin
 Manual Setup involves all of the same steps as Docker, but just done manually.
 
 First, install python, pip, and virtualenv on your system.
-  * `python` is the programming language used for Django, the web framework used by whats-open.
-  * `pip` is the python package manager.
-  * `virtualenv` allows you to isolate pip packages within virtual environments
+
+- `python` is the programming language used for Django, the web framework used by whats-open.
+- `pip` is the python package manager.
+- `virtualenv` allows you to isolate pip packages within virtual environments
 
 Open a terminal and run the following command:
 
@@ -167,10 +169,10 @@ You will also need the following `gdal` packages for GeoDjango support:
 
 ```
 sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
-sudo apt update 
-sudo apt upgrade # if you already have gdal 1.11 installed 
-sudo apt install gdal-bin python-gdal python3-gdal # if you don't have gdal 1.11 already installed 
-``` 
+sudo apt update
+sudo apt upgrade # if you already have gdal 1.11 installed
+sudo apt install gdal-bin python-gdal python3-gdal # if you don't have gdal 1.11 already installed
+```
 
 #### Database Setup
 
@@ -216,17 +218,16 @@ Run:
     GRANT ALL ON test_wopen.* TO 'wopen'@'localhost'; FLUSH PRIVILEGES;
 
 When running test cases, django creates a test database so your 'real' database
-doesn't get screwed up. This database is called 'test_' + whatever your normal
+doesn't get screwed up. This database is called 'test\_' + whatever your normal
 database is named. Note that for permissions it doesn't matter that this database
 hasn't yet been created.
 
-The .* is to grant access all tables in the database, and 'flush privileges'
+The .\* is to grant access all tables in the database, and 'flush privileges'
 reloads privileges to ensure that your user is ready to go.
 
 Exit the mysql shell by typing:
 
     exit
-
 
 At this point we will need to set some environment variables.
 

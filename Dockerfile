@@ -3,7 +3,7 @@
 ############################################################
 
 # Set the base image to Ubuntu
-FROM python:3.6
+FROM python:3.7
 ENV PYTHONUNBUFFERED 1
 
 # Update the sources list and install all packages
@@ -23,4 +23,5 @@ WORKDIR /whats-open/
 ADD . /whats-open/
 
 # Pip install all required dependecies
-RUN pip install -r /whats-open/requirements/base.txt
+RUN pip install pipenv
+RUN pipenv install --system --deploy
