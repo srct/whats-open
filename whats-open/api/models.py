@@ -22,7 +22,6 @@ from django.utils import timezone
 from model_utils.models import TimeStampedModel
 from autoslug import AutoSlugField
 from taggit.managers import TaggableManager
-from taggit.models import GenericTaggedItemBase, TagBase
 
 
 class Category(TimeStampedModel):
@@ -95,22 +94,6 @@ class Location(TimeStampedModel):
             self.address,
             self.on_campus,
         )
-
-
-# Look I didn't want to do this but APPARENTLY you cannot have two
-# TaggableManager()s on a model and thus you have to make a WHOLE other model
-# to have this work.
-# https://neutron-drive.appspot.com/blog/multiple-tags
-class StupidFacilityLabelHack(TagBase):
-    pass
-
-
-class StupidLabelHack(GenericTaggedItemBase):
-    tag = models.ForeignKey(
-        StupidFacilityLabelHack,
-        on_delete=models.CASCADE,
-        related_name="%(app_label)s_%(class)s_items",
-    )
 
 
 class Facility(TimeStampedModel):
@@ -198,15 +181,6 @@ class Facility(TimeStampedModel):
     facility_product_tags = TaggableManager(
         related_name="product_tags",
         help_text="A comma seperate list of words that neatly and aptly describe the product that this facility produces. These words are not shown to the use but are rather used in search.",
-    )
-
-    # Labels to describe the Facility that are displayed to the user and can be
-    # informative. "Takes Mason Money"
-    facility_labels = TaggableManager(
-        "labels",
-        related_name="labels",
-        through=StupidLabelHack,
-        help_text="Labels to describe the Facility that are displayed to the user and can be informative.",
     )
 
     # Tag a Facility to be shown on the ShopMason or Sodoxo (or both)
