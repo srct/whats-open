@@ -130,7 +130,6 @@ class FacilityAdmin(admin.ModelAdmin):
                     "tapingo_url",
                     "phone_number",
                     "note",
-                    "owners",
                 )
             },
         ),
