@@ -4,6 +4,7 @@ services:
 variables:
   MYSQL_DATABASE: wopen
   MYSQL_ROOT_PASSWORD: root
+  WOPEN_ENV: dev
 
 types:
   - test
@@ -31,8 +32,8 @@ before_script:
     get_user_model(); User.objects.create_superuser('root',
     'root@srct.gmu.edu', 'root') " | python manage.py shell
 
-whats-open-py3.5:
-  image: library/python:3.5
+whats-open-py3.7:
+  image: library/python:3.7
   type: test
   script:
     - echo "Done 😄"
