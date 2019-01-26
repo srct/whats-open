@@ -430,23 +430,21 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         closed_now = self.request.query_params.get("closed_now", None)
 
         # Clean the schedules in every Facility
-        for facility in Facility.objects.all():
-            facility.clean_schedules()
+        #        for facility in Facility.objects.all():
+        #            facility.clean_schedules()
 
-        if open_now is not None or closed_now is not None:
-            # List of all open facilities
-            open_facilities = [
+        if open_now is not None:
+            open_now = [
                 facility.pk for facility in Facility.objects.all() if facility.is_open()
             ]
-            # Return all Facility objects with the primary keys located in the
-            # open_facilities list
-            if open_now:
-                return Facility.objects.filter(pk__in=open_facilities)
-            # Return all Facility objects with the primary keys not located in
-            # the open_facilities list
-            elif closed_now:
-                return Facility.objects.exclude(pk__in=open_facilities)
-        # Default behavior
+            return Facility.objects.filter(pk__in=open_now)
+        elif closed_now is not None:
+            closed_now = [
+                facility.pk
+                for facility in Facility.objects.all()
+                if not facility.is_open()
+            ]
+            return Facility.objects.filter(pk__in=closed_now)
         else:
             return Facility.objects.all()
 

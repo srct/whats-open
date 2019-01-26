@@ -8,7 +8,7 @@ the API.
 
 https://docs.djangoproject.com/en/1.11/topics/db/models/
 """
-# Python stdlib Imports
+# Python Imports
 import datetime
 
 # Django Imports
@@ -57,7 +57,6 @@ class Location(TimeStampedModel):
     """
 
     CAMPUS_LOCATIONS = (
-        # (set in model, human readable version)
         ("front royal", "Front Royal"),
         ("prince william", "Prince William County Science and Technology"),
         ("fairfax", "Fairfax"),
@@ -198,30 +197,16 @@ class Facility(TimeStampedModel):
         First checks any valid special schedules and then checks the main,
         default, schedule.
         """
-        # Get the current date
-        today = datetime.datetime.today().date()
-        # Check special schedules first, loop through all of them
+        today = timezone.now()
+        # Check special schedules first
         for schedule in self.special_schedules.all():
             # Special schedules must have valid_start and valid_end set
             if schedule.valid_start and schedule.valid_end:
-                # If a special schedule in in effect
                 if schedule.valid_start <= today <= schedule.valid_end:
-                    # Check if the facility is open or not based on that
-                    # special schedule
-                    if schedule.is_open_now():
-                        # Open
-                        return True
-                    else:
-                        # Closed
-                        return False
-        # If no special schedule is in effect then check if the facility is
-        # open using the main_schedule
-        if self.main_schedule.is_open_now():
-            # Open
-            return True
-        else:
-            # Closed
-            return False
+                    return schedule.is_open_now()
+
+        # If no special schedule is in effect then check the main_schedule
+        return self.main_schedule.is_open_now()
 
     def clean_schedules(self):
         """
@@ -229,9 +214,9 @@ class Facility(TimeStampedModel):
         expired as well as promote special schedules to main if necessary.
         """
         for special_schedule in self.special_schedules.all():
-            # If it ends before today
             if (
-                special_schedule.valid_end < timezone.now()
+                special_schedule.valid_end is not None
+                and special_schedule.valid_end < timezone.now()
                 and special_schedule.schedule_for_removal
             ):
                 self.special_schedules.remove(special_schedule)
@@ -312,14 +297,10 @@ class Schedule(TimeStampedModel):
         # If the schedule is a 24 hour one, then it's open.
         if self.twenty_four_hours:
             return True
-        # Otherwise let's check if it's open.
         else:
             # Loop through all the open times that correspond to this schedule
             for open_time in OpenTime.objects.filter(schedule=self):
-                # If the current time we are looking at is open, then the schedule
-                # will say that the facility is open
                 if open_time.is_open_now():
-                    # Open
                     return True
             # Closed (all open times are not open)
             return False
@@ -383,6 +364,7 @@ class OpenTime(TimeStampedModel):
         """
         # Get the current datetime
         today = datetime.datetime.today()
+
         # Check that the start occurs before the end
         if self.start_day <= self.end_day:
             # If today is the start_day
@@ -405,7 +387,7 @@ class OpenTime(TimeStampedModel):
             elif self.end_day < today.weekday():
                 # Closed
                 return False
-        # The end_day > start_day
+        # The start_day > end_day
         else:
             # If today is the start_day
             if self.start_day == today.weekday():
@@ -424,7 +406,7 @@ class OpenTime(TimeStampedModel):
             if self.end_day < today.weekday() < self.start_day:
                 # Closed
                 return False
-        # All checks passed, it's Open
+        # All checks passed, it's open
         return True
 
     def __str__(self):
@@ -501,4 +483,3 @@ class Alert(TimeStampedModel):
         String representation of an Alert object.
         """
         return "{0} \n {1} \n {3}".format(self.subject, self.body, self.url)
-        # Returns the subject, body, and url fields

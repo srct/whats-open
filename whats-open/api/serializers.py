@@ -109,7 +109,6 @@ class FacilitySerializer(serializers.HyperlinkedModelSerializer):
     main_schedule = ScheduleSerializer(many=False, read_only=True)
     special_schedules = ScheduleSerializer(many=True, read_only=True)
     facility_product_tags = TagListSerializerField()
-    facility_classifier = TagListSerializerField()
 
     class Meta:
         # Choose the model to be serialized
