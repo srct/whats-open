@@ -59,6 +59,7 @@ class Location(TimeStampedModel):
 
     CAMPUS_LOCATIONS = (
         # (set in model, human readable version)
+        ("front royal", "Front Royal"),
         ("prince william", "Prince William County Science and Technology"),
         ("fairfax", "Fairfax"),
         ("arlington", "Arlington"),
