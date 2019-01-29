@@ -113,6 +113,7 @@ class FacilityAdmin(admin.ModelAdmin):
 
     # Allow filtering by the following fields
     list_filter = ["facility_category", "facility_location"]
+    list_display = ("facility_name", "main_schedule", "modified")
     # Modify the rendered layout of the "create a new facility" page
     # We are basically reordering things to look nicer to the user here
     fieldsets = (
@@ -200,3 +201,7 @@ admin.site.register(Location, OSMGeoAdmin)
 # Use the default ModelAdmin interface for these
 admin.site.register(Category)
 admin.site.register(Alert)
+
+admin.site.site_header = "What's Open API"
+admin.site.site_title = "What's Open API"
+admin.site.index_title = "Admin"

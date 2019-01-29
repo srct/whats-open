@@ -9,9 +9,13 @@ Top level url patterns.
 from django.urls import include, path
 from django.contrib import admin
 import django.contrib.auth.views
+from django.contrib.sites.models import Site
+from taggit.admin import Tag
 
 # Automatically populate the admin pages
 admin.autodiscover()
+admin.site.unregister(Site)
+admin.site.unregister(Tag)
 
 # Define all the top level url patterns in a list
 urlpatterns = [

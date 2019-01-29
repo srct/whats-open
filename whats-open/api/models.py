@@ -86,11 +86,7 @@ class Location(TimeStampedModel):
         """
         String representation of a Location object.
         """
-        return "Found in %s at %s | On Campus: %s" % (
-            self.building,
-            self.address,
-            self.on_campus,
-        )
+        return "%s on %s Campus" % (self.building, self.campus_region.title())
 
 
 class Facility(TimeStampedModel):
@@ -413,10 +409,10 @@ class Alert(TimeStampedModel):
 
     # Tuple that ties a urgency tag with a string representation
     URGENCY_CHOICES = (
-        (INFO, "Info"),
-        (MINOR, "Minor"),
-        (MAJOR, "Major"),
-        (EMERGENCY, "Emergency"),
+        (INFO, "Advertising / Announcement"),
+        (MINOR, "Expected Hours Change"),
+        (MAJOR, "(Small Scale) Unexpected Hours Change"),
+        (EMERGENCY, "(University Wide) Unexpected Hours Change"),
     )
 
     # The urgency tag for this Alert
@@ -427,7 +423,7 @@ class Alert(TimeStampedModel):
     # The text that is displayed that describes the Alert
     subject = models.CharField(max_length=130)
     body = models.TextField()
-    url = models.URLField(max_length=200)
+    url = models.URLField("Reference URL", max_length=200)
 
     # The date + time that the alert will be start being served
     start_datetime = models.DateTimeField()

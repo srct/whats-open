@@ -101,7 +101,9 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
     FILTER_FIELDS = (
         # Alert fields
         "urgency_tag",
-        "message",
+        "subject",
+        "body",
+        "url",
         "start_datetime",
         "end_datetime",
     )
