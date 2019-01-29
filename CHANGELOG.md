@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.2] - 2019-01-29
+
+## Fixed
+
+- Default owner now assigned automatically to the current logged in user / field hidden
+- Path buggy schedule checking timezone utilization
+- Schedules may now have N open times
+
+## Added
+
+- Admin action to bulk apply schedules to facilities
+- Changed default image
+- Alert model refactored to support URLs, subjects, and bodies
+- Add front royal location as an option
+
+## Removed
+
+- Mason Korea support dropped
+- Deprecated previous Alert model
+- Drop label support
+- Drop Sodoxo classifier
+- Drop schedule promotion
+- Drop schedule deletion
+
 ## [2.1.1] - 2017-01-13
 
 ## Fixed

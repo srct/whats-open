@@ -13,13 +13,19 @@ import datetime
 
 # App Imports
 from .models import Facility, OpenTime, Category, Schedule, Location, Alert
-from .serializers import (CategorySerializer, FacilitySerializer,
-                          ScheduleSerializer, OpenTimeSerializer,
-                          LocationSerializer, AlertSerializer)
+from .serializers import (
+    CategorySerializer,
+    FacilitySerializer,
+    ScheduleSerializer,
+    OpenTimeSerializer,
+    LocationSerializer,
+    AlertSerializer,
+)
 
 # Other Imports
 from rest_framework import viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
+
 
 class AlertViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -90,21 +96,27 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
 
     Return all Alert objects.
     """
+
     # All model fields that are available for filtering
     FILTER_FIELDS = (
         # Alert fields
-        'urgency_tag',
-        'message',
-        'start_datetime',
-        'end_datetime'
+        "urgency_tag",
+        "subject",
+        "body",
+        "url",
+        "start_datetime",
+        "end_datetime",
     )
 
     # Associate a serializer with the ViewSet
     serializer_class = AlertSerializer
 
     # Setup filtering
-    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
-                       filters.OrderingFilter, )
+    filter_backends = (
+        filters.SearchFilter,
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+    )
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
@@ -115,7 +127,7 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
         the API.
         """
         # Define ?all_alerts
-        all_alerts = self.request.query_params.get('all_alerts', None)
+        all_alerts = self.request.query_params.get("all_alerts", None)
 
         # Return all Alert objects if requested
         if all_alerts is not None:
@@ -123,13 +135,10 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
         # Default behavior
         else:
             # Enumerate all Alert objects that are active
-            alertable = [
-                alert.pk
-                for alert in Alert.objects.all()
-                if alert.is_active()
-            ]
+            alertable = [alert.pk for alert in Alert.objects.all() if alert.is_active()]
             # Return active Alerts
             return Alert.objects.filter(pk__in=alertable)
+
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -189,18 +198,22 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
     Return the Category object that is named "dining".
     """
+
     # All model fields that are available for filtering
     FILTER_FIELDS = (
         # Category fields
-        'name',
+        "name",
     )
 
     # Associate a serializer with the ViewSet
     serializer_class = CategorySerializer
 
     # Setup filtering
-    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
-                       filters.OrderingFilter, )
+    filter_backends = (
+        filters.SearchFilter,
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+    )
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
@@ -211,6 +224,7 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
         the API.
         """
         return Category.objects.all()
+
 
 class LocationViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -264,22 +278,26 @@ class LocationViewSet(viewsets.ReadOnlyModelViewSet):
 
     Return all Location objects located in the "Johnson Center" building.
     """
+
     # All model fields that are available for filtering
     FILTER_FIELDS = (
         # Location fields
-        'building',
-        'friendly_building',
-        'address',
-        'on_campus',
-        'campus_region'
+        "building",
+        "friendly_building",
+        "address",
+        "on_campus",
+        "campus_region",
     )
 
     # Associate a serializer with the ViewSet
     serializer_class = LocationSerializer
 
     # Setup filtering
-    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
-                       filters.OrderingFilter, )
+    filter_backends = (
+        filters.SearchFilter,
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+    )
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
@@ -290,6 +308,7 @@ class LocationViewSet(viewsets.ReadOnlyModelViewSet):
         the API.
         """
         return Location.objects.all()
+
 
 class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -357,47 +376,48 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
 
     Only return closed Facility objects.
     """
+
     # All model fields that are available for filtering
     FILTER_FIELDS = (
         # Facility fields
-        'facility_name',
-        'facility_classifier',
-        'logo',
-        'tapingo_url',
-        'note',
-        'facility_product_tags__name',
-        'facility_labels__name',
+        "facility_name",
+        "facility_classifier",
+        "logo",
+        "tapingo_url",
+        "note",
+        "facility_product_tags__name",
         # Category fields
-        'facility_category__name',
+        "facility_category__name",
         # Location fields
-        'facility_location__building',
-        'facility_location__friendly_building',
-        'facility_location__address',
-        'facility_location__on_campus',
-        'facility_location__campus_region',
+        "facility_location__building",
+        "facility_location__friendly_building",
+        "facility_location__address",
+        "facility_location__on_campus",
+        "facility_location__campus_region",
         # Schedule fields
-        'main_schedule__name',
-        'main_schedule__valid_start',
-        'main_schedule__valid_end',
-        'main_schedule__twenty_four_hours',
-        'main_schedule__schedule_for_removal',
-        'special_schedules__name',
-        'special_schedules__valid_start',
-        'special_schedules__valid_end',
-        'special_schedules__twenty_four_hours',
-        'special_schedules__schedule_for_removal'
+        "main_schedule__name",
+        "main_schedule__valid_start",
+        "main_schedule__valid_end",
+        "main_schedule__twenty_four_hours",
+        "special_schedules__name",
+        "special_schedules__valid_start",
+        "special_schedules__valid_end",
+        "special_schedules__twenty_four_hours",
     )
 
     # Associate a serializer with the ViewSet
     serializer_class = FacilitySerializer
 
     # Setup filtering
-    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
-                       filters.OrderingFilter, )
+    filter_backends = (
+        filters.SearchFilter,
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+    )
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
-    lookup_field = 'slug'
+    lookup_field = "slug"
 
     def get_queryset(self):
         """
@@ -405,32 +425,25 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
         the API.
         """
         # Define ?open_now
-        open_now = self.request.query_params.get('open_now', None)
+        open_now = self.request.query_params.get("open_now", None)
         # Define ?closed_now
-        closed_now = self.request.query_params.get('closed_now', None)
+        closed_now = self.request.query_params.get("closed_now", None)
 
-        # Clean the schedules in every Facility
-        for facility in Facility.objects.all():
-            facility.clean_schedules()
-
-        if open_now is not None or closed_now is not None:
-            # List of all open facilities
-            open_facilities = [
+        if open_now is not None:
+            open_now = [
+                facility.pk for facility in Facility.objects.all() if facility.is_open()
+            ]
+            return Facility.objects.filter(pk__in=open_now)
+        elif closed_now is not None:
+            closed_now = [
                 facility.pk
                 for facility in Facility.objects.all()
-                if facility.is_open()
+                if not facility.is_open()
             ]
-            # Return all Facility objects with the primary keys located in the
-            # open_facilities list
-            if open_now:
-                return Facility.objects.filter(pk__in=open_facilities)
-            # Return all Facility objects with the primary keys not located in
-            # the open_facilities list
-            elif closed_now:
-                return Facility.objects.exclude(pk__in=open_facilities)
-        # Default behavior
+            return Facility.objects.filter(pk__in=closed_now)
         else:
             return Facility.objects.all()
+
 
 class ScheduleViewSet(viewsets.ModelViewSet):
     """
@@ -487,23 +500,25 @@ class ScheduleViewSet(viewsets.ModelViewSet):
 
     Return the Schedule object that has "southside_main" as its name.
     """
+
     # All model fields that are available for filtering
     FILTER_FIELDS = (
         # Schedule fields
-        'name',
-        'valid_start',
-        'valid_end',
-        'twenty_four_hours',
-        'schedule_for_removal',
-        'promote_to_main'
+        "name",
+        "valid_start",
+        "valid_end",
+        "twenty_four_hours",
     )
 
     # Associate a serializer with the ViewSet
     serializer_class = ScheduleSerializer
 
     # Setup filtering
-    filter_backends = (filters.SearchFilter, DjangoFilterBackend,
-                       filters.OrderingFilter, )
+    filter_backends = (
+        filters.SearchFilter,
+        DjangoFilterBackend,
+        filters.OrderingFilter,
+    )
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
@@ -524,6 +539,7 @@ class ScheduleViewSet(viewsets.ModelViewSet):
         # Return all Schedule objects that have not expired
         return Schedule.objects.exclude(pk__in=filter_old_schedules)
 
+
 class OpenTimeViewSet(viewsets.ModelViewSet):
     """
     Represents a time period when a Facility is open.
@@ -533,6 +549,7 @@ class OpenTimeViewSet(viewsets.ModelViewSet):
     These objects are returned within a larger Schedule object and thus are not
     an endpoint that is query-able, so just return everything when requested.
     """
+
     # Associate a serializer with the ViewSet
     serializer_class = OpenTimeSerializer
 

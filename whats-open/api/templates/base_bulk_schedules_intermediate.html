@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrahead %}
+<link href="{% static "admin/css/vendor/select2/select2.min.css" %}" type="text/css" media="screen" rel="stylesheet" />
+<link href="{% static "admin/css/autocomplete.css" %}" type="text/css" media="screen" rel="stylesheet" />
+<script type="text/javascript" src="{% static "admin/js/vendor/jquery/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/vendor/select2/select2.full.min.js" %}"></script>
+<!-- Django changes jQuery to django.jQuery in case the version bundled with Django is not the version
+     you want to use in your app
+
+     It's super important that it is loaded after the jQuery library, and
+     any jQuery-reliant libraries are loaded-->
+<script type="text/javascript" src="{% static "admin/js/jquery.init.js" %}"></script>
+<script type="text/javascript" src="{% static "admin/js/cancel.js" %}"></script>
+<script>
+/**
+ Django's admin inferface uses select2 for its new autocompletion selects
+
+ Unfortunately, use of that specific widget and the associated support attributes
+ are limited to admin.ModelAdmin change views
+
+ You need instead to use it manually
+
+ See
+ https://docs.djangoproject.com/en/2.0/ref/contrib/admin/#django.contrib.admin.ModelAdmin.autocomplete_fields
+ https://docs.djangoproject.com/en/2.0/ref/contrib/admin/#reversing-admin-urls
+ https://select2.org/getting-started/basic-usage
+ for more information
+**/
+
+(function($) {
+    $(document).ready(function() {
+        $('.select2-basic-single').select2();
+    });
+// note how this is wrapped in a function to use django.jQuery for references to $
+})(django.jQuery);
+</script>
+{{ block.super }}
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link href="{% static "admin/css/forms.css" %}" type="text/css" rel="stylesheet" />
+<style type="text/css">
+    a.button.cancel-link {
+        display: inline-block;
+        vertical-align: middle;
+        height: 15px;
+        line-height: 15px;
+        background: #ddd;
+        border-radius: 4px;
+        padding: 10px 15px;
+        color: #333;
+        margin: 0 0 0 10px;
+    }
+    a.button.cancel-link:active,
+    a.button.cancel-link:focus,
+    a.button.cancel-link:hover {
+        background: #ccc;
+    }
+</style>
+{% endblock %}

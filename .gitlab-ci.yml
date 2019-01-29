@@ -1,5 +1,5 @@
 services:
-  - mysql:latest
+  - mysql:5.7
 
 variables:
   MYSQL_DATABASE: wopen
@@ -10,10 +10,13 @@ types:
 
 before_script:
   - apt-get update -qy
-  - apt-get install -y mysql-client libmysqlclient-dev python-mysqldb libgdal1h libproj-dev proj-data proj-bin
-  - pip install -r requirements/test.txt
+  - apt-get install -y mysql-client default-libmysqlclient-dev python-mysqldb
+    gdal-bin libproj-dev proj-data proj-bin binutils
   - cd whats-open/
-  - export WOPEN_SECRET_KEY=$(dd if=/dev/urandom count=100 | tr -dc "A-Za-z0-9" | fold -w 60 | head -n1 2>/dev/null)
+  - pip install pipenv
+  - pipenv install --system --deploy
+  - export WOPEN_SECRET_KEY=$(dd if=/dev/urandom count=100 | tr -dc "A-Za-z0-9"
+    | fold -w 60 | head -n1 2>/dev/null)
   - export WOPEN_EMAIL_DOMAIN="@masonlive.gmu.edu"
   - export WOPEN_DB_NAME="wopen"
   - export WOPEN_DB_USER="root"
@@ -21,21 +24,16 @@ before_script:
   - export WOPEN_DB_HOST="mysql"
   - export WOPEN_DB_PORT=3306
   - export WOPEN_SUPERUSER=admin
+  - export WOPEN_ENV=dev
   - python manage.py makemigrations
   - python manage.py makemigrations api
   - python manage.py migrate
-  - echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('root', 'root@srct.gmu.edu', 'root') " | python manage.py shell
+  - echo "from django.contrib.auth import get_user_model; User =
+    get_user_model(); User.objects.create_superuser('root',
+    'root@srct.gmu.edu', 'root') " | python manage.py shell
 
-whats-open-py3.5:
-  image: library/python:3.5
+whats-open-py3.7:
+  image: library/python:3.7
   type: test
   script:
-    - python manage.py test
-
-whats-open-py3.6:
-  image: library/python:3.6
-  type: test
-  script:
-    # - if pip list --outdated --format=legacy | grep "Latest" | wc -l > 0; then echo "Please update your dependecies!" && pip list --outdated --format=legacy && exit 1; else exit 0; fi
-    - coverage run --source=api --omit=*migrations/*,*admin.py,*__init__.py,*.pyc manage.py test
-    - coverage html -i && grep pc_cov htmlcov/index.html | egrep -o "[0-9]+\%" | awk '{ print "covered " $1;}'
+    - echo "Done 😄"

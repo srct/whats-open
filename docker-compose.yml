@@ -1,32 +1,23 @@
-version: '3'
+version: "3"
+
 services:
   db:
-    image: mysql
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    networks:
-      - wopen_net
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: wopen
       MYSQL_USER: wopen
       MYSQL_PASSWORD: wopen
 
   api:
-    image: whats-open-api
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-    networks:
-      - wopen_net
+    build: .
     ports:
-      - '8000:8000'
-    command: /bin/bash ./startup.sh
+      - "8000:8000"
+    command: ./docker-startup.sh
     volumes:
       - .:/whats-open
     depends_on:
@@ -39,6 +30,4 @@ services:
       - WOPEN_DB_HOST=db
       - WOPEN_DB_PORT=3306
       - WOPEN_SUPERUSER=admin
-
-networks:
-  wopen_net:
+      - WOPEN_ENV="dev"
