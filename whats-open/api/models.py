@@ -443,4 +443,4 @@ class Alert(TimeStampedModel):
         """
         String representation of an Alert object.
         """
-        return "{0} \n {1} \n {3}".format(self.subject, self.body, self.url)
+        return "{0} \n {1} \n {2}".format(self.subject, self.body, self.url)
