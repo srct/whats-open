@@ -145,19 +145,24 @@ class FacilityAdmin(admin.ModelAdmin):
         return initial_data
 
 
-class OpenTimeInline(admin.StackedInline):
+class OpenTimeInline(admin.TabularInline):
     """
     A table of time periods that represent an "open time" for a Facility.
 
     https://docs.djangoproject.com/en/1.11/ref/contrib/admin/#django.contrib.admin.TabularInline
     """
-
     # Columns correspond to each attribute in the OpenTime table
     model = OpenTime
-    extra = 1
+    # 7 days of the week, so only have 7 rows
+    extra = 7
     # We are basically reordering things to look nicer to the user here
     fieldsets = (
-        (None, {"fields": (("start_day", "start_time"), ("end_day", "end_time"))}),
+        (None, {
+            'fields': (
+                ('start_day', 'start_time'),
+                ('end_day', 'end_time')
+            ),
+        }),
     )
 
 

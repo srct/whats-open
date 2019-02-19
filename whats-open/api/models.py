@@ -423,7 +423,7 @@ class Alert(TimeStampedModel):
     # The text that is displayed that describes the Alert
     subject = models.CharField(max_length=130)
     body = models.TextField()
-    url = models.URLField("Reference URL", max_length=200)
+    url = models.URLField("Reference URL", max_length=200, blank=True)
 
     # The date + time that the alert will be start being served
     start_datetime = models.DateTimeField()
