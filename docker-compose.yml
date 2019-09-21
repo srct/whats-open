@@ -14,6 +14,7 @@ services:
       MYSQL_PASSWORD: wopen
 
   api:
+    container_name: whats_open_api
     build: .
     ports:
       - "8000:8000"

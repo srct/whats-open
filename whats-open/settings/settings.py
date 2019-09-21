@@ -268,6 +268,12 @@ REST_FRAMEWORK = {
     # http://www.django-rest-framework.org/api-guide/throttling/#throttling
     "DEFAULT_THROTTLE_CLASSES": ("rest_framework.throttling.AnonRateThrottle",),
     "DEFAULT_THROTTLE_RATES": {"anon": "1000/day"},
+    'DEFAULT_FILTER_BACKENDS': [
+        #'url_filter.integrations.drf.URLFilterBackend', #url_filters
+        "django_filters.rest_framework.DjangoFilterBackend", #rest_framework.filters
+        "rest_framework.filters.OrderingFilter",
+        "rest_framework.filters.SearchFilter",
+        ],
 }
 
 """
