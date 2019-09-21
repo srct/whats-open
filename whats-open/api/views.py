@@ -111,12 +111,6 @@ class AlertViewSet(viewsets.ReadOnlyModelViewSet):
     # Associate a serializer with the ViewSet
     serializer_class = AlertSerializer
 
-    # Setup filtering
-    filter_backends = (
-        filters.SearchFilter,
-        DjangoFilterBackend,
-        filters.OrderingFilter,
-    )
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
@@ -208,12 +202,7 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     # Associate a serializer with the ViewSet
     serializer_class = CategorySerializer
 
-    # Setup filtering
-    filter_backends = (
-        filters.SearchFilter,
-        DjangoFilterBackend,
-        filters.OrderingFilter,
-    )
+    
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
@@ -292,12 +281,6 @@ class LocationViewSet(viewsets.ReadOnlyModelViewSet):
     # Associate a serializer with the ViewSet
     serializer_class = LocationSerializer
 
-    # Setup filtering
-    filter_backends = (
-        filters.SearchFilter,
-        DjangoFilterBackend,
-        filters.OrderingFilter,
-    )
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
@@ -408,12 +391,6 @@ class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     # Associate a serializer with the ViewSet
     serializer_class = FacilitySerializer
 
-    # Setup filtering
-    filter_backends = (
-        filters.SearchFilter,
-        DjangoFilterBackend,
-        filters.OrderingFilter,
-    )
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS
@@ -513,12 +490,6 @@ class ScheduleViewSet(viewsets.ModelViewSet):
     # Associate a serializer with the ViewSet
     serializer_class = ScheduleSerializer
 
-    # Setup filtering
-    filter_backends = (
-        filters.SearchFilter,
-        DjangoFilterBackend,
-        filters.OrderingFilter,
-    )
     search_fields = FILTER_FIELDS
     ordering_fields = FILTER_FIELDS
     filter_fields = FILTER_FIELDS

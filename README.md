@@ -34,11 +34,10 @@ Check out some of the other What's Open projects!
 What's Open currently supports developers on Linux and macOS systems. Here's our
 walk-through of steps we will take:
 
-1. Install `git` on your system.
-2. Clone the whats-open codebase.
-3. Get whats-open up and running with the method of your choice.
-
-## 1) Install `git` on your system.
+<details><summary>
+</h2> 1) Install <code>git</code> on your system.</h2>
+</summary>
+<p>
 
 `git` is the version control system used for SRCT projects.
 
@@ -83,8 +82,14 @@ Next, to make sure Homebrew is up to date, run:
 Finally we can install git with:
 
     brew install git
+</p>
+</details>
 
-## 2) Clone the whats-open codebase
+<details><summary>
+</h2> 2) Clone the whats-open codebase </h2>
+</summary>
+<p>
+
 
 Now, we're going to clone down a copy of the whats-open codebase from [git.gmu.edu](http://git.gmu.edu/srct/whats-open),
 the SRCT code respository with SSH.
@@ -97,7 +102,13 @@ the SRCT code respository with SSH.
 
     git clone git@git.gmu.edu:srct/whats-open.git
 
-## 3) Get whats-open up and running
+</p>
+</details>
+
+<details><summary>
+</h2> 3) Get whats-open up and running </h2>
+</summary>
+<p>
 
 Now that we have `git` setup and cloned down the code you can
 
@@ -106,7 +117,10 @@ Now that we have `git` setup and cloned down the code you can
 and get to working on setting up a development environment! There are two options
 to go about doing this: `Docker` and `Manual Setup`.
 
-### Docker
+<details><summary>
+</h3> Docker</h3>
+</summary>
+<p>
 
 We can automate the setup process through [Docker](https://www.docker.com/what-docker)
 containers! This allows us to quickly get started and standardize development
@@ -120,19 +134,9 @@ Installing Docker on your system:
 
 Additionally, you will need to install docker-compose: https://docs.docker.com/compose/install/
 
-Next inside the `whats-open/` root directory run:
+Inside the `whats-open/` root directory run:
 
-    docker build . -t 'whats-open-api'
-
-This builds the docker image that we will deploy to the swarm in a stack.
-
-Initialize your swarm:
-
-    docker swarm init
-
-And finally,
-
-    docker stack deploy whats-open-api_stack -c docker-compose.yml
+    docker-compose up
 
 You should see that the server is running by going to http://localhost:8000
 in your browser. Any changes you make to your local file system will be mirrored in the server.
@@ -144,8 +148,22 @@ user: admin@masonlive.gmu.edu
 pass: admin
 ```
 
-### Manual Setup
+### Loading Default Data
 
+Django apps use fixtures to load default data for testing. To load the api's fixtures use the following command in the terminal:
+
+```
+docker exec whats_open_api python3 /whats-open/whats-open/manage.py loaddata --format json categoriesFixture locationFixture openTimeFixture scheduleFixture settingsFixture
+```
+
+
+</p>
+</details>
+
+<details><summary>
+</h2> Manual Setup </h2>
+</summary>
+<p>
 Manual Setup involves all of the same steps as Docker, but just done manually.
 
 First, install python, pip, and virtualenv on your system.
@@ -296,6 +314,20 @@ Go to http://127.0.0.1:8000/admin/ to add new Restaurant and Schedule objects
 to your database.
 
 With that, everything should be good to go!
+
+### Loading Default Data
+
+Django apps use fixtures to load default data for testing. To load the api's fixtures use the following command:
+
+```
+python3 manage.py loaddata --format json categoriesFixture locationFixture openTimeFixture scheduleFixture settingsFixture
+```
+
+</p>
+</details>
+
+</p>
+</details>
 
 # Modifying and Deploying Code
 

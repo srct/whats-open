@@ -1,0 +1,642 @@
+[
+    {
+        "fields": {
+            "name": "Starbucks NN [Fall/ Spring Hours]",
+            "twenty_four_hours": true,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "name": "PrintHub SciTech [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "name": "shopMason [Fall / Spring / Summer Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 3
+    },
+    {
+        "fields": {
+            "name": "RAC [Fall 217]",
+            "twenty_four_hours": false,
+            "valid_end": "2024-08-20T20:00:00-04:00",
+            "valid_start": "2017-09-19T20:00:00-04:00"
+        },
+        "model": "api.schedule",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "name": "The Hub [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "name": "The UPS Store [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 6
+    },
+    {
+        "fields": {
+            "name": "We Proudly Serve Exploratory Hall [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 7
+    },
+    {
+        "fields": {
+            "name": "We Proudly Serve Innovation Hall [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 8
+    },
+    {
+        "fields": {
+            "name": "Wingzone [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 9
+    },
+    {
+        "fields": {
+            "name": "Simply To Go [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 10
+    },
+    {
+        "fields": {
+            "name": "Star Ginger [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 11
+    },
+    {
+        "fields": {
+            "name": "Starbucks JC [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 12
+    },
+    {
+        "fields": {
+            "name": "Garbanzo [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 13
+    },
+    {
+        "fields": {
+            "name": "Ike's [Fall/ Spring Hours]",
+            "twenty_four_hours": true,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 14
+    },
+    {
+        "fields": {
+            "name": "IndAroma [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 15
+    },
+    {
+        "fields": {
+            "name": "JC [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 16
+    },
+    {
+        "fields": {
+            "name": "Express [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 17
+    },
+    {
+        "fields": {
+            "name": "Fenwick Library [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 18
+    },
+    {
+        "fields": {
+            "name": "Freshens JC [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 19
+    },
+    {
+        "fields": {
+            "name": "Freshens RAC [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 20
+    },
+    {
+        "fields": {
+            "name": "Red Hot & Blue [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 21
+    },
+    {
+        "fields": {
+            "name": "Second Stop [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 22
+    },
+    {
+        "fields": {
+            "name": "Randall's Cafe [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 23
+    },
+    {
+        "fields": {
+            "name": "Rathskeller [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 24
+    },
+    {
+        "fields": {
+            "name": "Mail Hub [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 25
+    },
+    {
+        "fields": {
+            "name": "Manhatten Pizza [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 26
+    },
+    {
+        "fields": {
+            "name": "Print Hub [Arlington] [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 27
+    },
+    {
+        "fields": {
+            "name": "Print Hub [Fairfax] [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 28
+    },
+    {
+        "fields": {
+            "name": "Akeno Sushi [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 29
+    },
+    {
+        "fields": {
+            "name": "AFC [Fall 2019]",
+            "twenty_four_hours": false,
+            "valid_end": "2024-12-16T19:08:17-05:00",
+            "valid_start": "2019-08-26T19:07:52-04:00"
+        },
+        "model": "api.schedule",
+        "pk": 30
+    },
+    {
+        "fields": {
+            "name": "Argo Tea [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 31
+    },
+    {
+        "fields": {
+            "name": "Apple FCU [Fall / Spring / Summer Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 32
+    },
+    {
+        "fields": {
+            "name": "Auxiliary Enterprises [Fall / Spring / Summer Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 33
+    },
+    {
+        "fields": {
+            "name": "Au Bon Pain [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 34
+    },
+    {
+        "fields": {
+            "name": "Bookstore Arlington [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 35
+    },
+    {
+        "fields": {
+            "name": "Blaze Pizza [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 36
+    },
+    {
+        "fields": {
+            "name": "Bookstore SciTech [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 37
+    },
+    {
+        "fields": {
+            "name": "Bookstore Fairfax [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 38
+    },
+    {
+        "fields": {
+            "name": "Southside [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 39
+    },
+    {
+        "fields": {
+            "name": "Patriot Tech [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 40
+    },
+    {
+        "fields": {
+            "name": "Panera Bread [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 41
+    },
+    {
+        "fields": {
+            "name": "The Globe [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 42
+    },
+    {
+        "fields": {
+            "name": "Subway [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 43
+    },
+    {
+        "fields": {
+            "name": "Chipotle [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 44
+    },
+    {
+        "fields": {
+            "name": "Chick Fil A [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 45
+    },
+    {
+        "fields": {
+            "name": "Commons2 (L) Front Royal [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 46
+    },
+    {
+        "fields": {
+            "name": "Commons1 (B) Front Royal [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 47
+    },
+    {
+        "fields": {
+            "name": "Corner Pocket [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 48
+    },
+    {
+        "fields": {
+            "name": "Commons3 (D) Front Royal [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 49
+    },
+    {
+        "fields": {
+            "name": "EagleBank Arena Ticket Office [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 50
+    },
+    {
+        "fields": {
+            "name": "Dunkin' Donuts [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 51
+    },
+    {
+        "fields": {
+            "name": "Einstein's Merten Hall [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 52
+    },
+    {
+        "fields": {
+            "name": "Einstein's Engineering Building [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 53
+    },
+    {
+        "fields": {
+            "name": "Mason Card [Sci-Tech] [Fall / Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 54
+    },
+    {
+        "fields": {
+            "name": "Mason Card [Arlington] [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 55
+    },
+    {
+        "fields": {
+            "name": "Panda Express [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 56
+    },
+    {
+        "fields": {
+            "name": "One Stop [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 57
+    },
+    {
+        "fields": {
+            "name": "Mix @ Innovation [Fall 2019]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 58
+    },
+    {
+        "fields": {
+            "name": "MIX @ Fenwick [Fall 2019]",
+            "twenty_four_hours": false,
+            "valid_end": "2019-12-06T19:02:45-05:00",
+            "valid_start": "2019-08-26T19:02:17-04:00"
+        },
+        "model": "api.schedule",
+        "pk": 59
+    },
+    {
+        "fields": {
+            "name": "Mason Catering [Fall/ Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 60
+    },
+    {
+        "fields": {
+            "name": "Steak and Shake [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 61
+    },
+    {
+        "fields": {
+            "name": "Mason Card Fairfax [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 62
+    },
+    {
+        "fields": {
+            "name": "SUB I [Fall /Spring Hours]",
+            "twenty_four_hours": false,
+            "valid_end": null,
+            "valid_start": null
+        },
+        "model": "api.schedule",
+        "pk": 63
+    },
+    {
+        "fields": {
+            "name": "Skyline Fitness [Fall 2019]",
+            "twenty_four_hours": false,
+            "valid_end": "2025-12-15T19:13:15-05:00",
+            "valid_start": "2019-08-26T19:13:16-04:00"
+        },
+        "model": "api.schedule",
+        "pk": 64
+    }
+]
