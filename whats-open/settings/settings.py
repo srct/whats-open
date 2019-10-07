@@ -148,6 +148,12 @@ DATABASES = {
         "PASSWORD": environ["WOPEN_DB_PASSWORD"],
         "HOST": environ["WOPEN_DB_HOST"],
         "PORT": environ["WOPEN_DB_PORT"],
+        'TEST': {
+            'NAME': environ["WOPEN_DB_NAME"],
+            'OPTIONS': {
+                "init_command": "SET storage_engine=MEMORY",
+            }
+        },
     }
 }
 
