@@ -25,6 +25,7 @@ docutils = "==0.13.1"
 gunicorn = "*"
 Django = "<2.1,>=2.0"
 Markdown = "==2.6.10"
+django-extensions = "*"
 
 [requires]
 python_version = "3.7"

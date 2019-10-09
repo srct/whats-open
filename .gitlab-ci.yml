@@ -10,7 +10,7 @@ types:
 
 before_script:
   - apt-get update -qy
-  - apt-get install -y default-mysql-client default-libmysqlclient-dev python-mysqldb
+  - apt-get install -y default-mysql-client default-libmysqlclient-dev python-mysqldb graphviz
     gdal-bin libproj-dev proj-data proj-bin binutils
   - cd whats-open/
   - pip install pipenv
@@ -30,7 +30,14 @@ before_script:
   - python manage.py migrate
   - echo "from django.contrib.auth.models import User; User.objects.filter(username='$WOPEN_SUPERUSER$WOPEN_EMAIL_DOMAIN').delete(); User.objects.create_superuser('$WOPEN_SUPERUSER$WOPEN_EMAIL_DOMAIN', '$WOPEN_SUPERUSER', 'admin')" | python manage.py shell
   - python3 manage.py loaddata --format json categoriesFixture locationFixture openTimeFixture scheduleFixture settingsFixture
+  - python manage.py graph_models --dot --group api > erd.dot
+  - dot -Tpng erd.dot > erd.png
+  
 whats-open-py3.7:
+  artifacts:
+    paths:
+      - whats-open/erd.png
+    expire_in: 1 week
   image: library/python:3.7
   type: test
   script:
