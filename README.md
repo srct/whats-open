@@ -1,6 +1,6 @@
 # What's Open
 
-[![build status](https://git.gmu.edu/srct/whats-open/badges/master/build.svg)](https://git.gmu.edu/srct/whats-open/commits/master) [![coverage report](https://git.gmu.edu/srct/whats-open/badges/master/coverage.svg)](https://git.gmu.edu/srct/whats-open/commits/master) [![python version](https://img.shields.io/badge/python-3.5+-blue.svg)]() [![Django version](https://img.shields.io/badge/Django-2.0-brightgreen.svg)]()
+[![python version](https://img.shields.io/badge/python-3.5+-blue.svg)]() [![Django version](https://img.shields.io/badge/Django-2.0-brightgreen.svg)]()
 
 The What's Open project is an initiative at George Mason University by Mason
 Student Run Computing and Technology (SRCT) to display which dining locations
@@ -24,10 +24,8 @@ willing to help.
 
 Check out some of the other What's Open projects!
 
-- https://git.gmu.edu/srct/whats-open-android
-- https://git.gmu.edu/srct/whats-open-ios
-- https://git.gmu.edu/srct/whats-open-web
-- https://git.gmu.edu/srct/whats-open-alexa
+- https://github.com/srct/whats-open-web
+- https://github.com/srct/whats-open-alexa
 
 # Setup instructions for local development
 
